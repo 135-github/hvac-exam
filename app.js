@@ -26,6 +26,7 @@ function validRecord(r) {
   return r && typeof r==='object' && !Array.isArray(r) &&
     ['seen','right','level','due','last','viewed'].every(k=>r[k]===undefined || Number.isFinite(r[k]) && r[k]>=0) &&
     (r.note===undefined || typeof r.note==='string') &&
+    (r.mnemonic===undefined || typeof r.mnemonic==='string' && r.mnemonic.length<=500) &&
     ['wrong','star','later'].every(k=>r[k]===undefined || typeof r[k]==='boolean');
 }
 function normalizeSession(old) {
@@ -112,7 +113,10 @@ try {
     const old=JSON.parse(localStorage.getItem('hvacWrongV1')||'{}');
     Object.keys(old).filter(id=>qs[id] && old[id]).forEach(id=>data.records[id]={...data.records[id],wrong:true,due:0});
   }
-} catch { toast('旧记录读取失败，可从备份导入。'); }
+} catch {
+  try { const damaged=localStorage.getItem(STORAGE);if(damaged)localStorage.setItem(STORAGE+'-recovery',damaged); } catch {}
+  toast('旧记录读取失败。可在“学习记录”找恢复原件，或导入之前的备份。');
+}
 function save() {
   try { localStorage.setItem(STORAGE,JSON.stringify(data)); }
   catch { toast('当前浏览器无法保存，请导出记录备份。'); }
@@ -195,12 +199,12 @@ function matchesSearch(q,text) {
   const term=text.trim();
   if(!term)return true;
   if(/^#?\d+$/.test(term))return q.id+1===Number(term.replace('#',''));
-  return [q.s,...q.o||[],q.cue,q.exp,record(q.id).note||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
+  return [q.s,...q.o||[],q.cue,q.exp,record(q.id).note||'',record(q.id).mnemonic||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
 }
 function pool() {
   return qs.filter(q=>(!filters.unit||q.u===filters.unit) && (!filters.type||q.t===filters.type) &&
     (view!=='due'||isDue(q)) && (view!=='later'||record(q.id).later) && (view!=='wrong'||record(q.id).wrong) &&
-    (view!=='star'||record(q.id).star||record(q.id).note) &&
+    (view!=='star'||record(q.id).star||record(q.id).note||record(q.id).mnemonic) &&
     matchesSearch(q,filters.search));
 }
 function renderSetup() {
@@ -255,7 +259,7 @@ function markViewed(id) {
 }
 function commitPendingAnswer() {
   const s=data.session,a=s?.answers[s.ids[s.index]];
-  if(a && typeof a.correct==='boolean' && !a.rated&&!a.skipAuto)rate(a.correct?(a.hinted?'hard':'good'):'again',false);
+  if(a && typeof a.correct==='boolean' && !a.rated&&!a.skipAuto)rate(a.correct?((a.hinted||a.peeked)?'hard':'good'):'again',false);
 }
 function moveTo(index) {
   if(!data.session || index<0 || index>=data.session.ids.length)return;
@@ -269,7 +273,7 @@ function pickOne() {
 function freePool() {
   const s=data.settings;
   return qs.filter(q=>(!s.unit||q.u===s.unit)&&(!s.type||q.t===s.type)&&
-    ({all:true,unseen:!record(q.id).seen,wrong:record(q.id).wrong,star:record(q.id).star||record(q.id).note,later:record(q.id).later,due:isDue(q)})[s.scope]);
+    ({all:true,unseen:!record(q.id).seen,wrong:record(q.id).wrong,star:record(q.id).star||record(q.id).note||record(q.id).mnemonic,later:record(q.id).later,due:isDue(q)})[s.scope]);
 }
 function bindFreeSettings() {
   const update=()=>{document.getElementById('available').textContent='当前范围 '+freePool().length+' 道 · 随时可以停，也可以跳过';};
@@ -364,7 +368,7 @@ function openQuestionPicker(all=false) {
     const number=all?dialog.querySelector('#map-number').value.trim():'';
     const list=(all?qs.map(q=>q.id):s.ids).filter(id=>{
       const r=record(id);
-      return (!number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note,later:r.later})[scope];
+      return (!number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note||r.mnemonic,later:r.later})[scope];
     });
     const grid=dialog.querySelector('.picker-grid');grid.replaceChildren();
     dialog.querySelector('#map-count').textContent=list.length?'共 '+list.length+' 道 · 点题号就能开始':'这里暂时没有题目，可以换个条件。';
@@ -393,7 +397,7 @@ function renderQuestion() {
   if(s.mode==='read'&&!a.revealed){a.revealed=true;a.peeked=true;markViewed(id);}
   main.innerHTML='<div class="question-wrap"><div class="topline"><button id="back" class="quiet">← 暂停，回首页</button><button class="quiet" id="jump">选题 · '+(s.index+1)+' / '+s.ids.length+'</button></div><div class="session-tools"><button id="hint">助记提示</button><button id="peek">看答案</button><button id="study-settings">练习设置</button></div><button id="exit-focus" class="quiet">专注中 · 退出专注</button>'+
     '<section class="card"><div class="question-meta"><span>第 '+(id+1)+' 题 · 单元 '+q.u+' · '+q.t+'</span><button id="star" class="quiet" aria-pressed="'+!!r.star+'">'+(r.star?'★ 已收藏':'☆ 收藏')+'</button></div>'+
-    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2><p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
+    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2><p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
   document.getElementById('back').onclick=()=>go('home');
@@ -472,8 +476,12 @@ function renderFeedback(q,a) {
   document.getElementById('feedback').innerHTML='<div class="feedback"><h3>'+heading+'</h3>'+
     (q.key?'<div class="answer-comparison">'+(typeof a.correct==='boolean'?'<p>你的答案 <b>'+escapeHTML([...a.selected].sort().join('、'))+'</b></p>':'')+'<p>参考答案 <b>'+escapeHTML([...q.key].join('、'))+'</b></p></div>':'')+
     (q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+
-    '<div class="memory"><small>一句助记</small><p>'+escapeHTML(q.cue)+'</p></div>'+
+    '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
     '<details open><summary>解析与参考答案</summary><p>'+escapeHTML(q.exp)+'</p></details></div>';
+  const editor=document.createElement('details');editor.className='mnemonic-editor';
+  editor.innerHTML='<summary>换成我的助记</summary><label for="my-mnemonic">写下你脑海里的画面或顺口溜</label><textarea id="my-mnemonic" class="note" maxlength="500" placeholder="例如：风管像道路，风量越大，需要的路越宽。">'+escapeHTML(record(q.id).mnemonic||'')+'</textarea><small>自动保存；清空后恢复题库助记。</small>';
+  document.querySelector('#feedback .memory').after(editor);
+  editor.querySelector('textarea').oninput=event=>{data.records[q.id]={...record(q.id),mnemonic:event.target.value};save();document.querySelector('#feedback .memory p').textContent=event.target.value||q.cue;};
   if(q.key&&a.correct===false&&q.t==='多选题') {
     const missing=[...q.key].filter(key=>!a.selected.includes(key));
     const extra=a.selected.filter(key=>!q.key.includes(key));
@@ -600,6 +608,16 @@ function saveBookmark() {
 }
 document.getElementById('brand').onclick=e=>{e.preventDefault();go('home');};
 document.getElementById('backup').onclick=()=>download(new Blob([JSON.stringify({format:STORAGE,...data},null,2)],{type:'application/json'}),'通风空调学习记录.json');
+// Keep a damaged original available without mixing it into a valid backup.
+try {
+  const recovery=localStorage.getItem(STORAGE+'-recovery');
+  if(recovery){
+    const button=document.createElement('button');button.id='recovery-export';
+    button.textContent='导出异常记录原件（用于修复）';
+    button.onclick=()=>download(new Blob([recovery],{type:'text/plain;charset=utf-8'}),'学习记录-待修复原件.txt');
+    document.querySelector('.tool-menu').append(button);
+  }
+} catch {}
 document.getElementById('import-button').onclick=()=>document.getElementById('restore').click();
 const legacyExport=document.createElement('button');
 legacyExport.textContent='导出原站旧记录（含考试历史）';
@@ -616,10 +634,10 @@ document.getElementById('restore').onchange=async e=>{
     if(raw.format!==STORAGE)throw Error();
     const imported=normalize(raw);
     if(!confirm('合并学习记录？相同题目采用备份中的记录。'))return;
+    parkSession();
     data.records={...data.records,...imported.records};
     data.settings=imported.settings;
     if(typeof raw.letter==='string')data.letter=imported.letter;
-    parkSession();
     const sessions=[...(imported.session?[imported.session]:[]),...imported.pausedSessions,...data.pausedSessions];
     data.session=null;data.pausedSessions=sessions.filter((s,i)=>sessions.findIndex(other=>other.id===s.id)===i);save();go('home');toast('学习记录与暂存练习已导入');
   } catch {toast('请使用本站导出的学习记录文件。');}
@@ -640,3 +658,10 @@ document.addEventListener('pointerdown',()=>{clearTimeout(toastTimer);document.g
 setInterval(()=>{const node=document.getElementById('exam-state');if(node)node.textContent=examState();},60000);
 save();
 go('home');
+
+// Desktop shortcuts do not intercept typing, IME, or dialog interaction.
+document.addEventListener('keydown',event=>{
+ if(event.repeat||event.isComposing||event.ctrlKey||event.metaKey||event.altKey||!document.body.classList.contains('is-practicing')||event.target.closest('input,textarea,select,[contenteditable="true"],dialog'))return;
+ const choices=[...document.querySelectorAll('#options .option:not(:disabled)')];
+ if(/^[1-4]$/.test(event.key)&&choices[Number(event.key)-1]){event.preventDefault();choices[Number(event.key)-1].click();}
+});

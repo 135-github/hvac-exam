@@ -7,7 +7,7 @@ const LEARNING_KEYS=['seen','right','wrong','level','due','last','lastGoodDay','
 const main = document.getElementById('main');
 const escapeHTML = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let view = 'home';
-let filters = {unit:'', type:'', search:'',status:''};
+let filters = {unit:'', type:'', search:''};
 let toastTimer;
 const fresh = () => ({records:{},session:null,pausedSessions:[],settings:{count:5,unit:'',type:'',scope:'all',order:'sequence',mode:'answer',autoNext:false,focus:false,font:'normal'},letter:''});
 
@@ -22,6 +22,7 @@ function validRecord(r) {
   return r && typeof r==='object' && !Array.isArray(r) &&
     ['seen','right','level','due','last','viewed'].every(k=>r[k]===undefined || Number.isFinite(r[k]) && r[k]>=0) &&
     (r.note===undefined || typeof r.note==='string') &&
+    (r.mnemonic===undefined || typeof r.mnemonic==='string' && r.mnemonic.length<=500) &&
     ['wrong','star','later'].every(k=>r[k]===undefined || typeof r[k]==='boolean');
 }
 function normalizeSession(old) {
@@ -53,7 +54,7 @@ function normalize(value) {
   result.settings.count=Number.isInteger(settings.count)&&settings.count>=1&&settings.count<=180?settings.count:5;
   result.settings.unit=units[settings.unit]?settings.unit:'';
   result.settings.type=qs.some(q=>q.t===settings.type)?settings.type:'';
-  result.settings.scope=['all','unseen','wrong','star','later','due','verified','reference'].includes(settings.scope)?settings.scope:'all';
+  result.settings.scope=['all','unseen','wrong','star','later','due'].includes(settings.scope)?settings.scope:'all';
   result.settings.order=['sequence','random','smart'].includes(settings.order)?settings.order:'sequence';
   result.settings.mode=['answer','read','recall'].includes(settings.mode)?settings.mode:'answer';
   result.settings.autoNext=settings.autoNext===true;
@@ -69,7 +70,10 @@ try {
   const stored=JSON.parse(localStorage.getItem(STORAGE)||'null');
   if(stored) data=normalize(stored);
 
-} catch { toast('旧记录读取失败，可从备份导入。'); }
+} catch {
+  try { const damaged=localStorage.getItem(STORAGE);if(damaged)localStorage.setItem(STORAGE+'-recovery',damaged); } catch {}
+  toast('旧记录读取失败。可在“学习记录”找恢复原件，或导入之前的备份。');
+}
 function save() {
   try { localStorage.setItem(STORAGE,JSON.stringify(data)); }
   catch { toast('当前浏览器无法保存，请导出记录备份。'); }
@@ -94,7 +98,7 @@ function go(next) {
   applyAppearance(false);
   view=next;
   document.getElementById('nav').innerHTML=menus.map(([id,label])=>'<button data-view="'+id+'" class="'+(id===view?'active':'')+'" '+(id===view?'aria-current="page"':'')+'>'+label+'</button>').join('');
-  document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{filters={unit:'',type:'',search:'',status:''};go(button.dataset.view);});
+  document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{filters={unit:'',type:'',search:''};go(button.dataset.view);});
   if(view==='home')renderHome();else renderSetup();
   window.scrollTo(0,0);
 }
@@ -105,17 +109,17 @@ function renderHome() {
   const today=qs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
   main.innerHTML='<small>电工考证 · 独立题库 · 180 道</small><h1>有空，就练一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
     '<div class="home-grid"><section class="ticket electric-ticket" aria-label="电工题库概览"><div class="ticket-top"><div><small>电工综合模拟练习卷</small><div class="ticket-date">180<span> 道</span></div></div><span class="exam-state">随时续练</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">今天，学一点就好。</div><p>140 道单选 · 20 道多选 · 20 道判断</p><p class="muted">32 题已按平台截图核对；148 题仍为参考答案。每题均标明答案来源。</p><div class="ticket-actions"><button id="verified-only">只练已核对 32 题</button><button id="reference-only">查看待核对 148 题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="ticket-body"><div class="exam-time">今天，学一点就好。</div><p>140 道单选 · 20 道多选 · 20 道判断</p><p class="muted">答案已由题库整理者确认。把零散的时间，留给真正需要再想一遍的题。</p><div class="ticket-actions"><button id="quick-five">来一轮 · 5 题</button><button id="review-now">复习薄弱题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
     '<details class="free-settings"><summary>自己选范围、题量和方式</summary><div class="free-fields">'+
-    '<label>题目范围<select id="free-scope"><option value="all">全部原文题</option><option value="verified">仅截图已核对的 32 题</option><option value="reference">待与平台核对的 148 题</option><option value="unseen">还没练过</option><option value="wrong">错题与待巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option><option value="due">推荐复习</option></select></label>'+
+    '<label>题目范围<select id="free-scope"><option value="all">全部原文题</option><option value="unseen">还没练过</option><option value="wrong">错题与待巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option><option value="due">推荐复习</option></select></label>'+
     '<label>题型分区<select id="free-unit"><option value="">全部题型分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select></label>'+
     '<label>题型<select id="free-type"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select></label>'+
     '<label>出题顺序<select id="free-order"><option value="sequence">按原文顺序</option><option value="random">随机抽题</option><option value="smart">智能推荐</option></select></label>'+
     '<label>本轮题量<input id="free-count" type="number" min="1" max="180" inputmode="numeric"></label>'+
-    '<label>练习方式<select id="free-mode"><option value="answer">作答后看解析</option><option value="read">直接背题看解析</option><option value="recall">回忆卡片</option></select></label></div>'+
+    '<label>练习方式<select id="free-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="auto-next">自评后自动进入下一题</label>'+
     '<p id="available" class="muted"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
@@ -126,7 +130,7 @@ function renderHome() {
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。32 题按你提供的两轮截图核对，其余 148 题为参考答案，可能与平台不同。助记提示仅辅助回忆，不冒充官方解析。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工考试日期尚未提供，复习按常规间隔安排。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
+    '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工考试日期尚未提供，复习按常规间隔安排。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
   bindFreeSettings();
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
@@ -137,8 +141,8 @@ function renderHome() {
   document.getElementById('due').onclick=()=>go('due');
   document.getElementById('wrong').onclick=()=>go('wrong');
   document.getElementById('letter').oninput=e=>{data.letter=e.target.value;save();};
-  document.getElementById('verified-only').onclick=()=>start(qs.filter(q=>q.verified).map(q=>q.id),'截图已核对');
-  document.getElementById('reference-only').onclick=()=>{filters.status='reference';go('practice');};
+  document.getElementById('quick-five').onclick=()=>start(shuffled(qs).sort((a,b)=>priority(b)-priority(a)).slice(0,5).map(q=>q.id),'五题小练习');
+  document.getElementById('review-now').onclick=()=>{filters={unit:'',type:'',search:''};go('wrong');};
   document.getElementById('copy-link').onclick=copyLink;
   document.getElementById('bookmark').onclick=saveBookmark;
   document.querySelectorAll('[data-unit]').forEach(b=>b.onclick=()=>{filters.unit=b.dataset.unit;go('practice');});
@@ -147,19 +151,19 @@ function matchesSearch(q,text) {
   const term=text.trim();
   if(!term)return true;
   if(/^#?\d+$/.test(term))return q.id+1===Number(term.replace('#',''));
-  return [q.s,...q.o||[],q.cue,q.exp,record(q.id).note||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
+  return [q.s,...q.o||[],q.cue,q.exp,record(q.id).note||'',record(q.id).mnemonic||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
 }
 function pool() {
   return qs.filter(q=>(!filters.unit||q.u===filters.unit) && (!filters.type||q.t===filters.type) &&
     (view!=='due'||isDue(q)) && (view!=='later'||record(q.id).later) && (view!=='wrong'||record(q.id).wrong) &&
-    (view!=='star'||record(q.id).star||record(q.id).note) &&
-    (!filters.status||(filters.status==='verified'?q.verified:!q.verified)) && matchesSearch(q,filters.search));
+    (view!=='star'||record(q.id).star||record(q.id).note||record(q.id).mnemonic) &&
+    matchesSearch(q,filters.search));
 }
 function renderSetup() {
   const title={practice:'按自己的节奏，复习。',wrong:'再遇见，就记住。',star:'留给自己的重点。',due:'今天，再回想一次。',later:'先放一放，等你回来。'}[view];
   main.innerHTML='<small>'+({practice:'全部 180 道原文题',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
-    '<div class="toolbar"><select id="unit" aria-label="题型分区"><option value="">全部题型分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、题干、选项或注记" aria-label="搜索题号、题目或注记"></div><div class="verification-filter"><label for="status">答案来源</label><select id="status"><option value="">全部 180 题</option><option value="verified">截图已核对 · 32 题</option><option value="reference">待与平台核对 · 148 题</option></select></div><div id="results"></div>';
-  for(const key of ['unit','type','search','status']) {
+    '<div class="toolbar"><select id="unit" aria-label="题型分区"><option value="">全部题型分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、题干、选项或注记" aria-label="搜索题号、题目或注记"></div><div id="results"></div>';
+  for(const key of ['unit','type','search']) {
     const node=document.getElementById(key);
     node.value=filters[key];
     node.oninput=()=>{filters[key]=node.value;renderResults();};
@@ -207,7 +211,7 @@ function markViewed(id) {
 }
 function commitPendingAnswer() {
   const s=data.session,a=s?.answers[s.ids[s.index]];
-  if(a && typeof a.correct==='boolean' && !a.rated&&!a.skipAuto)rate(a.correct?(a.hinted?'hard':'good'):'again',false);
+  if(a && typeof a.correct==='boolean' && !a.rated&&!a.skipAuto)rate(a.correct?((a.hinted||a.peeked)?'hard':'good'):'again',false);
 }
 function moveTo(index) {
   if(!data.session || index<0 || index>=data.session.ids.length)return;
@@ -221,7 +225,7 @@ function pickOne() {
 function freePool() {
   const s=data.settings;
   return qs.filter(q=>(!s.unit||q.u===s.unit)&&(!s.type||q.t===s.type)&&
-    ({all:true,unseen:!record(q.id).seen,wrong:record(q.id).wrong,star:record(q.id).star||record(q.id).note,later:record(q.id).later,due:isDue(q),verified:q.verified,reference:!q.verified})[s.scope]);
+    ({all:true,unseen:!record(q.id).seen,wrong:record(q.id).wrong,star:record(q.id).star||record(q.id).note||record(q.id).mnemonic,later:record(q.id).later,due:isDue(q)})[s.scope]);
 }
 function bindFreeSettings() {
   const update=()=>{document.getElementById('available').textContent='当前范围 '+freePool().length+' 道 · 随时可以停，也可以跳过';};
@@ -270,7 +274,7 @@ function renderPausedSessions() {
   }
   const later=document.createElement('button');later.className='saved-session';
   later.textContent='留待稍后的题 · '+qs.filter(q=>record(q.id).later).length;
-  later.onclick=()=>{filters={unit:'',type:'',search:'',status:''};go('later');};container.append(later);
+  later.onclick=()=>{filters={unit:'',type:'',search:''};go('later');};container.append(later);
 }
 function applyAppearance(practicing) {
   document.body.classList.toggle('is-practicing',practicing);
@@ -282,7 +286,7 @@ function openStudySettings() {
   const dialog=document.createElement('dialog');dialog.id='study-dialog';dialog.setAttribute('aria-labelledby','study-title');
   const s=data.session,id=s.ids[s.index];
   dialog.innerHTML='<div class="topline"><h3 id="study-title">按舒服的方式练</h3><button id="close-study">完成</button></div><div class="study-fields">'+
-    '<label>练习方式<select id="session-mode"><option value="answer">作答后看解析</option><option value="read">直接背题看解析</option><option value="recall">回忆卡片</option></select></label>'+
+    '<label>练习方式<select id="session-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label>'+
     '<label>题目字号<select id="font-size"><option value="normal">标准</option><option value="large">大字</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="focus-toggle">专注模式：收起页头和底部导航</label>'+
     '<label class="switch-line"><input type="checkbox" id="session-auto-next">自评后自动进入下一题</label>'+
@@ -306,7 +310,7 @@ function openQuestionPicker(all=false) {
   document.getElementById('question-picker')?.remove();
   const dialog=document.createElement('dialog');dialog.id='question-picker';dialog.setAttribute('aria-labelledby','picker-title');
   dialog.innerHTML='<div class="topline"><h3 id="picker-title">'+(all?'题目地图':'本轮选题')+'</h3><button id="close-picker">关闭</button></div><p class="muted">数字是原文题号。随时跳到想看的那一道。</p>'+
-    (all?'<div class="map-filters"><label>题目范围<select id="map-filter"><option value="all">全部原文题</option><option value="verified">仅截图已核对的 32 题</option><option value="reference">待与平台核对的 148 题</option><option value="unseen">还没看过</option><option value="wrong">需要再巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option></select></label><label>找题号<input id="map-number" type="search" inputmode="numeric" placeholder="例如 106"></label></div>':'')+
+    (all?'<div class="map-filters"><label>题目范围<select id="map-filter"><option value="all">全部原文题</option><option value="unseen">还没看过</option><option value="wrong">需要再巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option></select></label><label>找题号<input id="map-number" type="search" inputmode="numeric" placeholder="例如 106"></label></div>':'')+
     '<p class="muted" id="map-count"></p><div class="picker-grid"></div>';
   document.body.append(dialog);
   dialog.querySelector('#close-picker').onclick=()=>dialog.close();
@@ -316,7 +320,7 @@ function openQuestionPicker(all=false) {
     const number=all?dialog.querySelector('#map-number').value.trim():'';
     const list=(all?qs.map(q=>q.id):s.ids).filter(id=>{
       const r=record(id);
-      return (!number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note,later:r.later})[scope];
+      return (!number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note||r.mnemonic,later:r.later})[scope];
     });
     const grid=dialog.querySelector('.picker-grid');grid.replaceChildren();
     dialog.querySelector('#map-count').textContent=list.length?'共 '+list.length+' 道 · 点题号就能开始':'这里暂时没有题目，可以换个条件。';
@@ -345,7 +349,7 @@ function renderQuestion() {
   if(s.mode==='read'&&!a.revealed){a.revealed=true;a.peeked=true;markViewed(id);}
   main.innerHTML='<div class="question-wrap"><div class="topline"><button id="back" class="quiet">← 暂停，回首页</button><button class="quiet" id="jump">选题 · '+(s.index+1)+' / '+s.ids.length+'</button></div><div class="session-tools"><button id="hint">助记提示</button><button id="peek">看答案</button><button id="study-settings">练习设置</button></div><button id="exit-focus" class="quiet">专注中 · 退出专注</button>'+
     '<section class="card"><div class="question-meta"><span>第 '+(id+1)+' 题 · '+q.t+'</span><button id="star" class="quiet" aria-pressed="'+!!r.star+'">'+(r.star?'★ 已收藏':'☆ 收藏')+'</button></div>'+
-    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+answerBadge(q)+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
+    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
   document.getElementById('back').onclick=()=>go('home');
@@ -422,10 +426,14 @@ function reviewTime(grade,previous,now=Date.now()) {
 function renderFeedback(q,a) {
   const heading=a.correct===undefined?'对照答案，看看记住了多少':a.correct?'答对了':'记住这一次，下次再试';
   document.getElementById('feedback').innerHTML='<div class="feedback"><h3>'+heading+'</h3>'+
-    (q.key?'<div class="answer-comparison">'+(typeof a.correct==='boolean'?'<p>你的答案 <b>'+escapeHTML([...a.selected].sort().join('、'))+'</b></p>':'')+'<p>'+ (q.verified?'平台答案':'参考答案')+' <b>'+escapeHTML([...q.key].join('、'))+'</b></p></div>':'')+
+    (q.key?'<div class="answer-comparison">'+(typeof a.correct==='boolean'?'<p>你的答案 <b>'+escapeHTML([...a.selected].sort().join('、'))+'</b></p>':'')+'<p>'+ '正确答案'+' <b>'+escapeHTML([...q.key].join('、'))+'</b></p></div>':'')+
     (q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+
-    '<div class="memory"><small>一句助记</small><p>'+escapeHTML(q.cue)+'</p></div>'+
-    '<details open><summary>答案依据与校对说明</summary><p>'+escapeHTML(q.exp)+'</p></details></div>';
+    '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
+    '</div>';
+  const editor=document.createElement('details');editor.className='mnemonic-editor';
+  editor.innerHTML='<summary>换成我的助记</summary><label for="my-mnemonic">写下你脑海里的画面或顺口溜</label><textarea id="my-mnemonic" class="note" maxlength="500" placeholder="例如：电阻像窄门，电流经过要排队。">'+escapeHTML(record(q.id).mnemonic||'')+'</textarea><small>自动保存；清空后恢复题库助记。</small>';
+  document.querySelector('#feedback .memory').after(editor);
+  editor.querySelector('textarea').oninput=event=>{data.records[q.id]={...record(q.id),mnemonic:event.target.value};save();document.querySelector('#feedback .memory p').textContent=event.target.value||q.cue;};
   if(q.key&&a.correct===false&&q.t==='多选题') {
     const missing=[...q.key].filter(key=>!a.selected.includes(key));
     const extra=a.selected.filter(key=>!q.key.includes(key));
@@ -507,7 +515,6 @@ function renderSummary() {
   if(covered<s.ids.length)document.getElementById('remaining').onclick=()=>{s.index=s.ids.findIndex(id=>!s.answers[id]?.revealed&&!s.answers[id]?.rated);save();renderQuestion();};
   window.scrollTo(0,0);
 }
-function answerBadge(q) { return '<p class="answer-source '+(q.verified?'verified':'reference')+'">'+(q.verified?'已按平台截图核对':'参考答案 · 待与平台核对')+'</p>'; }
 async function copyLink() {
   try { await navigator.clipboard.writeText(location.href.split(/[?#]/)[0]);toast('电工题库链接已复制'); }
   catch { toast('复制未成功，请从浏览器地址栏复制链接。'); }
@@ -538,7 +545,7 @@ function saveBookmark() {
   ctx.fillStyle='#b76742';ctx.font='26px "Microsoft YaHei", sans-serif';ctx.fillText('电工 · 学习书签',120,390);
   ctx.setLineDash([8,10]);ctx.beginPath();ctx.moveTo(65,445);ctx.lineTo(1015,445);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#273d36';ctx.font='58px Inter, sans-serif';ctx.fillText('一点一点，记得更牢',115,555);
-  ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('32 题截图确认 · 148 题参考答案',115,635);
+  ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('180 题 · 每天记牢一点',115,635);
   ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('140 单选 · 20 多选 · 20 判断',115,690);
   const done=qs.filter(q=>record(q.id).seen||record(q.id).viewed).length;
   ctx.fillText('已接触 '+done+' / 180 道',115,790);
@@ -553,6 +560,16 @@ function saveBookmark() {
 }
 document.getElementById('brand').onclick=e=>{e.preventDefault();go('home');};
 document.getElementById('backup').onclick=()=>download(new Blob([JSON.stringify({format:STORAGE,...data},null,2)],{type:'application/json'}),'电工学习记录.json');
+// Keep a damaged original available without mixing it into a valid backup.
+try {
+  const recovery=localStorage.getItem(STORAGE+'-recovery');
+  if(recovery){
+    const button=document.createElement('button');button.id='recovery-export';
+    button.textContent='导出异常记录原件（用于修复）';
+    button.onclick=()=>download(new Blob([recovery],{type:'text/plain;charset=utf-8'}),'学习记录-待修复原件.txt');
+    document.querySelector('.tool-menu').append(button);
+  }
+} catch {}
 document.getElementById('import-button').onclick=()=>document.getElementById('restore').click();
 document.getElementById('restore').onchange=async e=>{
   const file=e.target.files[0];if(!file)return;
@@ -561,10 +578,10 @@ document.getElementById('restore').onchange=async e=>{
     if(raw.format!==STORAGE)throw Error();
     const imported=normalize(raw);
     if(!confirm('合并学习记录？相同题目采用备份中的记录。'))return;
+    parkSession();
     data.records={...data.records,...imported.records};
     data.settings=imported.settings;
     if(typeof raw.letter==='string')data.letter=imported.letter;
-    parkSession();
     const sessions=[...(imported.session?[imported.session]:[]),...imported.pausedSessions,...data.pausedSessions];
     data.session=null;data.pausedSessions=sessions.filter((s,i)=>sessions.findIndex(other=>other.id===s.id)===i);save();go('home');toast('学习记录与暂存练习已导入');
   } catch {toast('请使用本站导出的学习记录文件。');}
@@ -584,3 +601,10 @@ document.addEventListener('focusin',event=>{
 document.addEventListener('pointerdown',()=>{clearTimeout(toastTimer);document.getElementById('toast').style.display='none';});
 save();
 go('home');
+
+// Desktop shortcuts do not intercept typing, IME, or dialog interaction.
+document.addEventListener('keydown',event=>{
+ if(event.repeat||event.isComposing||event.ctrlKey||event.metaKey||event.altKey||!document.body.classList.contains('is-practicing')||event.target.closest('input,textarea,select,[contenteditable="true"],dialog'))return;
+ const choices=[...document.querySelectorAll('#options .option:not(:disabled)')];
+ if(/^[1-4]$/.test(event.key)&&choices[Number(event.key)-1]){event.preventDefault();choices[Number(event.key)-1].click();}
+});

@@ -236,3 +236,6 @@ html:has(body.is-practicing) { scroll-padding-top:16px; scroll-padding-bottom:12
  .rating-buttons { display:block; }
  .answer-dock:has(button:nth-child(3)) button.primary { flex:1.35; }
 }
+
+/* Memory editor: optional, touch friendly, stays out of the main answer flow. */
+.mnemonic-editor{margin:0 0 18px;font-size:14px}.mnemonic-editor label{display:block;margin:8px 0;color:var(--muted)}.mnemonic-editor summary{min-height:48px}.mnemonic-editor small{display:block;margin-top:6px}.memory p{line-height:1.85}.question-wrap h2{overflow-wrap:anywhere}button:focus-visible{outline-offset:2px}
