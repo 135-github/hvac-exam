@@ -108,8 +108,8 @@ function renderHome() {
   const due=qs.filter(isDue).length;
   const today=qs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
   main.innerHTML='<small>电工考证 · 独立题库 · 180 道</small><h1>有空，就练一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
-    '<div class="home-grid"><section class="ticket electric-ticket" aria-label="电工题库概览"><div class="ticket-top"><div><small>电工综合模拟练习卷</small><div class="ticket-date">180<span> 道</span></div></div><span class="exam-state">随时续练</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">今天，学一点就好。</div><p>140 道单选 · 20 道多选 · 20 道判断</p><p class="muted">答案已由题库整理者确认。把零散的时间，留给真正需要再想一遍的题。</p><div class="ticket-actions"><button id="quick-five">来一轮 · 5 题</button><button id="review-now">复习薄弱题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="home-grid"><section class="ticket electric-ticket" aria-label="电工题库概览"><div class="ticket-top"><div><small>电工高级工证书考试</small><div class="ticket-date">11.21<span> 考证</span></div></div><span class="exam-state">随时续练</span></div>'+
+    '<div class="ticket-body"><div class="exam-time">2026 年 11 月 21 日</div><p>考试具体时段以准考证为准</p><p>140 道单选 · 20 道多选 · 20 道判断</p><p class="muted">答案已由题库整理者确认。把零散的时间，留给真正需要再想一遍的题。</p><div class="ticket-actions"><button id="quick-five">来一轮 · 5 题</button><button id="review-now">复习薄弱题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
@@ -130,7 +130,7 @@ function renderHome() {
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工考试日期尚未提供，复习按常规间隔安排。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
+    '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工高级工考证日期为2026年11月21日，具体时段以准考证为准。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
   bindFreeSettings();
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
@@ -545,7 +545,7 @@ function saveBookmark() {
   ctx.fillStyle='#b76742';ctx.font='26px "Microsoft YaHei", sans-serif';ctx.fillText('电工 · 学习书签',120,390);
   ctx.setLineDash([8,10]);ctx.beginPath();ctx.moveTo(65,445);ctx.lineTo(1015,445);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#273d36';ctx.font='58px Inter, sans-serif';ctx.fillText('一点一点，记得更牢',115,555);
-  ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('180 题 · 每天记牢一点',115,635);
+  ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('11.21 · 电工高级工考证',115,635);
   ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('140 单选 · 20 多选 · 20 判断',115,690);
   const done=qs.filter(q=>record(q.id).seen||record(q.id).viewed).length;
   ctx.fillText('已接触 '+done+' / 180 道',115,790);
