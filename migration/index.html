@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f5ef">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>记录迁移试点 · 通风与空调</title><link rel="icon" href="../favicon.svg"><link rel="stylesheet" href="./style.css?v=20261114-r2">
+<script src="./engine.js?v=20261114-r2" defer></script><script src="./store.js?v=20261114-r2" defer></script><script src="./app.js?v=20261114-r2" defer></script>
+</head><body><main>
+<a class="back" href="../">← 回到刷题</a><p class="eyebrow">R2 · 通风空调优先试点</p><h1>给学习记录，一份可核对的副本。</h1>
+<p class="lead">题目、笔记、暂停草稿一起核对，再保存到本机新数据库。你的原练习照常使用，三科内容和已确认答案不变。</p>
+<aside><strong>这一步暂不切换正式存储。</strong>试点副本是保存时的快照，之后刷题不会自动同步。核对和撤回都不会改写原记录；逐次作答日志留在下一批。</aside>
+<section aria-labelledby="source-title"><div class="section-head"><span class="step">1</span><h2 id="source-title">选择要核对的记录</h2></div>
+<div class="actions"><button id="read-local">核对本机通风空调记录</button><label class="file-button" for="backup-file">选择导出的 JSON 备份<input id="backup-file" type="file" accept="application/json,.json"></label></div>
+<p class="muted">整个过程在当前浏览器中完成，不上传笔记。若本机没有记录，可在原题库“学习记录 → 导出记录”，再选取文件。</p>
+<p id="status" class="status" role="status" aria-live="polite">尚未读取你的学习记录。</p><p id="source-changed" class="warning" hidden>原练习记录已变化。请重新核对，避免保存过期副本。</p>
+</section>
+<section id="preview" hidden aria-labelledby="preview-title"><div class="section-head"><span class="step">2</span><h2 id="preview-title">核对数量、题目与笔记</h2></div>
+<div id="counts" class="counts"></div><p id="source-status" class="warning"></p><div id="samples"></div>
+<details id="all-records"><summary>查看全部候选题目与笔记</summary><div id="records-list"></div></details>
+<details><summary>练习位置与草稿</summary><div id="session-list"></div></details>
+<details><summary id="quarantine-title">待处理记录</summary><div id="quarantine-list"></div></details>
+<div class="actions"><button id="download-report" class="secondary">导出核对报告</button><button id="download-source" class="secondary">另存本次原始记录</button></div>
+</section>
+<section id="confirm-section" hidden aria-labelledby="confirm-title"><div class="section-head"><span class="step">3</span><h2 id="confirm-title">核对后保存试点副本</h2></div>
+<label class="check"><input id="reviewed" type="checkbox"><span>我已核对显示的题目、笔记与练习位置；抽样无法证明未抽样记录全部正确。</span></label>
+<label class="check"><input id="understood" type="checkbox"><span>我理解来源版本尚未被证明；待处理记录会原样保留，保存后也不会替换原题库进度。</span></label>
+<button id="save-copy" disabled>保存到本机新数据库</button><p id="save-status" class="status" role="status" aria-live="polite"></p>
+</section>
+<section aria-labelledby="saved-title"><div class="section-head"><h2 id="saved-title">已保存的试点</h2><button id="refresh-state" class="secondary">刷新状态</button></div>
+<p id="db-status" role="status">正在读取试点状态…</p><p id="saved-stale" class="warning" hidden></p>
+<div class="actions"><button id="export-copy" class="secondary" disabled>导出当前试点副本</button><button id="rollback" class="secondary" disabled>撤回当前试点</button></div>
+<dialog id="rollback-dialog"><h2>撤回当前试点副本？</h2><p>将试点指针恢复到上一个保存检查点。历史副本保留，原刷题记录始终不变。</p><div class="actions"><button id="cancel-rollback" class="secondary">保留当前副本</button><button id="confirm-rollback">确认撤回</button></div></dialog>
+<details><summary>历史检查点与导出</summary><div id="snapshot-list"></div></details>
+</section>
+<section><h2>本机保存情况</h2><p id="storage-status">正在查询…</p><button id="persist" class="secondary">申请持久保存</button><p class="muted">浏览器可能不批准。即使获准，主动清理网站数据仍会删除本地记录。下载到设备的备份不受本页控制。</p></section>
+<details class="footnote"><summary>版本与边界</summary><p>冻结题库：add8bfec7cc21588483b63696acdebc5369c6d54。本批只试点通风空调。使用永久编号 hvac-0001 等保存副本，显示题号独立；原练习页面尚未切换到新存储。</p><p>历史汇总按原值保留，不伪造成一次作答；不据此宣称掌握知识。副本仅能恢复到实际保存过的检查点。本页核对规则与冻结清单会一同缓存，首次加载需联网。</p></details>
+<noscript>请启用 JavaScript 后核对。未启用时不会修改任何记录。</noscript>
+</main></body></html>

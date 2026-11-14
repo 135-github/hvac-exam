@@ -11,7 +11,7 @@ const server=http.createServer((req,res)=>{
  if(failCache&&url.endsWith('/review/electric.html')){res.writeHead(503);return res.end('unavailable');}
  res.setHeader('Cache-Control','no-store');
  res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'}[path.extname(file)]||'text/plain')+';charset=utf-8');
- const bytes=fs.readFileSync(file);res.end(url.endsWith('/sw.js')?bytes.toString().replace('20261114-v1','20261114-'+version):bytes);
+ const bytes=fs.readFileSync(file);res.end(url.endsWith('/sw.js')?bytes.toString().replace(/const CACHE='[^']+'/, "const CACHE='study-pocket-20261114-"+version+"'"):bytes);
 });
 const ready=page=>page.waitForFunction(async()=>{
  const r=await navigator.serviceWorker.getRegistration();if(!r?.active)return false;

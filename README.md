@@ -74,3 +74,14 @@
 - 更新静态资源时同步提升`sw.js`的CACHE版本及首页资源版本；新文件需加入FILES清单。缓存失败不激活不完整版本。学习记录使用localStorage，缓存清理不清理记录。
 - Web实现参考：[MDN Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)、[Cache.addAll](https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll)。
 - `node tests/study-extras.cjs` 实测碎片时间选题、13×3步案例与草稿、速记返回原题、真正断网下三科切换，以及缓存失败重试和新版等待激活。使用与其他浏览器测试相同的Playwright环境变量。
+
+## R2 记录迁移试点（2026-11-14）
+
+- 各科“学习记录 → 记录迁移试点 · 通风空调”，独立入口 `migration/`，主刷题界面结构不变。
+- 先读取本机暖通记录或本人选取的备份，显示候选映射、最多十条笔记抽样、全部候选、草稿和隔离载荷；没有真实导出也能由本人在浏览器核对。
+- 经本人确认后，以稳定 qid 在 IndexedDB `exam-memory` v1 保存一份只读试点副本。旧 localStorage 三科记录不被改写，试点没有接管日常学习；之后的练习不会自动同步到此快照。
+- 保存以事务 complete 为准；失败不留下半份副本。并发 revision 比较、来源变化提示、原件导出、试点导出、历史检查点与撤回已实现。
+- 冻结清单与 R1 的 add8bfe 版本一致，源文件与题目指纹可核对。历史统计作为基线，不合成虚构作答，不声称来源版本已被证明。
+- 新页面和清单加入完整离线缓存（本版共29项），采用新的缓存版本，仍需本人选择加载新版。
+- R3 的正式学习存储切换、逐次日志、冲突合并与导出v3未在本批启用，详见 `migration/README.md`。
+- `node tests/migration-r2.cjs` 测试冻结清单、原记录不变、事务回滚、并发保存、撤回、隔离、过期预览、手机与离线；使用合成数据，不读取真实个人浏览器记录。

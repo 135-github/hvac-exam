@@ -1,0 +1,4811 @@
+{
+  "schemaVersion": 1,
+  "subject": "hvac",
+  "legacyFormat": "hvac-memory-v2",
+  "source": {
+    "repository": "135-github/hvac-exam",
+    "commit": "add8bfec7cc21588483b63696acdebc5369c6d54",
+    "tree": "eebff91941358d4b81a01c3ca29170eed1b52ac9",
+    "files": {
+      "json": {
+        "path": "questions.json",
+        "bytes": 53902,
+        "sha256": "a6aa1f33a75e4ed6d49fb05d251e69e474f778fc39ee62c0704c7ae94899b905",
+        "gitBlob": "545a9722e2925135a80e0479daeb17b4a524d675"
+      },
+      "js": {
+        "path": "questions.js",
+        "bytes": 83142,
+        "sha256": "b6127dbde1eb5eb791a35c9e998ef3751987d7cdd3fc5f5c1c06c6171f5c44fe",
+        "gitBlob": "2528ab4bdb3a0fd945200bbea9a027dbd346c3ca"
+      }
+    }
+  },
+  "hashing": {
+    "algorithm": "SHA-256",
+    "serialization": "recursive key sort; JSON strings unchanged; array order retained; UTF-8",
+    "content": "all question object fields except id/qid/legacyIndex/displayNo; includes browser-only cues",
+    "answer": "t,s,o,key,points,exp when present; exp included conservatively",
+    "scope": "question data only; UI templates and derived case-workbench text are not included"
+  },
+  "idPolicy": "Assigned once from this frozen registry; never regenerate or renumber. displayNo and order may change independently.",
+  "entries": [
+    {
+      "legacyIndex": 0,
+      "qid": "hvac-0001",
+      "displayNo": 1,
+      "unit": "1",
+      "type": "单选题",
+      "stem": "通风与空气调节的任务是（　）。",
+      "sourceContentHash": "d47ca691a494554b23d3feac4c66b154ccf6beebaa80436a693f46dcac09faf9",
+      "contentHash": "2d004db1c1d02e6fefc0e23d8622455808bde9f445bd5c47b641f14fd6b08b8c",
+      "answerHash": "63f68e74169ad4f9d11b6dabe2c156891d683dfd0035fb43b71a02e1ab138377",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "单选题",
+        "n": "1",
+        "s": "通风与空气调节的任务是（　）。",
+        "o": [
+          "A. 只对室内空气进行加热",
+          "B. 采用人工的方法，创造和保证满足一定的空气环境",
+          "C. 只排除室内产生的粉尘",
+          "D. 只调节室内空气的相对湿度"
+        ],
+        "key": "B",
+        "exp": "教材1.1节：通风与空气调节的任务是采用人工的方法，创造和保证满足一定的空气环境。",
+        "id": 0,
+        "keywords": [
+          "采用人工的方法，创造和保证满足一定的空气环境"
+        ],
+        "cue": "人工调节，环境达标。"
+      }
+    },
+    {
+      "legacyIndex": 1,
+      "qid": "hvac-0002",
+      "displayNo": 2,
+      "unit": "1",
+      "type": "单选题",
+      "stem": "空气调节所要控制的“四度”是指温度、湿度、气流速度和（　）。",
+      "sourceContentHash": "c62454f714589e66a061be6c04543d1f1f257227efdcbfeadef40295d0207926",
+      "contentHash": "a8ee393498ca1f64723a3dfcd6cdfaa077910a878f602b022064a1c0e1944a53",
+      "answerHash": "731d013984c2a1d6e1afcae59943ab75001dc0770ef746c4a1d31b2a77568acd",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "单选题",
+        "n": "2",
+        "s": "空气调节所要控制的“四度”是指温度、湿度、气流速度和（　）。",
+        "o": [
+          "A. 室内空气洁净度",
+          "B. 空气密度",
+          "C. 空气含氧量",
+          "D. 空气压力"
+        ],
+        "key": "A",
+        "exp": "四度即温度、湿度、气流速度、室内空气洁净度，是空气调节区别于通风的核心控制参数。",
+        "id": 1,
+        "keywords": [
+          "室内空气洁净度"
+        ],
+        "cue": "温、湿、速、洁——四项一起记。"
+      }
+    },
+    {
+      "legacyIndex": 2,
+      "qid": "hvac-0003",
+      "displayNo": 3,
+      "unit": "1",
+      "type": "单选题",
+      "stem": "空气调节系统按用途可分为（　）两类。",
+      "sourceContentHash": "d2a4f557856e5de5bf0264de9a0acfd96f22652c6888b38dd50a0e58fd46b569",
+      "contentHash": "edfb08d8ccf54e2e07e6b04a1462dd099feb5a0dbaae359e6d966b56c6bbb495",
+      "answerHash": "251a9c43406cd75110fb03e5c636f5e49d609ef456a2ed58eb3cf77ddfd5247f",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "单选题",
+        "n": "3",
+        "s": "空气调节系统按用途可分为（　）两类。",
+        "o": [
+          "A. 集中式与分散式",
+          "B. 舒适性空调与工艺性空调",
+          "C. 直流式与混合式",
+          "D. 全空气系统与全水系统"
+        ],
+        "key": "B",
+        "exp": "前者保证人体健康和舒适性要求，后者满足生产过程需要，两者互相统一。",
+        "id": 2,
+        "keywords": [
+          "舒适性空调与工艺性空调"
+        ],
+        "cue": "用途看对象：人要舒适，生产要工艺。"
+      }
+    },
+    {
+      "legacyIndex": 3,
+      "qid": "hvac-0004",
+      "displayNo": 4,
+      "unit": "1",
+      "type": "单选题",
+      "stem": "我国于1966年研制成功第一台（　）。",
+      "sourceContentHash": "d5fa22af1452d6468c7858d0d473628d0faee647bc0765e63a1c78399d127057",
+      "contentHash": "89f1130aba7c20800ba4fe2cc77cad7c10d7ed8a74a0fe29f307545adea9e63a",
+      "answerHash": "fc12824b164f1a79fa95743d2d8ddb08f733bf164d5f2497ca287899f4d69986",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "单选题",
+        "n": "4",
+        "s": "我国于1966年研制成功第一台（　）。",
+        "o": [
+          "A. 组合式空调机组",
+          "B. 风机盘管机组",
+          "C. 离心式冷水机组",
+          "D. 窗式空调器"
+        ],
+        "key": "B",
+        "exp": "教材1.3节：我国1966年研制成功第一台风机盘管机组；组合式空调机组在20世纪50年代已应用于纺织工业。",
+        "id": 3,
+        "keywords": [
+          "风机盘管机组"
+        ],
+        "cue": "六六年，风机盘管见。"
+      }
+    },
+    {
+      "legacyIndex": 4,
+      "qid": "hvac-0005",
+      "displayNo": 5,
+      "unit": "1",
+      "type": "单选题",
+      "stem": "按照单元小结的表述，通风与空气调节的关系是（　）。",
+      "sourceContentHash": "fc5e3894ffc0d2f6a4267fe9a5888b22eb8bdbcf3b182ba3a88186d6b4697e4a",
+      "contentHash": "5b29a8b3708c10616620f4d4982906077090091803820562104d430c40e2f4cd",
+      "answerHash": "77f93639d9dc5db52eebaf5c620abb8bfcbbb19438b61edac2ff1dee7abc9599",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "单选题",
+        "n": "5",
+        "s": "按照单元小结的表述，通风与空气调节的关系是（　）。",
+        "o": [
+          "A. 通风是空气调节的低级形式，空气调节是通风的高级形式",
+          "B. 两者互不相关",
+          "C. 空气调节是通风的低级形式，通风是高级形式",
+          "D. 通风可以完全替代空气调节"
+        ],
+        "key": "A",
+        "exp": "通风以创造良好室内环境和保护大气环境为目的，空气调节以控制温度、湿度、流动速度、洁净度等参数为目的。",
+        "id": 4,
+        "keywords": [
+          "通风是空气调节的低级形式，空气调节是通风的高级形式"
+        ],
+        "cue": "通风是空气调节的低级形式，空气调节是通风的高级形式"
+      }
+    },
+    {
+      "legacyIndex": 5,
+      "qid": "hvac-0006",
+      "displayNo": 6,
+      "unit": "1",
+      "type": "多选题",
+      "stem": "通风的作用包括（　）。",
+      "sourceContentHash": "1fc501d95dba82892f4b338499699bded8338c988ed5650e50aedca9ba3f25ea",
+      "contentHash": "7ce108832365f64eb793085a3ff45be35b145ea826941f31cbbb7d36137a4c33",
+      "answerHash": "f01aa2d1f06e521984fd7fd81fda05deff6e4dcdd1a985adc3d80f1da3a45824",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "多选题",
+        "n": "1",
+        "s": "通风的作用包括（　）。",
+        "o": [
+          "A. 控制生产过程中产生的粉尘",
+          "B. 控制有毒有害气体",
+          "C. 控制高温、高湿",
+          "D. 直接向室内提供冷量或热量"
+        ],
+        "key": "ABC",
+        "exp": "通风的作用是控制粉尘、有毒有害气体、高温高湿，创造良好的生产环境和保护大气环境。",
+        "id": 5,
+        "keywords": [
+          "控制生产过程中产生的粉尘",
+          "控制有毒有害气体",
+          "控制高温、高湿"
+        ],
+        "cue": "尘、毒、热、湿，通风来控制。"
+      }
+    },
+    {
+      "legacyIndex": 6,
+      "qid": "hvac-0007",
+      "displayNo": 7,
+      "unit": "1",
+      "type": "多选题",
+      "stem": "通风与空气调节工程的发展方向包括（　）。",
+      "sourceContentHash": "791992e64492b280447c4611a895fc1c6a82fd076cd08df467c7a02098ee9059",
+      "contentHash": "da5307efb502dce88342ee8177baf3191be0fd5e2919f0578250ce4418f43ebf",
+      "answerHash": "8c48deed5777fbc9286b52b5243f2017dcbfb9b42fa0209c62dd4a5573f482de",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "多选题",
+        "n": "2",
+        "s": "通风与空气调节工程的发展方向包括（　）。",
+        "o": [
+          "A. 技术创新",
+          "B. 实现信息技术在工程中的应用",
+          "C. 绿色低碳发展",
+          "D. 以增加能源消耗换取室内舒适度"
+        ],
+        "key": "ABC",
+        "exp": "教材1.4节列为技术创新、信息技术在工程中的应用、绿色低碳发展三项。",
+        "id": 6,
+        "keywords": [
+          "技术创新",
+          "实现信息技术在工程中的应用",
+          "绿色低碳发展"
+        ],
+        "cue": "创新、信息、绿色低碳。"
+      }
+    },
+    {
+      "legacyIndex": 7,
+      "qid": "hvac-0008",
+      "displayNo": 8,
+      "unit": "1",
+      "type": "多选题",
+      "stem": "室内空气环境所受的干扰主要来自（　）。",
+      "sourceContentHash": "894c31dd174b3b0d75eec56ea96402554ed2264175b02a21ee7636b893278bff",
+      "contentHash": "49b8d8e257b8d66723ba0cd707d0d2ab184d046889a7316116762f3956cf108d",
+      "answerHash": "5527c69dd0d2dfae9ca423442c9452b71567b4a18761b22155bae80f98bd197d",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "多选题",
+        "n": "3",
+        "s": "室内空气环境所受的干扰主要来自（　）。",
+        "o": [
+          "A. 室内生产过程和人员产生的余热、余湿及其他有害物",
+          "B. 室外太阳辐射和气候变化产生的室内外热作用",
+          "C. 外部有害物的干扰",
+          "D. 建筑围护结构的自重"
+        ],
+        "key": "ABC",
+        "exp": "教材1.2节：干扰一是室内生产工艺和人员，二是室外太阳辐射、气候变化及外部有害物。",
+        "id": 7,
+        "keywords": [
+          "室内生产过程和人员产生的余热、余湿及其他有害物",
+          "室外太阳辐射和气候变化产生的室内外热作用",
+          "外部有害物的干扰"
+        ],
+        "cue": "屋内看人和生产，屋外看日晒、气候与污染。"
+      }
+    },
+    {
+      "legacyIndex": 8,
+      "qid": "hvac-0009",
+      "displayNo": 9,
+      "unit": "1",
+      "type": "多选题",
+      "stem": "关于通风的目的，下列说法正确的有（　）。",
+      "sourceContentHash": "41ee5f9204e6a1423d21063e3dfab075103132b98738dd2958d677f9c9f61428",
+      "contentHash": "bbde452278147b1d4f03fd143a63313e76c7ddab619f70e21fd6c933b05e3152",
+      "answerHash": "ac5961c45ed80f629dcbe53d9288117f8fb5ee4591c5654130121b6a48aafca8",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "多选题",
+        "n": "4",
+        "s": "关于通风的目的，下列说法正确的有（　）。",
+        "o": [
+          "A. 把室外新鲜空气经过适当处理（如过滤、加热、冷却等）后送至室内",
+          "B. 把室内废气经除尘、除害等处理后排至室外",
+          "C. 保证室内空气的新鲜程度达到国家规定的卫生标准",
+          "D. 使排放到室外的废气符合排放标准"
+        ],
+        "key": "ABCD",
+        "exp": "四项均为教材1.1节对通风目的的描述。",
+        "id": 8,
+        "keywords": [
+          "把室外新鲜空气经过适当处理（如过滤、加热、冷却等）后送至室内",
+          "把室内废气经除尘、除害等处理后排至室外",
+          "保证室内空气的新鲜程度达到国家规定的卫生标准",
+          "使排放到室外的废气符合排放标准"
+        ],
+        "cue": "把室外新鲜空气经过适当处理（如过滤、加热、冷却等）后送至室内 · 把室内废气经除尘、除害等处理后排至室外 · 保证室内空气的新鲜程度达到国家规定的卫生标准 · 使排放到室外的废气符合排放标准"
+      }
+    },
+    {
+      "legacyIndex": 9,
+      "qid": "hvac-0010",
+      "displayNo": 10,
+      "unit": "1",
+      "type": "判断题",
+      "stem": "通风的目的仅在于降低室内温度（　）。",
+      "sourceContentHash": "b16ca535ddbaf32c7778b1306f795ddd3ff766346da4c4663edc2ad009ff6656",
+      "contentHash": "a614c33e11e1ef95a0c3b20598fd0b7f3a1237514d0e184b32875bc338708ab7",
+      "answerHash": "ccb8d2fd6eebe2584c6becf25954a3fdaee8064e03ddd8f9763d0a8b0bc31f06",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "判断题",
+        "n": "1",
+        "s": "通风的目的仅在于降低室内温度（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "通风的目的是保证室内空气新鲜程度和排放达标，并控制粉尘、有害气体、高温高湿，不仅是降温。",
+        "id": 9,
+        "keywords": [
+          "通风的目的是保证室内空气新鲜程度和排放达标，并控制粉尘、有害气体、高温高湿，不仅是降温。"
+        ],
+        "cue": "通风兼顾新鲜、排放和有害物。"
+      }
+    },
+    {
+      "legacyIndex": 10,
+      "qid": "hvac-0011",
+      "displayNo": 11,
+      "unit": "1",
+      "type": "判断题",
+      "stem": "舒适性空调与工艺性空调是互相统一的（　）。",
+      "sourceContentHash": "7b7783e97099a9a1dd90b7cc57409f7a494bfb58c2ca89bd2a96abb2bf79a7c0",
+      "contentHash": "bd26e5bfa84f1ed7a6cb3f2794848c876027f581bd208769e4fcca576cc92375",
+      "answerHash": "6eeea81d7a71c7051da72d090284577e2bb8e9ed66babd19c5c1ce62dfa24d61",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "判断题",
+        "n": "2",
+        "s": "舒适性空调与工艺性空调是互相统一的（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "前者保证人体健康舒适，后者满足生产工艺需要，两者互相统一；特殊工艺可另建专用空调系统。",
+        "id": 10,
+        "keywords": [
+          "前者保证人体健康舒适，后者满足生产工艺需要，两者互相统一；特殊工艺可另建专用空调系统。"
+        ],
+        "cue": "前者保证人体健康舒适，后者满足生产工艺需要，两者互相统一；特殊工艺可另建专用空调系统。"
+      }
+    },
+    {
+      "legacyIndex": 11,
+      "qid": "hvac-0012",
+      "displayNo": 12,
+      "unit": "1",
+      "type": "判断题",
+      "stem": "通风与空气调节的基本方法是采用适当手段消除室内、室外两方面的干扰（　）。",
+      "sourceContentHash": "3c14e1afe71759ef30a4c35786114c581cd960f3a637f9f87e7c3142db92c246",
+      "contentHash": "9a9f63c5bc6f5c1f41537c535edc0d4b9ac9bad95c3a4675d468fdeef2646e1d",
+      "answerHash": "ffd2f85e1b61a6a6850e300ce03f021d1ac54201839e936efba83a6fc4c1fe15",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "判断题",
+        "n": "3",
+        "s": "通风与空气调节的基本方法是采用适当手段消除室内、室外两方面的干扰（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材1.2节原句，从而达到控制室内空气环境的目的。",
+        "id": 11,
+        "keywords": [
+          "教材1.2节原句，从而达到控制室内空气环境的目的。"
+        ],
+        "cue": "教材1.2节原句，从而达到控制室内空气环境的目的。"
+      }
+    },
+    {
+      "legacyIndex": 12,
+      "qid": "hvac-0013",
+      "displayNo": 13,
+      "unit": "1",
+      "type": "判断题",
+      "stem": "空气调节只需控制温度，不必控制气流速度和洁净度（　）。",
+      "sourceContentHash": "2d930aa2c8597cb7a9de7d35f9e6f8fa7f7c003c26b0f9bdc4f4c0d0c4da2ad0",
+      "contentHash": "087dfe9a62244d51a535305879ad1afb7dcb943a965a3f25a7069e89e7cbc5f0",
+      "answerHash": "cab8456a0a31e21ae81b846bc0b1f70c301b7f8a085d2077b83283886a09758b",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "判断题",
+        "n": "4",
+        "s": "空气调节只需控制温度，不必控制气流速度和洁净度（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "空气调节要控制温度、湿度、气流速度和洁净度“四度”。",
+        "id": 12,
+        "keywords": [
+          "空气调节要控制温度、湿度、气流速度和洁净度“四度”。"
+        ],
+        "cue": "温湿速洁，缺一不全。"
+      }
+    },
+    {
+      "legacyIndex": 13,
+      "qid": "hvac-0014",
+      "displayNo": 14,
+      "unit": "1",
+      "type": "判断题",
+      "stem": "空调及制冷技术被列入20世纪最伟大的工程技术成就（　）。",
+      "sourceContentHash": "3f3c205d640eb914e0cd95392947075cc50c4803bb6989863085e694c641355c",
+      "contentHash": "de345c97ae27add0a7bc87ab2d1a6ad6d730bd955d7e95e297ec41417889edaf",
+      "answerHash": "5767b74edfc70f72e4223697d310ae59b5b6bdf9ed050bdea9f7305c51a3f6cb",
+      "frozenQuestion": {
+        "u": "1",
+        "t": "判断题",
+        "n": "5",
+        "s": "空调及制冷技术被列入20世纪最伟大的工程技术成就（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材1.3节：美国工程院评出的20世纪最伟大工程技术成就中均将空调及制冷技术列入其中之一。",
+        "id": 13,
+        "keywords": [
+          "教材1.3节：美国工程院评出的20世纪最伟大工程技术成就中均将空调及制冷技术列入其中之一。"
+        ],
+        "cue": "教材1.3节：美国工程院评出的20世纪最伟大工程技术成就中均将空调及制冷技术列入其中之一。"
+      }
+    },
+    {
+      "legacyIndex": 14,
+      "qid": "hvac-0015",
+      "displayNo": 15,
+      "unit": "2",
+      "type": "单选题",
+      "stem": "下列各项中，不属于按污染物性质分类的是（　）。",
+      "sourceContentHash": "6464b8a5e8cf2912622114af1f4cd8a64371071b0bc72353b9b054f8a7d5a402",
+      "contentHash": "04b8a163d27c9e7bb886df7e9c0b2370a6c56c9a01295795122bfa051d88c035",
+      "answerHash": "5c034e76b154e487c115b52e1181f49d888cfce7d7cf21531fa53caeb3b270fc",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "单选题",
+        "n": "1",
+        "s": "下列各项中，不属于按污染物性质分类的是（　）。",
+        "o": [
+          "A. 化学污染物",
+          "B. 物理污染物",
+          "C. 生物污染物",
+          "D. 颗粒状污染物"
+        ],
+        "key": "D",
+        "exp": "按性质分为化学、物理、生物污染物；按在空气中的状态分为气体污染物和颗粒状污染物。",
+        "id": 14,
+        "keywords": [
+          "颗粒状污染物"
+        ],
+        "cue": "性质记化物生，状态记气与粒。"
+      }
+    },
+    {
+      "legacyIndex": 15,
+      "qid": "hvac-0016",
+      "displayNo": 16,
+      "unit": "2",
+      "type": "单选题",
+      "stem": "有害气体的体积浓度1mL/m³，用百万分率表示为（　）。",
+      "sourceContentHash": "d6172fffce5a1108c662e9c93b761a9aa136afe5f009dc89b23010f54d07ba66",
+      "contentHash": "d14ab42279381e5e998efd8b039bfd1beeea3edf5669214a4de50de641c5db2d",
+      "answerHash": "d96a279a1c73b2f9850a1cd99e389a489e247c74296e3e0c010e95e2be757e9c",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "单选题",
+        "n": "2",
+        "s": "有害气体的体积浓度1mL/m³，用百万分率表示为（　）。",
+        "o": [
+          "A. 1ppm",
+          "B. 10ppm",
+          "C. 0.1ppm",
+          "D. 100ppm"
+        ],
+        "key": "A",
+        "exp": "1ml/m³＝1ppm，表示该有害气体体积浓度为百万分之一。",
+        "id": 15,
+        "keywords": [
+          "1ppm"
+        ],
+        "cue": "一毫升进一立方米，就是百万分之一。"
+      }
+    },
+    {
+      "legacyIndex": 16,
+      "qid": "hvac-0017",
+      "displayNo": 17,
+      "unit": "2",
+      "type": "单选题",
+      "stem": "住宅厨房和卫生间全面通风换气次数不宜小于（　）次/h。",
+      "sourceContentHash": "2ff50fb9d2a8e2790826a20a5891bc00d345c9962a573bdeb4f94cc24a52c3a9",
+      "contentHash": "abf80dce46f8cad8e982b6b966c794fe462ddebe288339d539b6bd8852989e26",
+      "answerHash": "0d4bc8b0a7b6cbc36b62ec03721f300ff7998cd809132ef905ee7299141b7f90",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "单选题",
+        "n": "3",
+        "s": "住宅厨房和卫生间全面通风换气次数不宜小于（　）次/h。",
+        "o": [
+          "A. 1",
+          "B. 2",
+          "C. 3",
+          "D. 6"
+        ],
+        "key": "C",
+        "exp": "教材2.3.1节：厨房和卫生间全面通风换气次数不宜小于3次/h。",
+        "id": 16,
+        "keywords": [
+          "3"
+        ],
+        "cue": "厨卫换气，题库记三。"
+      }
+    },
+    {
+      "legacyIndex": 17,
+      "qid": "hvac-0018",
+      "displayNo": 18,
+      "unit": "2",
+      "type": "单选题",
+      "stem": "机械送风系统进风口下缘距室外地坪不宜小于（　）m。",
+      "sourceContentHash": "1f96f4e175a47f4e332f780057b24cc7761f9e60cce146efea3ff0579844f6aa",
+      "contentHash": "031be7294a8dc409a2f5c9557af52403ce675c587905eb6debb503477327fbf2",
+      "answerHash": "fbc7d2f85aa7aba65db360350be6cb00ff5a054e8e59d6157d60e43135ad4402",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "单选题",
+        "n": "4",
+        "s": "机械送风系统进风口下缘距室外地坪不宜小于（　）m。",
+        "o": [
+          "A. 0.5",
+          "B. 1",
+          "C. 2",
+          "D. 3"
+        ],
+        "key": "C",
+        "exp": "进风口下缘距室外地坪不宜小于2m；当布置在绿化地带时不宜小于1m。",
+        "id": 17,
+        "keywords": [
+          "2"
+        ],
+        "cue": "一般离地二，绿化可到一。"
+      }
+    },
+    {
+      "legacyIndex": 18,
+      "qid": "hvac-0019",
+      "displayNo": 19,
+      "unit": "2",
+      "type": "单选题",
+      "stem": "每个防烟分区的建筑面积，对于高层民用建筑和其他建筑不宜大于（　）m²。",
+      "sourceContentHash": "0ea71d96303b2d6198397c3c6a710842ad523c81f5f7b4081bee8cfbb189dd87",
+      "contentHash": "23e7d8899391e0de34e620c4ddbffce42ef9f8380e8474d42931e5b4dd494a0c",
+      "answerHash": "f4b1988c17c14226ec5896777091d58845e3d399b9606713dfca53143bb3db04",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "单选题",
+        "n": "5",
+        "s": "每个防烟分区的建筑面积，对于高层民用建筑和其他建筑不宜大于（　）m²。",
+        "o": [
+          "A. 200",
+          "B. 500",
+          "C. 1000",
+          "D. 2000"
+        ],
+        "key": "B",
+        "exp": "教材2.4.2节：每个防烟分区建筑面积不宜大于500m²，且防烟分区不应跨越防火分区。",
+        "id": 18,
+        "keywords": [
+          "500"
+        ],
+        "cue": "500"
+      }
+    },
+    {
+      "legacyIndex": 19,
+      "qid": "hvac-0020",
+      "displayNo": 20,
+      "unit": "2",
+      "type": "多选题",
+      "stem": "通风系统的通风方式，从动力角度可分为（　）。",
+      "sourceContentHash": "461b2536b01f6e677a5023078a610853821e97c85dc920ba0f4167853156b997",
+      "contentHash": "d900fac16f4929d56472c71218141558b76c1b846be36c11002144ec959f234a",
+      "answerHash": "10776d02b736afe2ed7f5f26969dbf4104ee6c01515a8821717a67f721ba80f2",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "多选题",
+        "n": "1",
+        "s": "通风系统的通风方式，从动力角度可分为（　）。",
+        "o": [
+          "A. 机械通风",
+          "B. 自然通风",
+          "C. 局部通风",
+          "D. 全面通风"
+        ],
+        "key": "AB",
+        "exp": "按动力分为机械通风与自然通风；局部通风、全面通风是按控制空间区域范围划分的。",
+        "id": 19,
+        "keywords": [
+          "机械通风",
+          "自然通风"
+        ],
+        "cue": "动力看机械、自然；范围看局部、全面。"
+      }
+    },
+    {
+      "legacyIndex": 20,
+      "qid": "hvac-0021",
+      "displayNo": 21,
+      "unit": "2",
+      "type": "多选题",
+      "stem": "化学有害因素的职业接触限值包括（　）。",
+      "sourceContentHash": "7904845e4e6d34d10d08cec3a52acc550b400f7ebcde819913390f5372bd8eff",
+      "contentHash": "0e10c32d0c7c71756aad55a740b10e7788b0b911b70669ac2135336c546c70bb",
+      "answerHash": "42f77b84f312b0f86b64c95814feecf77ab977d481245b0f95c501c357dba63e",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "多选题",
+        "n": "2",
+        "s": "化学有害因素的职业接触限值包括（　）。",
+        "o": [
+          "A. 时间加权平均容许浓度",
+          "B. 短时间接触容许浓度",
+          "C. 最高容许浓度",
+          "D. 年平均容许浓度"
+        ],
+        "key": "ABC",
+        "exp": "见GBZ 2.1-2019，职业接触限值分为上述三类。",
+        "id": 20,
+        "keywords": [
+          "时间加权平均容许浓度",
+          "短时间接触容许浓度",
+          "最高容许浓度"
+        ],
+        "cue": "时间加权平均容许浓度 · 短时间接触容许浓度 · 最高容许浓度"
+      }
+    },
+    {
+      "legacyIndex": 21,
+      "qid": "hvac-0022",
+      "displayNo": 22,
+      "unit": "2",
+      "type": "多选题",
+      "stem": "机械送风系统进风口位置应符合的规定有（　）。",
+      "sourceContentHash": "04f19a7db20e836d5fa5e9ce2b9e9e08ba48fff99905dd1c71b0812bb8cc25b2",
+      "contentHash": "2e8803dddd1058034c36f204202b7571e5513484754160bc29c352e0afeef4ce",
+      "answerHash": "8097978dcc28d123e1cef7466e1b97505f7419c9fda10b5c35aebaf0050c9216",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "多选题",
+        "n": "3",
+        "s": "机械送风系统进风口位置应符合的规定有（　）。",
+        "o": [
+          "A. 应设在室外空气较清洁的地点",
+          "B. 进风口宜低于排风口3m以上",
+          "C. 进排风口在同一高度时宜在不同方向设置，水平距离一般不宜小于10m",
+          "D. 进风口应设在排风口正上方以利于混合"
+        ],
+        "key": "ABC",
+        "exp": "进排风口相对位置应遵循避免短路的原则，故不应设于排风口正上方。",
+        "id": 21,
+        "keywords": [
+          "应设在室外空气较清洁的地点",
+          "进风口宜低于排风口3m以上",
+          "进排风口在同一高度时宜在不同方向设置，水平距离一般不宜小于10m"
+        ],
+        "cue": "应设在室外空气较清洁的地点 · 进风口宜低于排风口3m以上 · 进排风口在同一高度时宜在不同方向设置，水平距离一般不宜小于10m"
+      }
+    },
+    {
+      "legacyIndex": 22,
+      "qid": "hvac-0023",
+      "displayNo": 23,
+      "unit": "2",
+      "type": "多选题",
+      "stem": "按《建筑设计防火规范》，应设置防烟设施的场所或部位有（　）。",
+      "sourceContentHash": "fddc65ffdb968822efb8b926938fd1f92ec5d5ecd3c381e89ef6d74bc50dfedc",
+      "contentHash": "78ac48b502219b095e6b8e6d24220fc207af0805d84ef650053d013c4d7f4ca3",
+      "answerHash": "e0e2525d523c4fe8333d29e2f5b6da40fe70d2b77187fc0fcbc0a27c257f231b",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "多选题",
+        "n": "4",
+        "s": "按《建筑设计防火规范》，应设置防烟设施的场所或部位有（　）。",
+        "o": [
+          "A. 防烟楼梯间及其前室",
+          "B. 消防电梯间前室或合用前室",
+          "C. 避难走道的前室、避难层（间）",
+          "D. 普通办公室和会议室"
+        ],
+        "key": "ABC",
+        "exp": "教材2.4.2节列出的三类场所应设置防烟设施。",
+        "id": 22,
+        "keywords": [
+          "防烟楼梯间及其前室",
+          "消防电梯间前室或合用前室",
+          "避难走道的前室、避难层（间）"
+        ],
+        "cue": "防烟楼梯间及其前室 · 消防电梯间前室或合用前室 · 避难走道的前室、避难层（间）"
+      }
+    },
+    {
+      "legacyIndex": 23,
+      "qid": "hvac-0024",
+      "displayNo": 24,
+      "unit": "2",
+      "type": "判断题",
+      "stem": "自然通风不需要专门的动力（　）。",
+      "sourceContentHash": "ac7ddd42556d9aaa1688b89ada8640e16eb29f98e222d94325d1ffaab7a9cb8b",
+      "contentHash": "43af8764d1f153dabe19065b75fe869b07bb36ed96ab2932db3713d08c8b2cea",
+      "answerHash": "4c28bc2a259536928bf47dc1cb931f953af44e080f28726e76148ec2bc988d81",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "判断题",
+        "n": "1",
+        "s": "自然通风不需要专门的动力（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "自然通风依靠室外风力造成的风压和室内外温差、高度差产生的热压使空气流动，在某些热车间是经济有效的通风方式。",
+        "id": 23,
+        "keywords": [
+          "自然通风依靠室外风力造成的风压和室内外温差、高度差产生的热压使空气流动，在某些热车间是经济有效的通风方式。"
+        ],
+        "cue": "风压加热压，空气自然流。"
+      }
+    },
+    {
+      "legacyIndex": 24,
+      "qid": "hvac-0025",
+      "displayNo": 25,
+      "unit": "2",
+      "type": "判断题",
+      "stem": "防烟分区可以跨越防火分区划分（　）。",
+      "sourceContentHash": "97854d71ec4abdea1cbfc16504734f6be8c3d69bf51b4408bbeb6acc22af7a95",
+      "contentHash": "3e7747a1b0c69b647434d3ae26f973564d1f122b4759d8ae07e899fe4910f641",
+      "answerHash": "cc216918a4eabba0b8f025e9885fc454a500cbae2ce4059aa4c01d30b9d5d520",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "判断题",
+        "n": "2",
+        "s": "防烟分区可以跨越防火分区划分（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "防烟分区设置原则明确规定：防烟分区不应跨越防火分区。",
+        "id": 24,
+        "keywords": [
+          "防烟分区设置原则明确规定：防烟分区不应跨越防火分区。"
+        ],
+        "cue": "烟区不跨火区。"
+      }
+    },
+    {
+      "legacyIndex": 25,
+      "qid": "hvac-0026",
+      "displayNo": 26,
+      "unit": "2",
+      "type": "判断题",
+      "stem": "氨是可燃气体，其爆炸极限为16%～27%（　）。",
+      "sourceContentHash": "f690cd4517c578a1ed53eeac94691e7c8d2f5e373bcbf561ca05a0a490fff54a",
+      "contentHash": "6f8317a3eb3123f6309e32c4c36ebda378ccf34949d7c44478a082369a53daef",
+      "answerHash": "0fa48224b795a7b5d07f4aecd1e26da448504eda01cb67a7f69c00f53d61a37b",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "判断题",
+        "n": "3",
+        "s": "氨是可燃气体，其爆炸极限为16%～27%（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "氨气大量泄漏且得不到吹散稀释时，遇明火或电气火花会引起燃烧爆炸，故氨冷冻站应设可靠的机械排风和事故通风系统。",
+        "id": 25,
+        "keywords": [
+          "氨气大量泄漏且得不到吹散稀释时，遇明火或电气火花会引起燃烧爆炸，故氨冷冻站应设可靠的机械排风和事故通风系统。"
+        ],
+        "cue": "氨的爆炸范围，题库记16到27。"
+      }
+    },
+    {
+      "legacyIndex": 26,
+      "qid": "hvac-0027",
+      "displayNo": 27,
+      "unit": "2",
+      "type": "判断题",
+      "stem": "氟制冷机房的事故通风量不应小于12次/h（　）。",
+      "sourceContentHash": "405751d9fdb82464135995a76aafdd30652dc7b8e9c16bdfdae7d12b3dfe1bf9",
+      "contentHash": "1cfaead6f7fc30ac0c7061c33057153db675a450f8ee43ce2fb9c4bebb6897ab",
+      "answerHash": "8f5ef264b2382e241dd65d18e2ceff4efbe6b7a5c6759ac6b64265d0c10770e4",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "判断题",
+        "n": "4",
+        "s": "氟制冷机房的事故通风量不应小于12次/h（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "氟制冷机房通风量可取4～6次/h，事故通风量不应小于12次/h，事故排风口上沿距室内地坪不应大于1.2m。",
+        "id": 26,
+        "keywords": [
+          "氟制冷机房通风量可取4～6次/h，事故通风量不应小于12次/h，事故排风口上沿距室内地坪不应大于1.2m。"
+        ],
+        "cue": "氟机事故换气，题库记十二。"
+      }
+    },
+    {
+      "legacyIndex": 27,
+      "qid": "hvac-0028",
+      "displayNo": 28,
+      "unit": "2",
+      "type": "判断题",
+      "stem": "Ⅰ类民用建筑工程包括住宅、医院病房、幼儿园和学校教室等（　）。",
+      "sourceContentHash": "dc500ad5dd03b4b16dbad84299c397857778def9c84aca064ddd4885f1c0b92d",
+      "contentHash": "a46dc475597b7e81e4a2c40a481bcbfbed32321e493b64b2257bd1cc963ec777",
+      "answerHash": "b549bf573325adf39f22992c5081ca810c1c7e35231a0d9caf2bf4a7dd308d97",
+      "frozenQuestion": {
+        "u": "2",
+        "t": "判断题",
+        "n": "5",
+        "s": "Ⅰ类民用建筑工程包括住宅、医院病房、幼儿园和学校教室等（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "按GB 50325-2020，Ⅰ类还包括居住功能公寓、老年人照料房屋设施、学生宿舍等。",
+        "id": 27,
+        "keywords": [
+          "按GB 50325-2020，Ⅰ类还包括居住功能公寓、老年人照料房屋设施、学生宿舍等。"
+        ],
+        "cue": "按GB 50325-2020，Ⅰ类还包括居住功能公寓、老年人照料房屋设施、学生宿舍等。"
+      }
+    },
+    {
+      "legacyIndex": 28,
+      "qid": "hvac-0029",
+      "displayNo": 29,
+      "unit": "3",
+      "type": "单选题",
+      "stem": "全面通风又称（　）。",
+      "sourceContentHash": "1d9c485f74c0c34a0e807edd5c7acd790bf758965ecea39ad751fcc3e4b6ef82",
+      "contentHash": "e6de4be9163081ef74d4ad118e16ad5dfdd15c6af565805713aed07b2fabbf5c",
+      "answerHash": "246008de587123c75c495b0eee6b406167db479265ae6d4109f7b812d7535b9f",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "单选题",
+        "n": "1",
+        "s": "全面通风又称（　）。",
+        "o": [
+          "A. 局部通风",
+          "B. 稀释通风",
+          "C. 事故通风",
+          "D. 置换通风"
+        ],
+        "key": "B",
+        "exp": "全面通风是对整个车间或房间进行通风换气，用新鲜空气稀释有害物浓度。",
+        "id": 28,
+        "keywords": [
+          "稀释通风"
+        ],
+        "cue": "全面换气，用新风稀释。"
+      }
+    },
+    {
+      "legacyIndex": 29,
+      "qid": "hvac-0030",
+      "displayNo": 30,
+      "unit": "3",
+      "type": "单选题",
+      "stem": "通风房间的换气次数n的定义是（　）。",
+      "sourceContentHash": "a0647f03a7cda6779ee2adebbe2d73181487a313ff053af3db3c7eff53c8f8c0",
+      "contentHash": "891a7ba4c2ff9f3bf54cf34c3bdee10ba7cece1aedb9bebe0a4128481ca495aa",
+      "answerHash": "2beb09699928418e40716b9ab22e244dbb49d64383f4e94a1d3db346092612ca",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "单选题",
+        "n": "2",
+        "s": "通风房间的换气次数n的定义是（　）。",
+        "o": [
+          "A. 通风量L与房间体积V的比值",
+          "B. 房间体积V与通风量L的比值",
+          "C. 送风量与排风量之比",
+          "D. 排风量与送风量之比"
+        ],
+        "key": "A",
+        "exp": "当有害物散发量无法具体计算时，可按换气次数估算全面通风量，n＝L/V。",
+        "id": 29,
+        "keywords": [
+          "通风量L与房间体积V的比值"
+        ],
+        "cue": "每小时风量除房间体积，n=L/V。"
+      }
+    },
+    {
+      "legacyIndex": 30,
+      "qid": "hvac-0031",
+      "displayNo": 31,
+      "unit": "3",
+      "type": "单选题",
+      "stem": "为使洁净度要求较高的房间保持正压，通常使机械送风量（　）机械排风量。",
+      "sourceContentHash": "dd2d2ebbb73abfdfb35dd51e3b2fc9f5579780fdfff2166e3e5076b291602749",
+      "contentHash": "5c5deaaba5f65d56a0f651741f2003aaebb2a2128a8226ddcb9df390141dfed3",
+      "answerHash": "c57c77f328dc07d9e3304d1daa3c66684e08361b520d69cb685243775b8e1f35",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "单选题",
+        "n": "3",
+        "s": "为使洁净度要求较高的房间保持正压，通常使机械送风量（　）机械排风量。",
+        "o": [
+          "A. 略大于，通常取5%～10%",
+          "B. 略小于，通常取10%～20%",
+          "C. 完全等于",
+          "D. 大于50%以上"
+        ],
+        "key": "A",
+        "exp": "送风量略大，多余部分从门窗缝隙自然渗出，可防止污染空气进入室内。",
+        "id": 30,
+        "keywords": [
+          "略大于，通常取5%～10%"
+        ],
+        "cue": "送多排少成正压，洁净房间防污染。"
+      }
+    },
+    {
+      "legacyIndex": 31,
+      "qid": "hvac-0032",
+      "displayNo": 32,
+      "unit": "3",
+      "type": "单选题",
+      "stem": "置换通风的送风特点是（　）。",
+      "sourceContentHash": "32f5d63c4d812bd6963de2c451cfb1b49fe0241b1fa7292b1a324a62a6c4dbf5",
+      "contentHash": "c4bdd2d692cc6340f015d683f4f36debf3881ddaaaab80f7db6fdcf9a599eb31",
+      "answerHash": "0894b0289672955c85f0420397dd5dbe6671e974178c942daf3ab011bc57cb1d",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "单选题",
+        "n": "4",
+        "s": "置换通风的送风特点是（　）。",
+        "o": [
+          "A. 送风温度高于室温，从房间顶部送入",
+          "B. 送风温度低于室温，从房间底部直接送入工作区",
+          "C. 送风温度等于室温，从侧墙中部送入",
+          "D. 送风温度低于室温，从房间顶部送入"
+        ],
+        "key": "B",
+        "exp": "低温新鲜空气由底部送入，在热源热对流作用下向上运动，污染空气从顶部排风口排出。",
+        "id": 31,
+        "keywords": [
+          "送风温度低于室温，从房间底部直接送入工作区"
+        ],
+        "cue": "低处凉风进，高处污风出。"
+      }
+    },
+    {
+      "legacyIndex": 32,
+      "qid": "hvac-0033",
+      "displayNo": 33,
+      "unit": "3",
+      "type": "单选题",
+      "stem": "置换通风的设计条件之一是房间冷负荷小于（　）。",
+      "sourceContentHash": "a581b16d31131815d39889eb84a7f85a83a0b0ecddce4c699c4adc44e059d51c",
+      "contentHash": "c0497a6df7d98c53a905dfdcd906c399528c48518abf08a11522d343e5f71e3b",
+      "answerHash": "7475428bd6d22746c07c5d29b8c7f90e9c384d1ff7f199191a25cfcaca8c5aca",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "单选题",
+        "n": "5",
+        "s": "置换通风的设计条件之一是房间冷负荷小于（　）。",
+        "o": [
+          "A. 60W/m²",
+          "B. 90W/m²",
+          "C. 120W/m²",
+          "D. 200W/m²"
+        ],
+        "key": "C",
+        "exp": "另两个条件为污染源与热源共存、房间高度≥2.4m。",
+        "id": 32,
+        "keywords": [
+          "120W/m²"
+        ],
+        "cue": "120W/m²"
+      }
+    },
+    {
+      "legacyIndex": 33,
+      "qid": "hvac-0034",
+      "displayNo": 34,
+      "unit": "3",
+      "type": "多选题",
+      "stem": "全面通风量的确定包括（　）。",
+      "sourceContentHash": "2133608ae6abbc2469b7cfabd79e93368827f510001b5090f76194e2e1b0439f",
+      "contentHash": "1382688a3eb34288596727d2442ecdac4bf989dfd3433ca0539b93364b3161b7",
+      "answerHash": "08b1512f3eef4f84fad9cb85e32289b10b79ecf89cde607ab1d374d33b0d8eb0",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "多选题",
+        "n": "1",
+        "s": "全面通风量的确定包括（　）。",
+        "o": [
+          "A. 为稀释有害物所需的通风量",
+          "B. 为消除余热所需的通风量",
+          "C. 为消除余湿所需的通风量",
+          "D. 为补充照明散热所需的通风量"
+        ],
+        "key": "ABC",
+        "exp": "教材3.1节按稀释有害物、消除余热、消除余湿三种情形分别计算。",
+        "id": 33,
+        "keywords": [
+          "为稀释有害物所需的通风量",
+          "为消除余热所需的通风量",
+          "为消除余湿所需的通风量"
+        ],
+        "cue": "有害物、余热、余湿，三路计算。"
+      }
+    },
+    {
+      "legacyIndex": 34,
+      "qid": "hvac-0035",
+      "displayNo": 35,
+      "unit": "3",
+      "type": "多选题",
+      "stem": "全面通风气流组织设计应遵循的原则有（　）。",
+      "sourceContentHash": "5c249f9a4fc68f990b88f27cb7807f4e0bc1a81571ecb4739ade53c6305a881c",
+      "contentHash": "bc8da69c1a7cfa59dc239a01888fcdf693ae45ef05d0236f1985e90f47148b94",
+      "answerHash": "851daa9a0e59fa9f6a867f3fc66539882f93930cc14f4b7c28b6ee18a5caa8e6",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "多选题",
+        "n": "2",
+        "s": "全面通风气流组织设计应遵循的原则有（　）。",
+        "o": [
+          "A. 送风口尽量靠近操作地点，清洁空气先经过操作地点再经污染区排出",
+          "B. 排风口尽量靠近有害物源或有害物浓度高的区域",
+          "C. 进风系统气流分布均匀，避免局部出现涡流使有害物聚积",
+          "D. 排风口应远离有害物源，以便延长稀释时间"
+        ],
+        "key": "ABC",
+        "exp": "排风口靠近有害物源才能迅速排出有害物；远离会使有害物扩散到工作区。",
+        "id": 34,
+        "keywords": [
+          "送风口尽量靠近操作地点，清洁空气先经过操作地点再经污染区排出",
+          "排风口尽量靠近有害物源或有害物浓度高的区域",
+          "进风系统气流分布均匀，避免局部出现涡流使有害物聚积"
+        ],
+        "cue": "送风口尽量靠近操作地点，清洁空气先经过操作地点再经污染区排出 · 排风口尽量靠近有害物源或有害物浓度高的区域 · 进风系统气流分布均匀，避免局部出现涡流使有害物聚积"
+      }
+    },
+    {
+      "legacyIndex": 35,
+      "qid": "hvac-0036",
+      "displayNo": 36,
+      "unit": "3",
+      "type": "多选题",
+      "stem": "关于空气平衡，下列说法正确的有（　）。",
+      "sourceContentHash": "ac36d1a67edf0c2daff645587ca2915977bfa967d2eebbfc71ea850b284791f0",
+      "contentHash": "52f28813dffb502240878f57ed65f19ed0ccd7e3923ff192d4aaa2d2bb1582e8",
+      "answerHash": "d01946ed8491251e87e7660705a25779473e730a3bff58f9357655b030936dac",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "多选题",
+        "n": "3",
+        "s": "关于空气平衡，下列说法正确的有（　）。",
+        "o": [
+          "A. 单位时间内进入室内的空气质量应与同一时间排出的空气质量保持相等",
+          "B. 空气平衡式可表示为G_zj＋G_jj＝G_zp＋G_jp",
+          "C. 机械进风量大于机械排风量时，室内处于正压状态",
+          "D. 机械排风量大于机械进风量时，室内处于正压状态"
+        ],
+        "key": "ABC",
+        "exp": "排风量大于进风量时室内压力降低，处于负压状态，用于防止污染空气向邻室扩散。",
+        "id": 35,
+        "keywords": [
+          "单位时间内进入室内的空气质量应与同一时间排出的空气质量保持相等",
+          "空气平衡式可表示为G_zj＋G_jj＝G_zp＋G_jp",
+          "机械进风量大于机械排风量时，室内处于正压状态"
+        ],
+        "cue": "送多正，排多负。"
+      }
+    },
+    {
+      "legacyIndex": 36,
+      "qid": "hvac-0037",
+      "displayNo": 37,
+      "unit": "3",
+      "type": "多选题",
+      "stem": "关于置换通风的设计与运用，说法正确的有（　）。",
+      "sourceContentHash": "d4be73c1f22c036812f8ce879901c6ef1e11a05dd6ab9a7d0e0b4a0a7001f8b7",
+      "contentHash": "232c9739a447dc6dec11b88b3f8830a8dff805b5d20e38430ef4ae1b4f73aa3a",
+      "answerHash": "82ef99ff0f46672053452ce298089c2a261faad4afbf5d4145ab9bffd574da4c",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "多选题",
+        "n": "4",
+        "s": "关于置换通风的设计与运用，说法正确的有（　）。",
+        "o": [
+          "A. 适用于污染源与热源共存的房间",
+          "B. 置换通风器应靠近外墙或外窗",
+          "C. 置换通风器附近不宜有较大障碍物",
+          "D. 工业建筑置换通风器断面风速一般取0.5m/s"
+        ],
+        "key": "ABCD",
+        "exp": "高级办公室断面风速一般取0.2m/s；冷负荷较大时应布置多个置换通风器。",
+        "id": 36,
+        "keywords": [
+          "适用于污染源与热源共存的房间",
+          "置换通风器应靠近外墙或外窗",
+          "置换通风器附近不宜有较大障碍物",
+          "工业建筑置换通风器断面风速一般取0.5m/s"
+        ],
+        "cue": "适用于污染源与热源共存的房间 · 置换通风器应靠近外墙或外窗 · 置换通风器附近不宜有较大障碍物 · 工业建筑置换通风器断面风速一般取0.5m/s"
+      }
+    },
+    {
+      "legacyIndex": 37,
+      "qid": "hvac-0038",
+      "displayNo": 38,
+      "unit": "3",
+      "type": "判断题",
+      "stem": "房间内同时存在多种有害物时，一般应分别计算，然后取其中的最大值作为房间的全面换气量（　）。",
+      "sourceContentHash": "d28e00224f68dd809bc7d14d51421b64995b9fe7a5fe674d5484ba98857124d9",
+      "contentHash": "f4674ab2e1e0653c6a7045aa3e60be31f7eb91d70730505ef6bab8d8a9d62189",
+      "answerHash": "97e967da0cc1b492d2761f04c60b0feba6aade63dad02ab46666aa1cf64f3e2d",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "判断题",
+        "n": "1",
+        "s": "房间内同时存在多种有害物时，一般应分别计算，然后取其中的最大值作为房间的全面换气量（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材3.1.3节明确规定，一般情形取最大值。",
+        "id": 37,
+        "keywords": [
+          "教材3.1.3节明确规定，一般情形取最大值。"
+        ],
+        "cue": "一般多种有害物，分别计算取最大。"
+      }
+    },
+    {
+      "legacyIndex": 38,
+      "qid": "hvac-0039",
+      "displayNo": 39,
+      "unit": "3",
+      "type": "判断题",
+      "stem": "数种有机溶剂的蒸气混合存在时，全面通风量取各自计算值中的最大值（　）。",
+      "sourceContentHash": "039f20ab29ffae01ff0f3ed1bd2c64bf88422f0e1b3657a23ed261379460a7ba",
+      "contentHash": "f965810334541be344f3e608c48e205802e1dc22f2800ae10c56be64f9338cc9",
+      "answerHash": "993ee4a5560edcd14b10cbde8c1f6a9dce1b75be18e67ae27054a6434bbe56c7",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "判断题",
+        "n": "2",
+        "s": "数种有机溶剂的蒸气混合存在时，全面通风量取各自计算值中的最大值（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "例3-1指出：数种有机溶剂的蒸气混合存在，全面通风量为各自所需之和（12＋2＝14m³/s）。",
+        "id": 38,
+        "keywords": [
+          "例3-1指出：数种有机溶剂的蒸气混合存在，全面通风量为各自所需之和（12＋2＝14m³/s）。"
+        ],
+        "cue": "有机溶剂蒸气混合，所需风量要相加。"
+      }
+    },
+    {
+      "legacyIndex": 39,
+      "qid": "hvac-0040",
+      "displayNo": 40,
+      "unit": "3",
+      "type": "判断题",
+      "stem": "热平衡是指为保持通风房间内温度不变，室内的总得热量等于总失热量（　）。",
+      "sourceContentHash": "3af465148e2121ee9bca83b7781635ca38f83051ed7c5d2c520b22e2f8de7b26",
+      "contentHash": "2085e65b31795dd6651eee4be5f30d7d6e24910f66198e820e017137d4f18d9b",
+      "answerHash": "cf8dadb41a986a923e5195ff98af1562ee87ad553cf83a82503b0bcb152dfb2b",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "判断题",
+        "n": "3",
+        "s": "热平衡是指为保持通风房间内温度不变，室内的总得热量等于总失热量（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "即∑Q_d＝∑Q_s。",
+        "id": 39,
+        "keywords": [
+          "即∑Q_d＝∑Q_s。"
+        ],
+        "cue": "温度稳，得热等于失热。"
+      }
+    },
+    {
+      "legacyIndex": 40,
+      "qid": "hvac-0041",
+      "displayNo": 41,
+      "unit": "3",
+      "type": "判断题",
+      "stem": "置换通风是将新鲜空气从房间顶部送入工作区（　）。",
+      "sourceContentHash": "5a7d0ae5ddbe217c08c4a921076e094198b1996d2017410f67698142764181e9",
+      "contentHash": "38cc08338dddf3611ef077138663cb90984bad0ebb6a6701dcca79cd70ecf66f",
+      "answerHash": "60e218e5f09339e7aba7d61938aa978bab4245f6dc989eb382dc72762d1f9719",
+      "frozenQuestion": {
+        "u": "3",
+        "t": "判断题",
+        "n": "4",
+        "s": "置换通风是将新鲜空气从房间顶部送入工作区（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "置换通风从房间底部将低于室温的新鲜空气直接送入工作区，由顶部排风口排出。",
+        "id": 40,
+        "keywords": [
+          "置换通风从房间底部将低于室温的新鲜空气直接送入工作区，由顶部排风口排出。"
+        ],
+        "cue": "置换通风，底送顶排。"
+      }
+    },
+    {
+      "legacyIndex": 41,
+      "qid": "hvac-0042",
+      "displayNo": 42,
+      "unit": "4",
+      "type": "单选题",
+      "stem": "局部排风系统一般由局部排风罩、风管、（　）、风机和进、排风口组成。",
+      "sourceContentHash": "6f9874e149a9db0b3c48bc93a025449722256f0e3f54e05b705a6c0ac961790f",
+      "contentHash": "6dda062ebb31e89cfc766fd454df1ba260b1d7d73a4a328b7a321b6decb62b4e",
+      "answerHash": "9cfed002d7d2c419e69911434ec8901412f14576f78968ac7400fb7c4382cf6f",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "单选题",
+        "n": "1",
+        "s": "局部排风系统一般由局部排风罩、风管、（　）、风机和进、排风口组成。",
+        "o": [
+          "A. 净化设备",
+          "B. 加湿器",
+          "C. 表面式冷却器",
+          "D. 空气加热器"
+        ],
+        "key": "A",
+        "exp": "教材4.1.1节列出局部排风系统的五个组成部分。",
+        "id": 41,
+        "keywords": [
+          "净化设备"
+        ],
+        "cue": "罩、管、净化、风机、进排口。"
+      }
+    },
+    {
+      "legacyIndex": 42,
+      "qid": "hvac-0043",
+      "displayNo": 43,
+      "unit": "4",
+      "type": "单选题",
+      "stem": "柜式排风罩（通风柜）的结构特点是（　）。",
+      "sourceContentHash": "6adbd955738b531fead02f8b19f812d172f895246e5ad7e388cdd472ccb6b4b0",
+      "contentHash": "0f302840afaab7253fdaffeb592e6a0aa47b64c01a4bd1f84346b368522a4967",
+      "answerHash": "ecccb7b6c0c3351aa1050ed1a49081cddbbb5a557e7dbc01005b3c9b6196b1a8",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "单选题",
+        "n": "2",
+        "s": "柜式排风罩（通风柜）的结构特点是（　）。",
+        "o": [
+          "A. 把有害物源全部密闭在罩内",
+          "B. 结构形式与密闭罩类似，只是罩的一面全部敞开",
+          "C. 设在有害物源附近，依靠罩口抽吸捕集",
+          "D. 设在污染气流前方直接承接"
+        ],
+        "key": "B",
+        "exp": "小型通风柜操作人员把手伸入罩内工作，如化学实验室通风柜。",
+        "id": 42,
+        "keywords": [
+          "结构形式与密闭罩类似，只是罩的一面全部敞开"
+        ],
+        "cue": "结构形式与密闭罩类似，只是罩的一面全部敞开"
+      }
+    },
+    {
+      "legacyIndex": 43,
+      "qid": "hvac-0044",
+      "displayNo": 44,
+      "unit": "4",
+      "type": "单选题",
+      "stem": "槽边排风罩当槽宽b（　）时应采用双侧排风。",
+      "sourceContentHash": "40249aeb5c0e22cdfc7bb32d050722b53302cde04f7bcac81437e3ff8f9f8e89",
+      "contentHash": "e96fa477175db6479af167545985101f7fdc339a9636592210fa86d614481a84",
+      "answerHash": "b2395828133590b3152c2cbe8271c7c249a8a4e2c29fd9fe64efbeead36fab27",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "单选题",
+        "n": "3",
+        "s": "槽边排风罩当槽宽b（　）时应采用双侧排风。",
+        "o": [
+          "A. ≤500mm",
+          "B. ≤700mm",
+          "C. ＞700mm",
+          "D. ＞1000mm"
+        ],
+        "key": "C",
+        "exp": "单侧适用于b≤700mm，b＞700mm时用双侧。",
+        "id": 43,
+        "keywords": [
+          "＞700mm"
+        ],
+        "cue": "槽宽超过七百，双侧来排。"
+      }
+    },
+    {
+      "legacyIndex": 44,
+      "qid": "hvac-0045",
+      "displayNo": 45,
+      "unit": "4",
+      "type": "单选题",
+      "stem": "空气幕按空气分布器的安装位置可分为（　）。",
+      "sourceContentHash": "aea9222d9b59eabe9f7fb29adae45c3599d926490c477b35e4cddbf438493602",
+      "contentHash": "debc76470ea6f51e68407585ca240c5e201fdc2e904105de8fa14382c618efa9",
+      "answerHash": "aa64ef18d36bdf1dd5b025ee704cf349ded28d9f9be0d739f2f031c8837d56d0",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "单选题",
+        "n": "4",
+        "s": "空气幕按空气分布器的安装位置可分为（　）。",
+        "o": [
+          "A. 侧送式、上送式和下送式",
+          "B. 单侧式和双侧式",
+          "C. 系统式和分布式",
+          "D. 吸入式和吹出式"
+        ],
+        "key": "A",
+        "exp": "侧送式又分单侧和双侧；单侧适用于宽度小于4m的门洞。",
+        "id": 44,
+        "keywords": [
+          "侧送式、上送式和下送式"
+        ],
+        "cue": "侧送式、上送式和下送式"
+      }
+    },
+    {
+      "legacyIndex": 45,
+      "qid": "hvac-0046",
+      "displayNo": 46,
+      "unit": "4",
+      "type": "单选题",
+      "stem": "阻挡效果最好，但容易被脏物堵塞、送风易受污染的空气幕是（　）。",
+      "sourceContentHash": "c065b0233c399c2a03e0792f6f1ae982ce581b2889e3f3a4758f70f13b5f487c",
+      "contentHash": "a1ae9d312c501242e0238aa4e31d80c24467683326f5ff0b8f3b52979665d8b2",
+      "answerHash": "8fe371f86dba8211d67123d0c3e38409e5b598e84f63000769f45c2311408bce",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "单选题",
+        "n": "5",
+        "s": "阻挡效果最好，但容易被脏物堵塞、送风易受污染的空气幕是（　）。",
+        "o": [
+          "A. 侧送式空气幕",
+          "B. 上送式空气幕",
+          "C. 下送式空气幕",
+          "D. 双侧式空气幕"
+        ],
+        "key": "C",
+        "exp": "下送式气流由门洞下部风道吹出，所需空气量少、运行费用低，射流最强作用段位于大门下部。",
+        "id": 45,
+        "keywords": [
+          "下送式空气幕"
+        ],
+        "cue": "下送阻挡强，地面易弄脏。"
+      }
+    },
+    {
+      "legacyIndex": 46,
+      "qid": "hvac-0047",
+      "displayNo": 47,
+      "unit": "4",
+      "type": "多选题",
+      "stem": "常用的局部排气装置有（　）。",
+      "sourceContentHash": "6777a0d31c18369e0f815d7658dc45cc8812f257b2339e22ad7fb316f08ca6ce",
+      "contentHash": "da193ed70d3242f81137cc0982f500e032544d3e028d4164af14b8d46588caf6",
+      "answerHash": "de04619ed544892cc823529762a3e8a5241dda9b13e286f438ce57992c8dc0fc",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "多选题",
+        "n": "1",
+        "s": "常用的局部排气装置有（　）。",
+        "o": [
+          "A. 密闭罩",
+          "B. 柜式排风罩",
+          "C. 外部吸气罩",
+          "D. 接受式排风罩"
+        ],
+        "key": "ABCD",
+        "exp": "教材4.2节还介绍了槽边排风罩和吹吸式排风罩。",
+        "id": 46,
+        "keywords": [
+          "密闭罩",
+          "柜式排风罩",
+          "外部吸气罩",
+          "接受式排风罩"
+        ],
+        "cue": "密闭罩 · 柜式排风罩 · 外部吸气罩 · 接受式排风罩"
+      }
+    },
+    {
+      "legacyIndex": 47,
+      "qid": "hvac-0048",
+      "displayNo": 48,
+      "unit": "4",
+      "type": "多选题",
+      "stem": "空气幕的作用包括（　）。",
+      "sourceContentHash": "ea3865e6fd77a0319cb53554a0dbdbfc0b3c3d502fe32c412991aa363fd0a728",
+      "contentHash": "5616f686799c45a051152dd5772525ea8d44188cc8385727dfded03ee88573fb",
+      "answerHash": "376d874048ae1ac0cd51cc2746834818f8dcb200fb85d16b52718e2cf4fa98f0",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "多选题",
+        "n": "2",
+        "s": "空气幕的作用包括（　）。",
+        "o": [
+          "A. 防止室外冷、热气流侵入",
+          "B. 防止余热和有害气体的扩散",
+          "C. 提高室内空气洁净度等级",
+          "D. 降低室内噪声"
+        ],
+        "key": "AB",
+        "exp": "教材4.4.1节列出上述两项作用。",
+        "id": 47,
+        "keywords": [
+          "防止室外冷、热气流侵入",
+          "防止余热和有害气体的扩散"
+        ],
+        "cue": "防止室外冷、热气流侵入 · 防止余热和有害气体的扩散"
+      }
+    },
+    {
+      "legacyIndex": 48,
+      "qid": "hvac-0049",
+      "displayNo": 49,
+      "unit": "4",
+      "type": "多选题",
+      "stem": "关于局部送风系统，说法正确的有（　）。",
+      "sourceContentHash": "00752f5d9a25c250ab2b34c9cabfe6b416ab255f5a41d416fdc951b92b9916c0",
+      "contentHash": "4f3a60658491537e76791eac25534abe14e0c9d1808396efe64cf1be7ac24ac2",
+      "answerHash": "d9c3cd95549da3dbc31f4f9ac34e88574c9b765a9c0e3ee8f46fe5f8ed39fe8e",
+      "frozenQuestion": {
+        "u": "4",
+        "t": "多选题",
+        "n": "3",
+        "s": "关于局部送风系统，说法正确的有（　）。",
+        "o": [
+          "A. 以一定的速度将空气直接送到指定地点",
+          "B. 分为系统式和分布式两种",
+          "C. 分布式一般利用轴流风扇或喷雾扇",
+          "D. 只能用于冬季供热"
+        ],
+        "key": "ABC",
+        "exp": "分布式可增加局部工作地点风速或同时降低空气温度，用于改善工作地点空气环境。",
+        "id": 48,
+        "keywords": [
+          "以一定的速度将空气直接送到指定地点",
+          "分为系统式和分布式两种",
+          "分布式一般利用轴流风扇或喷雾扇"
+        ],
+        "cue": "以一定的速度将空气直接送到指定地点 · 分为系统式和分布式两种 · 分布式一般利用轴流风扇或喷雾扇"
+      }
+    },
+    {
+      "legacyIndex": 49,
+      "qid": "hvac-0050",
+      "displayNo": 50,
+      "unit": "5",
+      "type": "单选题",
+      "stem": "自然通风是实现通风换气的一种方式，其动力是（　）。",
+      "sourceContentHash": "91e81072fa3a6af4c85ca3825aa707cae9fb2e0cb708a109c5beada6e2c9077d",
+      "contentHash": "5cc5f0cc5d51445f3355ad6c7707ebe142884f0dcc250c71612d377c07a85f9e",
+      "answerHash": "27cffeb848d473674a53f70861d6361af6e5445a722fd6c63d8b6d8c5b0a20a0",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "单选题",
+        "n": "1",
+        "s": "自然通风是实现通风换气的一种方式，其动力是（　）。",
+        "o": [
+          "A. 风机造成的压力",
+          "B. 室内外温度差造成的热压或风力造成的风压",
+          "C. 机械送风系统的余压",
+          "D. 空调机组的机外静压"
+        ],
+        "key": "B",
+        "exp": "教材5.1节对自然通风的定义。",
+        "id": 49,
+        "keywords": [
+          "室内外温度差造成的热压或风力造成的风压"
+        ],
+        "cue": "自然通风，风压热压两动力。"
+      }
+    },
+    {
+      "legacyIndex": 50,
+      "qid": "hvac-0051",
+      "displayNo": 51,
+      "unit": "5",
+      "type": "单选题",
+      "stem": "仅有热压作用时，某窗孔的余压为正，则该窗孔（　）。",
+      "sourceContentHash": "7c31e5ce19355f299b506bd01a7966faa2136725f5f4b9aa6c43dd3c7c7833ff",
+      "contentHash": "3828a5388665232a4133e808ae7a2ede2e4417778e85b67a52b3b3adfbb39b01",
+      "answerHash": "2ec9ee7e3858ff50eaa73b2e6a718ef068d83a5e146426117911b7e50d452213",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "单选题",
+        "n": "2",
+        "s": "仅有热压作用时，某窗孔的余压为正，则该窗孔（　）。",
+        "o": [
+          "A. 进风",
+          "B. 排风",
+          "C. 既不进风也不排风",
+          "D. 风向不定"
+        ],
+        "key": "B",
+        "exp": "余压为正该窗孔排风，余压为负该窗孔进风。",
+        "id": 50,
+        "keywords": [
+          "排风"
+        ],
+        "cue": "余压正就排，余压负就进。"
+      }
+    },
+    {
+      "legacyIndex": 51,
+      "qid": "hvac-0052",
+      "displayNo": 52,
+      "unit": "5",
+      "type": "单选题",
+      "stem": "余压为零的平面称为（　）。",
+      "sourceContentHash": "914c1dd2a5f13d0f1013d49c6d30372312e9fd90add12027c259d20c8f5bb0f3",
+      "contentHash": "22b55d213cc88549be40f6e19edcf6195a3ac6df27e3d82379f00e0b03a57e27",
+      "answerHash": "ab046f16b9e7538e97105cdcfb86d09b75660df831e7d7814db36fed4953e8e6",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "单选题",
+        "n": "3",
+        "s": "余压为零的平面称为（　）。",
+        "o": [
+          "A. 等温面",
+          "B. 中和面（等压面）",
+          "C. 等湿面",
+          "D. 分界面"
+        ],
+        "key": "B",
+        "exp": "中和面上既不进风也不排风；中和面以上孔口均排风，以下孔口均进风。",
+        "id": 51,
+        "keywords": [
+          "中和面（等压面）"
+        ],
+        "cue": "中和面压差零，上排下进。"
+      }
+    },
+    {
+      "legacyIndex": 52,
+      "qid": "hvac-0053",
+      "displayNo": 53,
+      "unit": "5",
+      "type": "单选题",
+      "stem": "实际工程中通常设计自然通风的依据是（　）。",
+      "sourceContentHash": "fa020c8a3f6ceb716105587ad04d6d1d143c0d6cba19d423fb4c8be117ccc357",
+      "contentHash": "6a4307b2cd02e36255ef6a5ef4759e3e59ff8a1f05b38fb77bc9a99175a31b74",
+      "answerHash": "3d0505d5892632fcd91e22f3713b5183b6f5c61fefb0ec8a26889b4f4c9564d0",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "单选题",
+        "n": "4",
+        "s": "实际工程中通常设计自然通风的依据是（　）。",
+        "o": [
+          "A. 仅按热压作用设计",
+          "B. 仅按风压作用设计",
+          "C. 热压、风压各取一半",
+          "D. 按机械通风计算后折算"
+        ],
+        "key": "A",
+        "exp": "室外风向、风压很不稳定，通常不考虑风压，仅按热压作用设计自然通风。",
+        "id": 52,
+        "keywords": [
+          "仅按热压作用设计"
+        ],
+        "cue": "风向风压不稳定，设计通常按热压。"
+      }
+    },
+    {
+      "legacyIndex": 53,
+      "qid": "hvac-0054",
+      "displayNo": 54,
+      "unit": "5",
+      "type": "单选题",
+      "stem": "热压、风压共同作用时，下列做法正确的是（　）。",
+      "sourceContentHash": "0c40d8d5c002e89b6766f7ba9a2971660fdcc9a4e4d56c35f6e902d64d77a336",
+      "contentHash": "168e53a07ff19e0c16be9e3c4ede3628ca74f525c46bde3eff7322b3073ddfd4",
+      "answerHash": "5c51a99166b6dbae089af79df254f579a557b485321451456ea572c147baf664",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "单选题",
+        "n": "5",
+        "s": "热压、风压共同作用时，下列做法正确的是（　）。",
+        "o": [
+          "A. 迎风面开天窗以加强排风",
+          "B. 迎风面不能开天窗，背风面不宜开下部侧窗",
+          "C. 迎风面、背风面均可开天窗",
+          "D. 风口位置对通风效果没有影响"
+        ],
+        "key": "B",
+        "exp": "迎风面风压为正，与热压叠加易发生倒灌，故不能开天窗。",
+        "id": 53,
+        "keywords": [
+          "迎风面不能开天窗，背风面不宜开下部侧窗"
+        ],
+        "cue": "天窗避迎风，避免倒灌。"
+      }
+    },
+    {
+      "legacyIndex": 54,
+      "qid": "hvac-0055",
+      "displayNo": 55,
+      "unit": "5",
+      "type": "多选题",
+      "stem": "自然通风计算中采用的假设条件包括（　）。",
+      "sourceContentHash": "cc0b5d1e08595c1b59b929c95bd7361431f592e8ea30b0e713bfe6f69ba65a83",
+      "contentHash": "a68ff5079e621337b93110c72fb904b89450dcf85df3ffe120500dd915fb0118",
+      "answerHash": "bae270b87d5994c2eaf42d1135963f93d02c7147c97227982256fb331579e098",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "多选题",
+        "n": "1",
+        "s": "自然通风计算中采用的假设条件包括（　）。",
+        "o": [
+          "A. 整个车间的温度均一致，余热量不随时间变化",
+          "B. 通风过程是稳定的，影响因素不随时间变化",
+          "C. 车间内同一水平面上各点的静压相等",
+          "D. 进、排风口为方形或长方形孔口"
+        ],
+        "key": "ABCD",
+        "exp": "教材5.2节共列出六项假设条件，还包括气流不受物体阻挡、不考虑局部气流影响。",
+        "id": 54,
+        "keywords": [
+          "整个车间的温度均一致，余热量不随时间变化",
+          "通风过程是稳定的，影响因素不随时间变化",
+          "车间内同一水平面上各点的静压相等",
+          "进、排风口为方形或长方形孔口"
+        ],
+        "cue": "整个车间的温度均一致，余热量不随时间变化 · 通风过程是稳定的，影响因素不随时间变化 · 车间内同一水平面上各点的静压相等 · 进、排风口为方形或长方形孔口"
+      }
+    },
+    {
+      "legacyIndex": 55,
+      "qid": "hvac-0056",
+      "displayNo": 56,
+      "unit": "5",
+      "type": "多选题",
+      "stem": "避风天窗的形式有（　）。",
+      "sourceContentHash": "cb1aef32829a7c60fc26d9c99f89aaae7e8f7c752dcf01bf2a79fc95e1d7cf51",
+      "contentHash": "0b1c8b390c4b79ab2fc37024e73adcb135311b915878634f60f0ce304948ceda",
+      "answerHash": "b631548934885c10a93057f986b36856856afdac0e084db0a148f61e062a82f7",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "多选题",
+        "n": "2",
+        "s": "避风天窗的形式有（　）。",
+        "o": [
+          "A. 矩形天窗",
+          "B. 曲、折线型天窗",
+          "C. 下沉式天窗",
+          "D. 圆形天窗"
+        ],
+        "key": "ABC",
+        "exp": "教材5.3.1节列出三种形式。",
+        "id": 55,
+        "keywords": [
+          "矩形天窗",
+          "曲、折线型天窗",
+          "下沉式天窗"
+        ],
+        "cue": "矩形天窗 · 曲、折线型天窗 · 下沉式天窗"
+      }
+    },
+    {
+      "legacyIndex": 56,
+      "qid": "hvac-0057",
+      "displayNo": 57,
+      "unit": "5",
+      "type": "多选题",
+      "stem": "自然通风的优点有（　）。",
+      "sourceContentHash": "e96ceba50bea00fb619aa6f9d9d8cfa0a21d8801f24002b7ad539b1085f8f5a3",
+      "contentHash": "ce75a8e23fd1bfde504697e4134ab597b60acf670f915ab3c37bbeabb001e305",
+      "answerHash": "d1c2f7cac154a3e215e4e37df0f3b59ded42c7d728c4014694f9cffdba9e1c10",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "多选题",
+        "n": "3",
+        "s": "自然通风的优点有（　）。",
+        "o": [
+          "A. 不需要消耗动力",
+          "B. 节省能源",
+          "C. 节省设备投资和运行费用",
+          "D. 不受室外气象条件影响"
+        ],
+        "key": "ABC",
+        "exp": "自然通风与室外气象条件密切相关、难以人为控制，这是它的局限。",
+        "id": 56,
+        "keywords": [
+          "不需要消耗动力",
+          "节省能源",
+          "节省设备投资和运行费用"
+        ],
+        "cue": "不需要消耗动力 · 节省能源 · 节省设备投资和运行费用"
+      }
+    },
+    {
+      "legacyIndex": 57,
+      "qid": "hvac-0058",
+      "displayNo": 58,
+      "unit": "5",
+      "type": "多选题",
+      "stem": "自然通风设计计算的已知条件通常包括（　）。",
+      "sourceContentHash": "145bbc622d3ce6fae48de5e684073926e8455cde8535f1030415c0794c0d6352",
+      "contentHash": "cef36e8eb0fb7d8aa9aa4584dfbdf4165c8560aed041958730243429dab710be",
+      "answerHash": "d940d27c98e2244fbe6538b0f74cdf445565f8019a0db02df60a064107124214",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "多选题",
+        "n": "4",
+        "s": "自然通风设计计算的已知条件通常包括（　）。",
+        "o": [
+          "A. 车间内余热量Q",
+          "B. 工作区设计温度",
+          "C. 室外空气温度",
+          "D. 车间内热源的几何尺寸及分布情况"
+        ],
+        "key": "ABCD",
+        "exp": "设计目的是确定各窗孔位置和面积、计算自然通风量、确定运行管理方法。",
+        "id": 57,
+        "keywords": [
+          "车间内余热量Q",
+          "工作区设计温度",
+          "室外空气温度",
+          "车间内热源的几何尺寸及分布情况"
+        ],
+        "cue": "车间内余热量Q · 工作区设计温度 · 室外空气温度 · 车间内热源的几何尺寸及分布情况"
+      }
+    },
+    {
+      "legacyIndex": 58,
+      "qid": "hvac-0059",
+      "displayNo": 59,
+      "unit": "5",
+      "type": "判断题",
+      "stem": "中和面以上孔口均排风，中和面以下孔口均进风（　）。",
+      "sourceContentHash": "11520affc124a6622e689330d2ed1c6dea3e6b5816a360f3cba7bbf0990fa106",
+      "contentHash": "554f9237dd454996589612496ec82d839ed34fde85c44013940deab700c5a527",
+      "answerHash": "1c6c842a72c034a409207f28f1eb1e0d703adfe56bafdc93651b920ec6193d36",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "判断题",
+        "n": "1",
+        "s": "中和面以上孔口均排风，中和面以下孔口均进风（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "离中和面越远，进、排风量越大。",
+        "id": 58,
+        "keywords": [
+          "离中和面越远，进、排风量越大。"
+        ],
+        "cue": "上排下进，以中和面分。"
+      }
+    },
+    {
+      "legacyIndex": 59,
+      "qid": "hvac-0060",
+      "displayNo": 60,
+      "unit": "5",
+      "type": "判断题",
+      "stem": "离中和面越远，进、排风量越大（　）。",
+      "sourceContentHash": "1903748efede0fa871774c575475c53db7314f00d83ed9c2faf956398f72a858",
+      "contentHash": "3362a8ccf43653a1472820ab1b6ab5b831b73be47f73592d31f6817b6bb497be",
+      "answerHash": "2b2583e8a7046d576cda05c7d8278826e6e6b6b780a1430f524cddc5da31dc64",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "判断题",
+        "n": "2",
+        "s": "离中和面越远，进、排风量越大（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "窗孔内外压差随距中和面的高度增大而增大。",
+        "id": 59,
+        "keywords": [
+          "窗孔内外压差随距中和面的高度增大而增大。"
+        ],
+        "cue": "离中和面越远，压差越大。"
+      }
+    },
+    {
+      "legacyIndex": 60,
+      "qid": "hvac-0061",
+      "displayNo": 61,
+      "unit": "5",
+      "type": "判断题",
+      "stem": "自然通风与室外气象条件密切相关，难以人为控制，不能完全取代其他通风方式（　）。",
+      "sourceContentHash": "5172481cf33702b49e29d9a2922673449a6886f19a489ee5b0eb47a4201a9f7d",
+      "contentHash": "174810c9a2c8d0b2ec8bf9b088b8de97e6cbeb6f1b648cc99c48c7d05fe7b82a",
+      "answerHash": "f6382fc6bdeebfc3188760592aed8cb13b032401625fdb29cef8305117aabb7a",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "判断题",
+        "n": "3",
+        "s": "自然通风与室外气象条件密切相关，难以人为控制，不能完全取代其他通风方式（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材单元小结原句。",
+        "id": 60,
+        "keywords": [
+          "教材单元小结原句。"
+        ],
+        "cue": "教材单元小结原句。"
+      }
+    },
+    {
+      "legacyIndex": 61,
+      "qid": "hvac-0062",
+      "displayNo": 62,
+      "unit": "5",
+      "type": "判断题",
+      "stem": "风压为负值的区域称为空气动力阴影（　）。",
+      "sourceContentHash": "4afd344e679f0e2d345bf39772f5daf735fa59b00fd0d77e1d3e641bd415c35c",
+      "contentHash": "fcd324ea5cfbfa8ffea4802d67b48550cbfdbdc37554386e27ae85cc71816e82",
+      "answerHash": "0138af97f63ef66102c773c858d75cb12c8f294c711ccb1a76f676565c7041bf",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "判断题",
+        "n": "4",
+        "s": "风压为负值的区域称为空气动力阴影（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "迎风面静压升高为正压，侧面和背面产生局部涡流使静压降低为负压。",
+        "id": 61,
+        "keywords": [
+          "迎风面静压升高为正压，侧面和背面产生局部涡流使静压降低为负压。"
+        ],
+        "cue": "背风侧风负压区，空气动力阴影。"
+      }
+    },
+    {
+      "legacyIndex": 62,
+      "qid": "hvac-0063",
+      "displayNo": 63,
+      "unit": "5",
+      "type": "判断题",
+      "stem": "屋顶通风器由外壳、防雨罩、蝶阀及喉口部分组成（　）。",
+      "sourceContentHash": "b57d3a3b0dfe1692323fa61b0b47731168550c4bdef99e5654bc86af0e723d15",
+      "contentHash": "bdf6ca46a0aac54e17ed71b9f6e0b33ce8451e668fd0de0b5469d8bc3284f68a",
+      "answerHash": "f14027325b5d24cf3a71af3a13c4ce50edef2dfe0d66fd316104006d06d9699a",
+      "frozenQuestion": {
+        "u": "5",
+        "t": "判断题",
+        "n": "5",
+        "s": "屋顶通风器由外壳、防雨罩、蝶阀及喉口部分组成（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "外壳用合金镀锌板，板厚1.0mm，喉口与车间内相连。",
+        "id": 62,
+        "keywords": [
+          "外壳用合金镀锌板，板厚1.0mm，喉口与车间内相连。"
+        ],
+        "cue": "外壳用合金镀锌板，板厚1.0mm，喉口与车间内相连。"
+      }
+    },
+    {
+      "legacyIndex": 63,
+      "qid": "hvac-0064",
+      "displayNo": 64,
+      "unit": "6",
+      "type": "单选题",
+      "stem": "研究单个尘粒在空气中的运动规律时应采用（　）。",
+      "sourceContentHash": "68199d283252669e7187bc639895ca1e11b4feb5aad3e89260419174d6e6c76a",
+      "contentHash": "27c2c880b6f00bed828aefddeb637b39045f938b9b4a5b6f2c088ce6788238cc",
+      "answerHash": "e0b6eb0a4dfb769af138f1409d146412bdf60aadbfde32f54e33489a92522eee",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "单选题",
+        "n": "1",
+        "s": "研究单个尘粒在空气中的运动规律时应采用（　）。",
+        "o": [
+          "A. 容积密度",
+          "B. 真密度",
+          "C. 堆积密度",
+          "D. 表观密度"
+        ],
+        "key": "B",
+        "exp": "计算灰斗体积或堆灰场地面积时应用容积密度；研究单个尘粒运动规律应用真密度。",
+        "id": 63,
+        "keywords": [
+          "真密度"
+        ],
+        "cue": "单颗尘粒用真密度，成堆体积用容积密度。"
+      }
+    },
+    {
+      "legacyIndex": 64,
+      "qid": "hvac-0065",
+      "displayNo": 65,
+      "unit": "6",
+      "type": "单选题",
+      "stem": "旋风除尘器的主要工作机理是（　）。",
+      "sourceContentHash": "205f1e734dbe6623c86dc5ced0a3d68b1e52977f82af85021787d34833e07677",
+      "contentHash": "46954790f9beb3d85bedb2a6681c75ecae3ebe0ddb806b457a7cc36cc9929dbc",
+      "answerHash": "144846016ebb309a4b92265832591bcd7b5e5837567e24bebabaaf4a18fe4c89",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "单选题",
+        "n": "2",
+        "s": "旋风除尘器的主要工作机理是（　）。",
+        "o": [
+          "A. 重力",
+          "B. 离心力",
+          "C. 惯性碰撞",
+          "D. 接触阻留"
+        ],
+        "key": "B",
+        "exp": "含尘气流作圆周运动时，尘粒在惯性离心力作用下与气流产生相对运动而分离。",
+        "id": 64,
+        "keywords": [
+          "离心力"
+        ],
+        "cue": "旋风打转，离心分尘。"
+      }
+    },
+    {
+      "legacyIndex": 65,
+      "qid": "hvac-0066",
+      "displayNo": 66,
+      "unit": "6",
+      "type": "单选题",
+      "stem": "过滤式除尘器、湿式除尘器和惯性除尘器的主要除尘机理是（　）。",
+      "sourceContentHash": "c701c0205db6eb55e70e2b97ee74529150cbc3f394e4163337002568ccc01f41",
+      "contentHash": "ff3bb0ab0359f659f792985480628460778c30d269f85ddf3ae3e65231809534",
+      "answerHash": "367e86c3f8b19e8b9037397fc2b69fa1a12f87edc1c0fa2014b2675db00d4564",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "单选题",
+        "n": "3",
+        "s": "过滤式除尘器、湿式除尘器和惯性除尘器的主要除尘机理是（　）。",
+        "o": [
+          "A. 重力",
+          "B. 扩散",
+          "C. 惯性碰撞",
+          "D. 静电力"
+        ],
+        "key": "C",
+        "exp": "粗大尘粒惯性大，遇挡板、纤维、水滴等阻碍时脱离气流并与之碰撞。",
+        "id": 65,
+        "keywords": [
+          "惯性碰撞"
+        ],
+        "cue": "粗粒惯性大，撞上障碍离气流。"
+      }
+    },
+    {
+      "legacyIndex": 66,
+      "qid": "hvac-0067",
+      "displayNo": 67,
+      "unit": "6",
+      "type": "单选题",
+      "stem": "扩散机理主要适用于粒径（　）的粉尘。",
+      "sourceContentHash": "647374a06ab21af7c4c9f3d4ef2d316d80c681b1210d61a07c24f536cb7927a1",
+      "contentHash": "830959b82fa76a544f7da2ebda0ec3994aa0317480b543facc000675a7489eec",
+      "answerHash": "9d74ec78bdfc0fc1de0af271c1f8c08fa9651091dafd48dd76a9ca98c0e6eb17",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "单选题",
+        "n": "4",
+        "s": "扩散机理主要适用于粒径（　）的粉尘。",
+        "o": [
+          "A. 小于1μm",
+          "B. 1～10μm",
+          "C. 10～50μm",
+          "D. 大于50μm"
+        ],
+        "key": "A",
+        "exp": "小于1μm的粉尘在气体分子撞击下作布朗运动，与物体表面接触而分离。",
+        "id": 66,
+        "keywords": [
+          "小于1μm"
+        ],
+        "cue": "小于一微米，布朗扩散记。"
+      }
+    },
+    {
+      "legacyIndex": 67,
+      "qid": "hvac-0068",
+      "displayNo": 68,
+      "unit": "6",
+      "type": "单选题",
+      "stem": "关于有害气体的净化方法，下列表述正确的是（　）。",
+      "sourceContentHash": "773395d82507b61f51dd5a4d793442209f7e7f045dd54c843fb3fd59b88d5bbe",
+      "contentHash": "30050068e63000d483684e65b54aaf6dfa8f39e49a6b943c03c0e66302c37198",
+      "answerHash": "e5c2b94e9a39132d86bf3ceb464806b3159a23c0ee2e9409c5019eeb21345dd4",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "单选题",
+        "n": "5",
+        "s": "关于有害气体的净化方法，下列表述正确的是（　）。",
+        "o": [
+          "A. 燃烧法设备简单、投资少，且能回收有用物质",
+          "B. 冷凝法效率高，适用于低浓度有害蒸气",
+          "C. 吸收法既能吸收有害气体，也能除掉排气中的粉尘，但增加了废水处理问题",
+          "D. 吸附法只能进行物理吸附"
+        ],
+        "key": "C",
+        "exp": "燃烧法不能回收有用物质；冷凝法效率低，只适用于冷凝温度高、浓度高的有害蒸气；吸附法分物理吸附和化学吸附。",
+        "id": 67,
+        "keywords": [
+          "吸收法既能吸收有害气体，也能除掉排气中的粉尘，但增加了废水处理问题"
+        ],
+        "cue": "吸收法既能吸收有害气体，也能除掉排气中的粉尘，但增加了废水处理问题"
+      }
+    },
+    {
+      "legacyIndex": 68,
+      "qid": "hvac-0069",
+      "displayNo": 69,
+      "unit": "6",
+      "type": "多选题",
+      "stem": "目前常用除尘器的除尘机理主要有（　）。",
+      "sourceContentHash": "c5662ab745dda4ca22302bb81a526720f8ef5055c01d572af7d7fcaefc68e5f5",
+      "contentHash": "11da8807acb3e8c834f271b1ebddb2b94bcd2b97614eced2965cb2873d4bd4b3",
+      "answerHash": "75a68a550f9376d82b05007ba273409ccb4eb7b11ddabbd822fd51b98d6adc64",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "多选题",
+        "n": "1",
+        "s": "目前常用除尘器的除尘机理主要有（　）。",
+        "o": [
+          "A. 重力",
+          "B. 离心力",
+          "C. 惯性碰撞与接触阻留",
+          "D. 扩散与静电力"
+        ],
+        "key": "ABCD",
+        "exp": "教材6.2.1节共列七项，还包括凝聚作用。",
+        "id": 68,
+        "keywords": [
+          "重力",
+          "离心力",
+          "惯性碰撞与接触阻留",
+          "扩散与静电力"
+        ],
+        "cue": "重力 · 离心力 · 惯性碰撞与接触阻留 · 扩散与静电力"
+      }
+    },
+    {
+      "legacyIndex": 69,
+      "qid": "hvac-0070",
+      "displayNo": 70,
+      "unit": "6",
+      "type": "多选题",
+      "stem": "按主要除尘机理不同，常用除尘器可分为（　）。",
+      "sourceContentHash": "5815852a3d2739ee8d3155a8200c65ec3da32e01c6742a11c07c11b9abb0c5a1",
+      "contentHash": "18cf1bda2e3be36dc52c6813b9f226e9dafbb9f99f9cde70a0669ed0730098a0",
+      "answerHash": "b090a09c6840fee879c2bb6c7a519b1d74f983eafe91c5a19690d71a5d0d5de6",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "多选题",
+        "n": "2",
+        "s": "按主要除尘机理不同，常用除尘器可分为（　）。",
+        "o": [
+          "A. 重力除尘、惯性除尘",
+          "B. 离心除尘",
+          "C. 过滤除尘、洗涤除尘",
+          "D. 静电除尘"
+        ],
+        "key": "ABCD",
+        "exp": "如重力沉降室、惯性除尘器、旋风除尘器、袋式除尘器、水浴除尘器、电除尘器等。",
+        "id": 69,
+        "keywords": [
+          "重力除尘、惯性除尘",
+          "离心除尘",
+          "过滤除尘、洗涤除尘",
+          "静电除尘"
+        ],
+        "cue": "重力除尘、惯性除尘 · 离心除尘 · 过滤除尘、洗涤除尘 · 静电除尘"
+      }
+    },
+    {
+      "legacyIndex": 70,
+      "qid": "hvac-0071",
+      "displayNo": 71,
+      "unit": "6",
+      "type": "多选题",
+      "stem": "选择除尘器时应考虑的原则有（　）。",
+      "sourceContentHash": "78c6889a16082eb07734d848450d7de2feeae9e64845bae0bf77cbc6336cca39",
+      "contentHash": "439d2c1745e60d41294e18c238557a6c62763b481a44a2be569a7cb0a6e6369b",
+      "answerHash": "cac94111872843c3524c75cc920efebdc236db5dc2868a715de180d9aeb95bdf",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "多选题",
+        "n": "3",
+        "s": "选择除尘器时应考虑的原则有（　）。",
+        "o": [
+          "A. 掌握被处理粉尘的特性",
+          "B. 气体的含尘浓度、温度和性质",
+          "C. 满足排放标准的要求",
+          "D. 了解各种除尘器的性能、特点及使用范围以及粉尘的回收与处理"
+        ],
+        "key": "ABCD",
+        "exp": "教材6.4.1节列出五项选择原则。",
+        "id": 70,
+        "keywords": [
+          "掌握被处理粉尘的特性",
+          "气体的含尘浓度、温度和性质",
+          "满足排放标准的要求",
+          "了解各种除尘器的性能、特点及使用范围以及粉尘的回收与处理"
+        ],
+        "cue": "掌握被处理粉尘的特性 · 气体的含尘浓度、温度和性质 · 满足排放标准的要求 · 了解各种除尘器的性能、特点及使用范围以及粉尘的回收与处理"
+      }
+    },
+    {
+      "legacyIndex": 71,
+      "qid": "hvac-0072",
+      "displayNo": 72,
+      "unit": "6",
+      "type": "多选题",
+      "stem": "关于吸附法净化有害气体，说法正确的有（　）。",
+      "sourceContentHash": "c36631b06dceb178720300e701babd3e29c5cdd781eb1413ee26f745dbf85f2c",
+      "contentHash": "4f80a0d7f31412e70f59d98054330396af76c60145dda0e79ad6fecf9cbeda4d",
+      "answerHash": "0ef0451900283ccb24eeb93eb6f0b6ca8f9ca18a1d6f83d5b553f867860f9118",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "多选题",
+        "n": "4",
+        "s": "关于吸附法净化有害气体，说法正确的有（　）。",
+        "o": [
+          "A. 利用多孔性固体材料吸附有害气体和蒸气",
+          "B. 被吸附的物质称为吸附质",
+          "C. 靠分子引力和静电力进行的吸附称为物理吸附",
+          "D. 靠化学键力进行的吸附称为化学吸附"
+        ],
+        "key": "ABCD",
+        "exp": "吸附材料称为吸附剂；物理吸附与化学吸附的区分依据是作用力性质。",
+        "id": 71,
+        "keywords": [
+          "利用多孔性固体材料吸附有害气体和蒸气",
+          "被吸附的物质称为吸附质",
+          "靠分子引力和静电力进行的吸附称为物理吸附",
+          "靠化学键力进行的吸附称为化学吸附"
+        ],
+        "cue": "利用多孔性固体材料吸附有害气体和蒸气 · 被吸附的物质称为吸附质 · 靠分子引力和静电力进行的吸附称为物理吸附 · 靠化学键力进行的吸附称为化学吸附"
+      }
+    },
+    {
+      "legacyIndex": 72,
+      "qid": "hvac-0073",
+      "displayNo": 73,
+      "unit": "6",
+      "type": "判断题",
+      "stem": "凝聚作用是一种直接的除尘机理（　）。",
+      "sourceContentHash": "8c0c8e0be9eae0c96e3bb8b85fb947a8a2bc0b08b8859fd932d1ec7ed02d5a09",
+      "contentHash": "5b3d6085a506a1480007cf353e486b180f474d0e8c991a0b046fe482e25e7542",
+      "answerHash": "d89ccbc05fadabd54df6d1be4c1341926edb8bd6dcdf24ef684d4ca0fe034086",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "判断题",
+        "n": "1",
+        "s": "凝聚作用是一种直接的除尘机理（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "凝聚作用使微小尘粒凝聚增大后再用一般除尘方法除掉，不是直接的除尘机理。",
+        "id": 72,
+        "keywords": [
+          "凝聚作用使微小尘粒凝聚增大后再用一般除尘方法除掉，不是直接的除尘机理。"
+        ],
+        "cue": "凝聚先变大，再用其他方法除。"
+      }
+    },
+    {
+      "legacyIndex": 73,
+      "qid": "hvac-0074",
+      "displayNo": 74,
+      "unit": "6",
+      "type": "判断题",
+      "stem": "自然堆积状态下粉尘的容积密度小于真密度（　）。",
+      "sourceContentHash": "971ac184df167d3f0873075d995b1bcc1010de6538f3a4faff087c6c8ef9aa2e",
+      "contentHash": "04647c7db8bec20581a0b9a1ecf218ea1e120bf11a161db943ede35c1afdce84",
+      "answerHash": "84097c82414bf85b60cf96cd119b8d79b99dfeaa61ce32c97f54c6dc309a1759",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "判断题",
+        "n": "2",
+        "s": "自然堆积状态下粉尘的容积密度小于真密度（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "自然堆积状态下粉尘不密实、颗粒间有很大空隙。",
+        "id": 73,
+        "keywords": [
+          "自然堆积状态下粉尘不密实、颗粒间有很大空隙。"
+        ],
+        "cue": "堆积有空隙，容积密度小。"
+      }
+    },
+    {
+      "legacyIndex": 74,
+      "qid": "hvac-0075",
+      "displayNo": 75,
+      "unit": "6",
+      "type": "判断题",
+      "stem": "燃烧法净化有害气体能够回收有用物质（　）。",
+      "sourceContentHash": "4c4f467b043dad87e45564111c495885a2148b31fe0790e0a8726025436ef6cf",
+      "contentHash": "02e8c9b593fb970e85eb52c54b58766a5362ac11f9d0d8a7ce68a82368f2e7fa",
+      "answerHash": "dd984e01e25088f21cc1227eb5cf8fb007b5bbd50b4fd74d4530988da739effe",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "判断题",
+        "n": "3",
+        "s": "燃烧法净化有害气体能够回收有用物质（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "燃烧法方法简单、设备投资较少，缺点是不能回收有用物质，只适用于可燃和高温下能分解的有害气体。",
+        "id": 74,
+        "keywords": [
+          "燃烧法方法简单、设备投资较少，缺点是不能回收有用物质，只适用于可燃和高温下能分解的有害气体。"
+        ],
+        "cue": "燃烧能净化，有用物难回收。"
+      }
+    },
+    {
+      "legacyIndex": 75,
+      "qid": "hvac-0076",
+      "displayNo": 76,
+      "unit": "6",
+      "type": "判断题",
+      "stem": "冷凝法设备简单、管理方便，但效率低，只适用于冷凝温度高、浓度高的有害蒸气的净化（　）。",
+      "sourceContentHash": "48f9ffddbd4c2a0f0ce10684b6d1ca502301a33cc22e3455c59388d3e4a88f53",
+      "contentHash": "a178101eb69906dbdcb34c9f7ed887b6b9750ec855767025776ba6488d6535f1",
+      "answerHash": "950bbbe0bfbf9dfc341d867369e6906336d043f91226ee9e3b58d0a0381202ab",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "判断题",
+        "n": "4",
+        "s": "冷凝法设备简单、管理方便，但效率低，只适用于冷凝温度高、浓度高的有害蒸气的净化（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "一般常用水来冷却有害气体和蒸气。",
+        "id": 75,
+        "keywords": [
+          "一般常用水来冷却有害气体和蒸气。"
+        ],
+        "cue": "冷凝效率低，适合双高蒸气。"
+      }
+    },
+    {
+      "legacyIndex": 76,
+      "qid": "hvac-0077",
+      "displayNo": 77,
+      "unit": "6",
+      "type": "判断题",
+      "stem": "在有害气体浓度较小、采用净化方法不经济时，可采用高空排放扩散的方法稀释有害气体（　）。",
+      "sourceContentHash": "f08e3278d55a79bd324e424eb01a63086e83fd4de33c85654729aa7b333abd2f",
+      "contentHash": "45c7ebf1e74d105968a9e717cfbc9c79a9d6de5eb2a469d11fcda7db138683d1",
+      "answerHash": "43aa189a7cb1e1b40838d64be369bd08c86db287f0ed5dc3cf07c124585b6716",
+      "frozenQuestion": {
+        "u": "6",
+        "t": "判断题",
+        "n": "5",
+        "s": "在有害气体浓度较小、采用净化方法不经济时，可采用高空排放扩散的方法稀释有害气体（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "前提是使有害气体降落到地面的最大浓度不超过卫生标准的规定。",
+        "id": 76,
+        "keywords": [
+          "前提是使有害气体降落到地面的最大浓度不超过卫生标准的规定。"
+        ],
+        "cue": "前提是使有害气体降落到地面的最大浓度不超过卫生标准的规定。"
+      }
+    },
+    {
+      "legacyIndex": 77,
+      "qid": "hvac-0078",
+      "displayNo": 78,
+      "unit": "7",
+      "type": "单选题",
+      "stem": "湿空气是（　）的混合物。",
+      "sourceContentHash": "887e046bc461a43bfc806d1c7b22ebb965dad0524318e023e7430b5a2df7d075",
+      "contentHash": "797216c741ff72362a85dd03f57b28d8e6ace540dc643f401b7b4c4e8e30d0bf",
+      "answerHash": "c76d5a6c50f3d8473f818594bd0cd09ebcc0c607056efbcbc0a154a203bc8531",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "单选题",
+        "n": "1",
+        "s": "湿空气是（　）的混合物。",
+        "o": [
+          "A. 干空气和水蒸气",
+          "B. 氧气和氮气",
+          "C. 空气和水滴",
+          "D. 干空气和二氧化碳"
+        ],
+        "key": "A",
+        "exp": "干空气组元和成分通常一定，可当作一种“单一气体”处理。",
+        "id": 77,
+        "keywords": [
+          "干空气和水蒸气"
+        ],
+        "cue": "湿空气＝干空气＋水蒸气。"
+      }
+    },
+    {
+      "legacyIndex": 78,
+      "qid": "hvac-0079",
+      "displayNo": 79,
+      "unit": "7",
+      "type": "单选题",
+      "stem": "在i－d图中，等焓线是一组（　）。",
+      "sourceContentHash": "c0101787a698ac274a44d4a4c0c8c3d2fb7c328e48894b9d7d1a62aec6336574",
+      "contentHash": "124fcfb5acc1e1e1c9d11adc3c20f4afdc312adbe5f10f447f6aaf6ab0ac1c7b",
+      "answerHash": "5378a5936733fb3fd504365961deb863ed6e3caca29a9b95fef189512cbdf72b",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "单选题",
+        "n": "2",
+        "s": "在i－d图中，等焓线是一组（　）。",
+        "o": [
+          "A. 平行于纵坐标的直线",
+          "B. 与横坐标轴成135°的平行直线",
+          "C. 互不平行的直线",
+          "D. 曲线"
+        ],
+        "key": "B",
+        "exp": "等d线平行于纵坐标；等t线是一组互不平行的直线，但近似平行。",
+        "id": 78,
+        "keywords": [
+          "与横坐标轴成135°的平行直线"
+        ],
+        "cue": "与横坐标轴成135°的平行直线"
+      }
+    },
+    {
+      "legacyIndex": 79,
+      "qid": "hvac-0080",
+      "displayNo": 80,
+      "unit": "7",
+      "type": "单选题",
+      "stem": "当含湿量d相同时，状态不同的湿空气具有相同的（　）。",
+      "sourceContentHash": "6ce9689a7f69944db3767cd9f9326448e96b4d0eeb70568b5523a241eb9c6a4f",
+      "contentHash": "21394c9d4254d183c1740b4dbcd7b75e7836a061f42c854253f6dbb34ad667c8",
+      "answerHash": "e346e5913b8ad80cba53964e4162b57ccf5e0f2700d7c574a6036f3eea2b44e0",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "单选题",
+        "n": "3",
+        "s": "当含湿量d相同时，状态不同的湿空气具有相同的（　）。",
+        "o": [
+          "A. 干球温度",
+          "B. 湿球温度",
+          "C. 露点温度",
+          "D. 焓值"
+        ],
+        "key": "C",
+        "exp": "露点是湿空气冷却到相对湿度为100%时的温度，仅取决于含湿量。",
+        "id": 79,
+        "keywords": [
+          "露点温度"
+        ],
+        "cue": "同含湿量、同压力下，露点相同。"
+      }
+    },
+    {
+      "legacyIndex": 80,
+      "qid": "hvac-0081",
+      "displayNo": 81,
+      "unit": "7",
+      "type": "单选题",
+      "stem": "大气压力B一定时，水蒸气分压力只取决于（　）。",
+      "sourceContentHash": "9bb4b33911586f8b185e2ea507a026717e4dfb3b7cd6fc917b400ddfdb59ad2c",
+      "contentHash": "2c3bb7310c9666de1b2375d1c8d36899a0c2f55412fef5a901c4f07861b18585",
+      "answerHash": "a598504494d4cdd72ad8c6a55a1f9d13c12599601a159db34728f9fcda5bcde8",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "单选题",
+        "n": "4",
+        "s": "大气压力B一定时，水蒸气分压力只取决于（　）。",
+        "o": [
+          "A. 干球温度",
+          "B. 含湿量",
+          "C. 焓值",
+          "D. 风速"
+        ],
+        "key": "B",
+        "exp": "水蒸气分压力愈大，含湿量也愈大；含湿量一定时，水蒸气分压力随大气压力增加而增加。",
+        "id": 80,
+        "keywords": [
+          "含湿量"
+        ],
+        "cue": "大气压一定，分压力随含湿量变。"
+      }
+    },
+    {
+      "legacyIndex": 81,
+      "qid": "hvac-0082",
+      "displayNo": 82,
+      "unit": "7",
+      "type": "单选题",
+      "stem": "湿球温度计指示的是（　）。",
+      "sourceContentHash": "28b72c49df354692428f19d78c3f7b764a1e2a16016a2e4371e550286623e913",
+      "contentHash": "24aee5a1926937f4a6ed27855948c403be7efdcc7bef47dd4bed5eaf9cccf8b1",
+      "answerHash": "8c23c075f6f7324c9e7f44afc6d73f0b14c2a60a3eba20ce0db282139e4089e2",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "单选题",
+        "n": "5",
+        "s": "湿球温度计指示的是（　）。",
+        "o": [
+          "A. 湿空气的真实温度",
+          "B. 平衡时湿纱布中水分的温度",
+          "C. 空气的露点温度",
+          "D. 空气的干球温度与露点温度之差"
+        ],
+        "key": "B",
+        "exp": "当空气向湿纱布传递的热量等于水分蒸发所需热量时达到平衡，湿球温度保持恒定。",
+        "id": 81,
+        "keywords": [
+          "平衡时湿纱布中水分的温度"
+        ],
+        "cue": "湿球看传热与蒸发平衡。"
+      }
+    },
+    {
+      "legacyIndex": 82,
+      "qid": "hvac-0083",
+      "displayNo": 83,
+      "unit": "7",
+      "type": "多选题",
+      "stem": "湿空气i－d图由下列线群组成，包括（　）。",
+      "sourceContentHash": "96db63a789a174313f91383556603a14dcd14345800e20569a7ad989c847f2b3",
+      "contentHash": "9b3c506a3846aecdd0885292dbbb0c4fd109a97dd02ec5ff6c407e7c871995c0",
+      "answerHash": "c7d26066a5a822371e23c3a32e879faca013fbb6c8ee7f9dd0db8871581f0fd9",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "多选题",
+        "n": "1",
+        "s": "湿空气i－d图由下列线群组成，包括（　）。",
+        "o": [
+          "A. 等含湿量线（等d线）",
+          "B. 等焓线（等i线）",
+          "C. 等温线（等t线）",
+          "D. 等相对湿度线和等水蒸气分压力线"
+        ],
+        "key": "ABCD",
+        "exp": "教材7.2.1节列出五种线群，图右下角还标有热湿比线。",
+        "id": 82,
+        "keywords": [
+          "等含湿量线（等d线）",
+          "等焓线（等i线）",
+          "等温线（等t线）",
+          "等相对湿度线和等水蒸气分压力线"
+        ],
+        "cue": "等含湿量线（等d线） · 等焓线（等i线） · 等温线（等t线） · 等相对湿度线和等水蒸气分压力线"
+      }
+    },
+    {
+      "legacyIndex": 83,
+      "qid": "hvac-0084",
+      "displayNo": 84,
+      "unit": "7",
+      "type": "多选题",
+      "stem": "空气状态变化过程在i－d图上可表示为（　）。",
+      "sourceContentHash": "9ef89778ce2cb6556d122950c302d6d6b1ea52c8ef0bf29e4b184fc8c0a59f78",
+      "contentHash": "5ff2378dab5da67ed58e44a742f7115a5173127adb3f71ab4b5ddb7bb8f064bd",
+      "answerHash": "52971a1561a9a5f9ae144cb3716dfc0c7edbf9729b5abc3457397d43e398de07",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "多选题",
+        "n": "2",
+        "s": "空气状态变化过程在i－d图上可表示为（　）。",
+        "o": [
+          "A. 等湿加热过程、等湿冷却过程",
+          "B. 等焓加湿过程、等焓减湿过程",
+          "C. 等温加湿过程",
+          "D. 减湿冷却（冷却干燥）过程"
+        ],
+        "key": "ABCD",
+        "exp": "教材7.2.2节列出六种典型过程。",
+        "id": 83,
+        "keywords": [
+          "等湿加热过程、等湿冷却过程",
+          "等焓加湿过程、等焓减湿过程",
+          "等温加湿过程",
+          "减湿冷却（冷却干燥）过程"
+        ],
+        "cue": "等湿加热过程、等湿冷却过程 · 等焓加湿过程、等焓减湿过程 · 等温加湿过程 · 减湿冷却（冷却干燥）过程"
+      }
+    },
+    {
+      "legacyIndex": 84,
+      "qid": "hvac-0085",
+      "displayNo": 85,
+      "unit": "7",
+      "type": "多选题",
+      "stem": "湿空气常用的状态参数有（　）。",
+      "sourceContentHash": "7b2ab15dfdbe64428dac325c9aff0f318464087a8ba19b9a3798989693e5728f",
+      "contentHash": "102684f56d435dcaec1a48daf25d7dbd9141ad7151fd535ebba624a1235d78cc",
+      "answerHash": "dff75535ba836198e91f73c116482dabe268f401df3b56f0a24768421f9bb5ed",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "多选题",
+        "n": "3",
+        "s": "湿空气常用的状态参数有（　）。",
+        "o": [
+          "A. 压力",
+          "B. 温度",
+          "C. 相对湿度",
+          "D. 含湿量和焓"
+        ],
+        "key": "ABCD",
+        "exp": "湿空气的状态通常用压力、温度、相对湿度、含湿量及焓等参数表示。",
+        "id": 84,
+        "keywords": [
+          "压力",
+          "温度",
+          "相对湿度",
+          "含湿量和焓"
+        ],
+        "cue": "压力 · 温度 · 相对湿度 · 含湿量和焓"
+      }
+    },
+    {
+      "legacyIndex": 85,
+      "qid": "hvac-0086",
+      "displayNo": 86,
+      "unit": "7",
+      "type": "多选题",
+      "stem": "关于焓湿图的应用，说法正确的有（　）。",
+      "sourceContentHash": "b39730cfb8b5fe09a2f89098f300a5f7dbf730280a34855aa911af499811c3b5",
+      "contentHash": "f9cd3f035296c172ad06c20c6fcfabcca5cdb829cc6fd6b5ebfcfcbd60f47ebf",
+      "answerHash": "3eb768ec18ce817e773b9e70e555a72ace3a00632c747e2cfb39cd807316ae94",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "多选题",
+        "n": "4",
+        "s": "关于焓湿图的应用，说法正确的有（　）。",
+        "o": [
+          "A. 图上任意一点代表空气的一个状态",
+          "B. 大气压力一定时，知道任意两个独立状态参数即可确定其余参数",
+          "C. 可将空气状态变化过程表示在图上",
+          "D. 两种不同状态空气的混合状态可在图上确定"
+        ],
+        "key": "ABCD",
+        "exp": "教材7.2.2节“焓湿图的应用”三项内容。",
+        "id": 85,
+        "keywords": [
+          "图上任意一点代表空气的一个状态",
+          "大气压力一定时，知道任意两个独立状态参数即可确定其余参数",
+          "可将空气状态变化过程表示在图上",
+          "两种不同状态空气的混合状态可在图上确定"
+        ],
+        "cue": "图上任意一点代表空气的一个状态 · 大气压力一定时，知道任意两个独立状态参数即可确定其余参数 · 可将空气状态变化过程表示在图上 · 两种不同状态空气的混合状态可在图上确定"
+      }
+    },
+    {
+      "legacyIndex": 86,
+      "qid": "hvac-0087",
+      "displayNo": 87,
+      "unit": "7",
+      "type": "判断题",
+      "stem": "在i－d图上，等焓线是一组与横坐标轴成135°的平行直线（　）。",
+      "sourceContentHash": "e1cf8f266d04c55e18e1a5873da86459df3e102a4cd68837f474e45245bf4e45",
+      "contentHash": "851c94497c3923f8dd85b56e0466df308cc203818a05dbbc3157a9e256693333",
+      "answerHash": "496f4d5ef8ae92426c6607a06cc062152777e8dd87836198fc4cf9f106c66ad4",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "判断题",
+        "n": "1",
+        "s": "在i－d图上，等焓线是一组与横坐标轴成135°的平行直线（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材7.2.1节原文表述。",
+        "id": 86,
+        "keywords": [
+          "教材7.2.1节原文表述。"
+        ],
+        "cue": "等焓斜线，题库记135度。"
+      }
+    },
+    {
+      "legacyIndex": 87,
+      "qid": "hvac-0088",
+      "displayNo": 88,
+      "unit": "7",
+      "type": "判断题",
+      "stem": "当含湿量一定时，水蒸气分压力随大气压力的增加而增加（　）。",
+      "sourceContentHash": "af3ce602000e61d872f3a20591ebe0afd9aadf164c373b6c8a7e054eb3e5e783",
+      "contentHash": "da56f0261bc1f0f4e1a8c0317961d12454889aa216415705100a8685b2505cbe",
+      "answerHash": "ec4e09685611a5267209df392075bd4e989d463b48446ec3aa2a688efe3b9848",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "判断题",
+        "n": "2",
+        "s": "当含湿量一定时，水蒸气分压力随大气压力的增加而增加（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "公式7-6表明的规律。",
+        "id": 87,
+        "keywords": [
+          "公式7-6表明的规律。"
+        ],
+        "cue": "含湿量一定，大气压增，水汽分压增。"
+      }
+    },
+    {
+      "legacyIndex": 88,
+      "qid": "hvac-0089",
+      "displayNo": 89,
+      "unit": "7",
+      "type": "判断题",
+      "stem": "湿空气中的干空气可以当作一种“单一气体”处理（　）。",
+      "sourceContentHash": "ea86e911b6ab65f63166420e18a28c9f6a04456fc71f386e86f97d1b78e84d35",
+      "contentHash": "fb2bad827c7461cea86ab772a5876df500fd809f04e3b8aca05ce91e86dd87f3",
+      "answerHash": "c509adb4ef307419ae46591eaf021d9a68301c91e93e9bc6c6bd2e4e4bfa4b80",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "判断题",
+        "n": "3",
+        "s": "湿空气中的干空气可以当作一种“单一气体”处理（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "干空气的组元和成分通常是一定的。",
+        "id": 88,
+        "keywords": [
+          "干空气的组元和成分通常是一定的。"
+        ],
+        "cue": "干空气的组元和成分通常是一定的。"
+      }
+    },
+    {
+      "legacyIndex": 89,
+      "qid": "hvac-0090",
+      "displayNo": 90,
+      "unit": "7",
+      "type": "判断题",
+      "stem": "焓湿图一般按当地大气压绘制（　）。",
+      "sourceContentHash": "e19ab1578a1151530e81d2781de7b88838d255434898f4f96d5595fb5bae4105",
+      "contentHash": "ef0dcc1d61bdcb9cd950dec33d733e7829b0ae79624a5a5b82a57314c409ad45",
+      "answerHash": "1216265c7188618695287ea672705f797407dd94b67560aeca0f2572f14b6d00",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "判断题",
+        "n": "4",
+        "s": "焓湿图一般按当地大气压绘制（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "单元小结明确指出，因此不同地区应选用相应大气压下的i－d图。",
+        "id": 89,
+        "keywords": [
+          "单元小结明确指出，因此不同地区应选用相应大气压下的i－d图。"
+        ],
+        "cue": "图要配气压，使用看当地。"
+      }
+    },
+    {
+      "legacyIndex": 90,
+      "qid": "hvac-0091",
+      "displayNo": 91,
+      "unit": "7",
+      "type": "判断题",
+      "stem": "湿空气的相对湿度和含湿量通常采用干湿球温度计测定（　）。",
+      "sourceContentHash": "9843573ff06d9f0bbda7a90ed122dea3b2f3547e5f2102e1a77820ff1ebf4920",
+      "contentHash": "289d77685cb33d32fa8a40f1d6a3969a42b897dbe1ad17fa9f840e92b09f1194",
+      "answerHash": "f133b3823277a737c03fbf8580e5957a50ac3449fa1c00cd6c769f2e37f976d2",
+      "frozenQuestion": {
+        "u": "7",
+        "t": "判断题",
+        "n": "5",
+        "s": "湿空气的相对湿度和含湿量通常采用干湿球温度计测定（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "干球温度计测真实温度，湿球温度计感温球包裹浸水的湿纱布。",
+        "id": 90,
+        "keywords": [
+          "干球温度计测真实温度，湿球温度计感温球包裹浸水的湿纱布。"
+        ],
+        "cue": "干球温度计测真实温度，湿球温度计感温球包裹浸水的湿纱布。"
+      }
+    },
+    {
+      "legacyIndex": 91,
+      "qid": "hvac-0092",
+      "displayNo": 92,
+      "unit": "8",
+      "type": "单选题",
+      "stem": "某一时刻为维持房间恒温恒湿而需要空调系统向室内提供的冷量称为（　）。",
+      "sourceContentHash": "597b5fe7d5148d082869e7c421417f54b01b4107c17efbd83799544792920ad7",
+      "contentHash": "ce50897d7021977a4233075ad5495aab0a662868978f8e395df404726bd269b7",
+      "answerHash": "174298e663b3f7d99e98a0b5f5942ee1dcd358a1bbb7a380db0bd910f522de10",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "单选题",
+        "n": "1",
+        "s": "某一时刻为维持房间恒温恒湿而需要空调系统向室内提供的冷量称为（　）。",
+        "o": [
+          "A. 得热量",
+          "B. 冷负荷",
+          "C. 热负荷",
+          "D. 湿负荷"
+        ],
+        "key": "B",
+        "exp": "为补偿房间失热而向室内提供的热量称为热负荷；为维持相对湿度恒定需除去的湿量称为湿负荷。",
+        "id": 91,
+        "keywords": [
+          "冷负荷"
+        ],
+        "cue": "维持恒温恒湿，此刻需要的冷量叫冷负荷。"
+      }
+    },
+    {
+      "legacyIndex": 92,
+      "qid": "hvac-0093",
+      "displayNo": 93,
+      "unit": "8",
+      "type": "单选题",
+      "stem": "舒适性空调室内热舒适性评价指标PMV和PPD的宜用范围为（　）。",
+      "sourceContentHash": "c841f125e68da80faa77a92a43512ee2f795c66b6a473ac20fe6ee0343b37d99",
+      "contentHash": "c76ce824dad109fd016072e1ec5a2de2a667ce6dc10064be695e9ea8f023fdec",
+      "answerHash": "02ba04fa5c705a9c61c34c78e8f6c1da167c263191c4df4ebcdc646bc346aa8b",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "单选题",
+        "n": "2",
+        "s": "舒适性空调室内热舒适性评价指标PMV和PPD的宜用范围为（　）。",
+        "o": [
+          "A. －1≤PMV≤＋1，PPD≤27%",
+          "B. 0≤PMV≤2，PPD≤50%",
+          "C. －2≤PMV≤＋2，PPD≤10%",
+          "D. PMV≤－1，PPD≤27%"
+        ],
+        "key": "A",
+        "exp": "教材8.1.1节引GB 50736-2012的规定。",
+        "id": 92,
+        "keywords": [
+          "－1≤PMV≤＋1，PPD≤27%"
+        ],
+        "cue": "－1≤PMV≤＋1，PPD≤27%"
+      }
+    },
+    {
+      "legacyIndex": 93,
+      "qid": "hvac-0094",
+      "displayNo": 94,
+      "unit": "8",
+      "type": "单选题",
+      "stem": "夏季空气调节室外计算干球温度，应采用历年平均不保证（　）的干球温度。",
+      "sourceContentHash": "79e62c348809ab3a434395807fd5500681ccc572a90a019fde2331ccf3b7add6",
+      "contentHash": "6389e894948e2117bc56b00508658efbd9a8cd1bfa78fa0d139b2ac300e9b7e2",
+      "answerHash": "c9789894724d07f4885eca6f701920d7866c422d777fa76f2d2f07da6fd60916",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "单选题",
+        "n": "3",
+        "s": "夏季空气调节室外计算干球温度，应采用历年平均不保证（　）的干球温度。",
+        "o": [
+          "A. 5h",
+          "B. 50h",
+          "C. 1天",
+          "D. 5天"
+        ],
+        "key": "B",
+        "exp": "湿球温度同样取历年平均不保证50h；日平均温度取历年平均不保证5天。",
+        "id": 93,
+        "keywords": [
+          "50h"
+        ],
+        "cue": "夏季干湿球五十小时，日平均五天。"
+      }
+    },
+    {
+      "legacyIndex": 94,
+      "qid": "hvac-0095",
+      "displayNo": 95,
+      "unit": "8",
+      "type": "单选题",
+      "stem": "冬季空气调节室外计算温度，应采用历年平均不保证（　）的日平均温度。",
+      "sourceContentHash": "f91c9e1a3600aa0b22180d41aa17ca8da3d29c0c59d7798fc4585b1d6ab5c8f0",
+      "contentHash": "3e27efce02e1aa64610c7aaac30cb04459fa726bc58d1515f861d31af760cefb",
+      "answerHash": "9633b86c21f53fce9232b30d63234552b82d222873cfd81f3ec3e0c85362c49a",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "单选题",
+        "n": "4",
+        "s": "冬季空气调节室外计算温度，应采用历年平均不保证（　）的日平均温度。",
+        "o": [
+          "A. 1天",
+          "B. 5天",
+          "C. 50h",
+          "D. 10天"
+        ],
+        "key": "A",
+        "exp": "冬季室外计算相对湿度应采用累年最冷月平均相对湿度。",
+        "id": 94,
+        "keywords": [
+          "1天"
+        ],
+        "cue": "冬季计算温度，历年不保证一天。"
+      }
+    },
+    {
+      "legacyIndex": 95,
+      "qid": "hvac-0096",
+      "displayNo": 96,
+      "unit": "8",
+      "type": "单选题",
+      "stem": "关于空调房间冬季热负荷计算，下列说法正确的是（　）。",
+      "sourceContentHash": "b572c22e93fe587a6e00acd2d0201131027e452b1962fa90afae36f3f1fc871e",
+      "contentHash": "7d7658d123924a24a3b9a93e341b299db40fd5efcdbe6e172a71e425bc142902",
+      "answerHash": "80997f724009d5c42a48a8b8959544423f6f31d338a8517e9425d8dac292f3a2",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "单选题",
+        "n": "5",
+        "s": "关于空调房间冬季热负荷计算，下列说法正确的是（　）。",
+        "o": [
+          "A. 按不稳定传热计算并考虑室外气温波动",
+          "B. 按稳定传热方法计算，采用冬季空调室外计算温度，且无需计算冷风渗透热负荷",
+          "C. 按稳定传热方法计算，采用采暖室外计算温度",
+          "D. 与夏季冷负荷计算方法完全相同"
+        ],
+        "key": "B",
+        "exp": "冬季加热、加湿费用远低于夏季冷却、除湿费用；空调房间保持一定正压，故无需计算冷风渗透。",
+        "id": 95,
+        "keywords": [
+          "按稳定传热方法计算，采用冬季空调室外计算温度，且无需计算冷风渗透热负荷"
+        ],
+        "cue": "按稳定传热方法计算，采用冬季空调室外计算温度，且无需计算冷风渗透热负荷"
+      }
+    },
+    {
+      "legacyIndex": 96,
+      "qid": "hvac-0097",
+      "displayNo": 97,
+      "unit": "8",
+      "type": "多选题",
+      "stem": "房间瞬时得热量通常包括（　）。",
+      "sourceContentHash": "ec9bb934db7ffc23649d1c9238c97ae9e01e07aced2f51fa8515103dcaa4099c",
+      "contentHash": "1b9d50ad01a89095c2f6de04b44d3f85b66a634a4bd3430403337afd805cda50",
+      "answerHash": "0e5690c0e84eb7120482430b722a816511b0a00bfd0ba0e6a238f459dc38f09f",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "多选题",
+        "n": "1",
+        "s": "房间瞬时得热量通常包括（　）。",
+        "o": [
+          "A. 太阳辐射进入房间的热量",
+          "B. 室内外空气温差经围护结构传入房间的热量",
+          "C. 人体散入房间的热量",
+          "D. 照明及工艺设备、电气设备散入房间的热量"
+        ],
+        "key": "ABCD",
+        "exp": "得热量中包含潜热和显热，显热又分对流和辐射两种传递方式。",
+        "id": 96,
+        "keywords": [
+          "太阳辐射进入房间的热量",
+          "室内外空气温差经围护结构传入房间的热量",
+          "人体散入房间的热量",
+          "照明及工艺设备、电气设备散入房间的热量"
+        ],
+        "cue": "太阳辐射进入房间的热量 · 室内外空气温差经围护结构传入房间的热量 · 人体散入房间的热量 · 照明及工艺设备、电气设备散入房间的热量"
+      }
+    },
+    {
+      "legacyIndex": 97,
+      "qid": "hvac-0098",
+      "displayNo": 98,
+      "unit": "8",
+      "type": "多选题",
+      "stem": "按GB 50736-2012，舒适性空调室内计算参数应符合的规定有（　）。",
+      "sourceContentHash": "9d2844458975171aa4125cc0a4b6ca0e6857cd4998b90b675725c26b8a8c325a",
+      "contentHash": "7c6f67ccda517d5dedcad83e9af1c48c95748cb4864fa6d02d03509d5d80476a",
+      "answerHash": "7098dc1f7f8ad996d1ded572ba1ce83c22eff7f86ca16659acd95be9c5f551c1",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "多选题",
+        "n": "2",
+        "s": "按GB 50736-2012，舒适性空调室内计算参数应符合的规定有（　）。",
+        "o": [
+          "A. 夏季温度24～28℃，冬季18～24℃",
+          "B. 夏季相对湿度40%～70%，冬季30%～60%",
+          "C. 夏季风速≤0.25m/s，冬季≤0.2m/s",
+          "D. 冬夏季温度均取20℃"
+        ],
+        "key": "ABC",
+        "exp": "见教材表8-1。",
+        "id": 97,
+        "keywords": [
+          "夏季温度24～28℃，冬季18～24℃",
+          "夏季相对湿度40%～70%，冬季30%～60%",
+          "夏季风速≤0.25m/s，冬季≤0.2m/s"
+        ],
+        "cue": "夏季温度24～28℃，冬季18～24℃ · 夏季相对湿度40%～70%，冬季30%～60% · 夏季风速≤0.25m/s，冬季≤0.2m/s"
+      }
+    },
+    {
+      "legacyIndex": 98,
+      "qid": "hvac-0099",
+      "displayNo": 99,
+      "unit": "8",
+      "type": "多选题",
+      "stem": "空调冷负荷的计算方法主要有（　）。",
+      "sourceContentHash": "ca08870d50a4359bcbb32019601ac5af98e3991311c31d1c6a89e5c66cd8f272",
+      "contentHash": "161654b592475c64f0970644e07a220933004ffa2a4fd713eae87cd277b958c4",
+      "answerHash": "9dafee9db67f7d04f1a446f8e45b9e49595fc4e6606014a10e4293f0271ae0ca",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "多选题",
+        "n": "3",
+        "s": "空调冷负荷的计算方法主要有（　）。",
+        "o": [
+          "A. 谐波反应法",
+          "B. 冷负荷系数法",
+          "C. 换气次数法",
+          "D. 概算指标法"
+        ],
+        "key": "AB",
+        "exp": "冷负荷系数法是便于工程计算的简化方法，还特别适用于建筑物全年动态负荷计算与能耗分析。",
+        "id": 98,
+        "keywords": [
+          "谐波反应法",
+          "冷负荷系数法"
+        ],
+        "cue": "谐波反应法 · 冷负荷系数法"
+      }
+    },
+    {
+      "legacyIndex": 99,
+      "qid": "hvac-0100",
+      "displayNo": 100,
+      "unit": "8",
+      "type": "多选题",
+      "stem": "太阳辐射能到达地球表面可分为（　）。",
+      "sourceContentHash": "088947d0bcbac0ab08cedae256e8a0e78ae0bdd7703a54a4f89b9faa68777706",
+      "contentHash": "9f0c66c58bd634d785e6b57e2120479ccd085e1b2051a05853ec5a638f3fdd92",
+      "answerHash": "c096375a1ef21595fff31489d577780e0344708d577515c478894e106228c331",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "多选题",
+        "n": "4",
+        "s": "太阳辐射能到达地球表面可分为（　）。",
+        "o": [
+          "A. 直接辐射",
+          "B. 散射辐射",
+          "C. 地面反射辐射",
+          "D. 大气长波辐射"
+        ],
+        "key": "AB",
+        "exp": "直接辐射与散射辐射之和称为总辐射；地面反射辐射与大气长波辐射属于建筑物所受散射辐射的组成项。",
+        "id": 99,
+        "keywords": [
+          "直接辐射",
+          "散射辐射"
+        ],
+        "cue": "直接辐射 · 散射辐射"
+      }
+    },
+    {
+      "legacyIndex": 100,
+      "qid": "hvac-0101",
+      "displayNo": 101,
+      "unit": "8",
+      "type": "判断题",
+      "stem": "任一时刻房间瞬时得热量的总和与同一时间的冷负荷一定相等（　）。",
+      "sourceContentHash": "62f2c3d6a17a62111f80f5b09aa8a3eb5faa47e8ce3c666077b4cf3d228b385c",
+      "contentHash": "3847ba58f349b471ddf2094d9c1d7bdca42b2da3389e60cf371e1c63f1006c00",
+      "answerHash": "d74615ab755f42ed6221021b8663348bdb40b7d9023410426181790c8f170490",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "判断题",
+        "n": "1",
+        "s": "任一时刻房间瞬时得热量的总和与同一时间的冷负荷一定相等（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "以辐射方式传递的显热得热在转化为冷负荷过程中数量上衰减、时间上延迟，只有全部以对流方式传递时两者才相等。",
+        "id": 100,
+        "keywords": [
+          "以辐射方式传递的显热得热在转化为冷负荷过程中数量上衰减、时间上延迟，只有全部以对流方式传递时两者才相等。"
+        ],
+        "cue": "辐射先蓄热，负荷有延迟、有衰减。"
+      }
+    },
+    {
+      "legacyIndex": 101,
+      "qid": "hvac-0102",
+      "displayNo": 102,
+      "unit": "8",
+      "type": "判断题",
+      "stem": "冬季围护结构传热按稳定传热计算，不考虑室外气温的波动（　）。",
+      "sourceContentHash": "df0600edbbe912d2fc020b1ce1096618f88fbd581fac3c2fae2e4282075bd072",
+      "contentHash": "18864bf6fab20e6945c82f45e2e15f2d8e56688f67d89ff9721f09ca0c794986",
+      "answerHash": "8fa9c7fc4be4d40dda1d90cc5a0084454533982985b4b6e2a3aa7fb982d50ff7",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "判断题",
+        "n": "2",
+        "s": "冬季围护结构传热按稳定传热计算，不考虑室外气温的波动（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "因冬季加热、加湿费用总低于夏季冷却减湿费用。",
+        "id": 101,
+        "keywords": [
+          "因冬季加热、加湿费用总低于夏季冷却减湿费用。"
+        ],
+        "cue": "因冬季加热、加湿费用总低于夏季冷却减湿费用。"
+      }
+    },
+    {
+      "legacyIndex": 102,
+      "qid": "hvac-0103",
+      "displayNo": 103,
+      "unit": "8",
+      "type": "判断题",
+      "stem": "空调房间保持一定正压值，故计算冬季热负荷时无需计算冷风渗透形成的热负荷（　）。",
+      "sourceContentHash": "427fad7c15f10628078d36db867ce2cf7fa9586e6f4f99bbbe1982d32b6cb6c8",
+      "contentHash": "4985f7812275fa638a6a957b923e6905a6452127009ba58050574747cee8ec62",
+      "answerHash": "8f749b880097391c3c6b4f0e3a42630aa365c3497d502a0c4617fb26a5f149ea",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "判断题",
+        "n": "3",
+        "s": "空调房间保持一定正压值，故计算冬季热负荷时无需计算冷风渗透形成的热负荷（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材8.3.3节原文表述。",
+        "id": 102,
+        "keywords": [
+          "教材8.3.3节原文表述。"
+        ],
+        "cue": "题库按正压房间处理，冬季不计冷风渗透。"
+      }
+    },
+    {
+      "legacyIndex": 103,
+      "qid": "hvac-0104",
+      "displayNo": 104,
+      "unit": "8",
+      "type": "判断题",
+      "stem": "空调冷（热）、湿负荷是确定空调系统送风量、送风参数和选择空气处理设备的基础（　）。",
+      "sourceContentHash": "e38010bbee1090be5e41a20aaf9021925cf1f6f964397cccdf26f4db6cdfda74",
+      "contentHash": "2a485b8e22247bd94ad191854e3ecd348930eb1e3c72c5150186a70cb5d3a08a",
+      "answerHash": "645f32c2da41dde7e568cc574ca8dbfdf4e07f65e3e62aaf210f517b1c94bc91",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "判断题",
+        "n": "4",
+        "s": "空调冷（热）、湿负荷是确定空调系统送风量、送风参数和选择空气处理设备的基础（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "单元小结明确指出，设计空调系统的第一步就是计算冷（热）、湿负荷。",
+        "id": 103,
+        "keywords": [
+          "单元小结明确指出，设计空调系统的第一步就是计算冷（热）、湿负荷。"
+        ],
+        "cue": "先算冷热湿，再定风量和设备。"
+      }
+    },
+    {
+      "legacyIndex": 104,
+      "qid": "hvac-0105",
+      "displayNo": 105,
+      "unit": "8",
+      "type": "判断题",
+      "stem": "民用建筑冬季热负荷可按冬季供暖热负荷指标估算后乘以空调系统冬季用室外新风量的加热系数1.3～1.5（　）。",
+      "sourceContentHash": "7e2b0134d19e63151056e69eb0b3eba879b079a42d0021d07e68938463138ae3",
+      "contentHash": "6b3809b7b8121a153415609bbe325d6e5b7c9fdf707ff5d126271424f2330483",
+      "answerHash": "7ce1e9af47a95a311f496e51ecf48cc38b647df3052c9b29eff856f603968977",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "判断题",
+        "n": "5",
+        "s": "民用建筑冬季热负荷可按冬季供暖热负荷指标估算后乘以空调系统冬季用室外新风量的加热系数1.3～1.5（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材8.4.2节冬季热负荷估算方法。",
+        "id": 104,
+        "keywords": [
+          "教材8.4.2节冬季热负荷估算方法。"
+        ],
+        "cue": "教材8.4.2节冬季热负荷估算方法。"
+      }
+    },
+    {
+      "legacyIndex": 105,
+      "qid": "hvac-0106",
+      "displayNo": 106,
+      "unit": "9",
+      "type": "单选题",
+      "stem": "空气经表面式加热器或电加热器加热后，其处理过程是（　）。",
+      "sourceContentHash": "355bcaaae1839bfe1f56de625991c1627d366bb09079ea507c2ffd1f79860843",
+      "contentHash": "0af158f3d975cf506f8a305481c7198031d68637b01bf62efbe8cbd17bf27ee7",
+      "answerHash": "c780aebe560e0ef9ec8942ea459731e6eca0fb10afbe1310bed248f4c1c0a8d7",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "单选题",
+        "n": "1",
+        "s": "空气经表面式加热器或电加热器加热后，其处理过程是（　）。",
+        "o": [
+          "A. 等湿加热过程",
+          "B. 等焓加热过程",
+          "C. 等温加湿过程",
+          "D. 减湿冷却过程"
+        ],
+        "key": "A",
+        "exp": "温度升高但含湿量不变，即等湿加热过程。",
+        "id": 105,
+        "keywords": [
+          "等湿加热过程"
+        ],
+        "cue": "加热温度升，含湿量不变。"
+      }
+    },
+    {
+      "legacyIndex": 106,
+      "qid": "hvac-0107",
+      "displayNo": 107,
+      "unit": "9",
+      "type": "单选题",
+      "stem": "当空气冷却器的冷媒温度低于被处理空气的露点温度时，空气的处理过程是（　）。",
+      "sourceContentHash": "8c251e1388e2a2fdb2fdbc55234978ad7163b91f7f2e03284a0857650065dd5c",
+      "contentHash": "b3781aad7f0a4b0f3734507d0c708a564cb978b3174921e0e1818279d700fc38",
+      "answerHash": "dd7f088bdd08d5e361d8e45096d447b7adf7057c9834c3f27039a49a69e5b1be",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "单选题",
+        "n": "2",
+        "s": "当空气冷却器的冷媒温度低于被处理空气的露点温度时，空气的处理过程是（　）。",
+        "o": [
+          "A. 等湿降温过程",
+          "B. 减湿降温过程",
+          "C. 等焓加湿过程",
+          "D. 等温加湿过程"
+        ],
+        "key": "B",
+        "exp": "冷媒温度高于露点时空气中水蒸气不凝结，为等湿降温过程。",
+        "id": 106,
+        "keywords": [
+          "减湿降温过程"
+        ],
+        "cue": "冷到露点以下，降温又除湿。"
+      }
+    },
+    {
+      "legacyIndex": 107,
+      "qid": "hvac-0108",
+      "displayNo": 108,
+      "unit": "9",
+      "type": "单选题",
+      "stem": "喷雾加湿（将常温水喷成水雾混入空气）属于（　）。",
+      "sourceContentHash": "7dbf56fd74280f4e4f71098d273af833812bb5c089b3813368a9061d3e345ea4",
+      "contentHash": "33e50f396db85de345dfe88023d8ee0e462b983a7fdd2ed34883d2873af297e9",
+      "answerHash": "34e46903f1b39102d191af09c1269cc8eeb8867b48c9029cf263a8cfc6b7986b",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "单选题",
+        "n": "3",
+        "s": "喷雾加湿（将常温水喷成水雾混入空气）属于（　）。",
+        "o": [
+          "A. 等温加湿过程",
+          "B. 等焓加湿过程",
+          "C. 等湿加热过程",
+          "D. 减湿冷却过程"
+        ],
+        "key": "B",
+        "exp": "喷蒸汽加湿才是等温加湿过程。",
+        "id": 107,
+        "keywords": [
+          "等焓加湿过程"
+        ],
+        "cue": "喷雾记等焓，喷汽记近似等温。"
+      }
+    },
+    {
+      "legacyIndex": 108,
+      "qid": "hvac-0109",
+      "displayNo": 109,
+      "unit": "9",
+      "type": "单选题",
+      "stem": "固体吸湿剂处理空气的过程近似为（　）。",
+      "sourceContentHash": "466b04c0604fd80906e3a965417972f317cea9800333384f8e002a5c01e597d6",
+      "contentHash": "d9878951747ccf576902c84ae06d06f70c831f3f3d8ce0d90bdbcebec1660f30",
+      "answerHash": "399560342ef496967e81df39e1a1231f38be2c3f17300a479b34bd4acead9b49",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "单选题",
+        "n": "4",
+        "s": "固体吸湿剂处理空气的过程近似为（　）。",
+        "o": [
+          "A. 等焓减湿过程",
+          "B. 等温减湿过程",
+          "C. 等湿冷却过程",
+          "D. 等焓加湿过程"
+        ],
+        "key": "A",
+        "exp": "液体吸湿剂的吸湿过程为减湿降温过程，且以减湿为主。",
+        "id": 108,
+        "keywords": [
+          "等焓减湿过程"
+        ],
+        "cue": "固体吸湿，近似等焓减湿。"
+      }
+    },
+    {
+      "legacyIndex": 109,
+      "qid": "hvac-0110",
+      "displayNo": 110,
+      "unit": "9",
+      "type": "单选题",
+      "stem": "空调工程中把全热交换与显热交换的比值称为（　）。",
+      "sourceContentHash": "78c7682030e39b04b7e191be265ef45c1cddba493e39442f7994e3d50778dbeb",
+      "contentHash": "e941d556d9fc0e60d81e777f1e1c294d956181b95095ad16be98ccefe728f44f",
+      "answerHash": "a1f1978ef487322cad761d6a250add98b889b460de4c3719f292fd3b0a59fd01",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "单选题",
+        "n": "5",
+        "s": "空调工程中把全热交换与显热交换的比值称为（　）。",
+        "o": [
+          "A. 接触系数ε2",
+          "B. 热交换效率系数ε1",
+          "C. 析湿系数ξ",
+          "D. 传热系数K"
+        ],
+        "key": "C",
+        "exp": "析湿系数用于描述表冷器减湿冷却时的湿工况；接触系数ε2是实际温降与冷却到饱和时温降的比值。",
+        "id": 109,
+        "keywords": [
+          "析湿系数ξ"
+        ],
+        "cue": "析湿系数ξ"
+      }
+    },
+    {
+      "legacyIndex": 110,
+      "qid": "hvac-0111",
+      "displayNo": 111,
+      "unit": "9",
+      "type": "判断题",
+      "stem": "空气经空气加热器加热后温度升高，含湿量没有改变（　）。",
+      "sourceContentHash": "7402cb319fb6d152d99c711f3739a579ac9f31d3c2855f6b61d238277e99f8d5",
+      "contentHash": "413a5090c928463341992da417d718b80c6a398602a47cab64bd7e40d0c2d4c0",
+      "answerHash": "8903e4c35e4702bde7a2d5d76d19dba369faeabccbf3b93f6f424368226522a9",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "判断题",
+        "n": "1",
+        "s": "空气经空气加热器加热后温度升高，含湿量没有改变（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "属于等湿加热过程。",
+        "id": 110,
+        "keywords": [
+          "属于等湿加热过程。"
+        ],
+        "cue": "加热升温，含湿不动。"
+      }
+    },
+    {
+      "legacyIndex": 111,
+      "qid": "hvac-0112",
+      "displayNo": 112,
+      "unit": "9",
+      "type": "判断题",
+      "stem": "喷蒸汽加湿是等焓加湿过程（　）。",
+      "sourceContentHash": "08cad15382be30400c39d7123954b1550ca3b2b1ea68a4fe13718797cb7ed230",
+      "contentHash": "f841478c4a67b57e3f854a59b716b2b9683bda00778e9fbcc42d8e88c582c1c6",
+      "answerHash": "83fee86765012ec48e611be002bae1e60277a2a00d6dae51bff97a4ac33da937",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "判断题",
+        "n": "2",
+        "s": "喷蒸汽加湿是等焓加湿过程（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "喷蒸汽加湿时空气温度基本不变，是等温加湿过程；喷雾加湿才是等焓加湿。",
+        "id": 111,
+        "keywords": [
+          "喷蒸汽加湿时空气温度基本不变，是等温加湿过程；喷雾加湿才是等焓加湿。"
+        ],
+        "cue": "雾等焓，汽等温。"
+      }
+    },
+    {
+      "legacyIndex": 112,
+      "qid": "hvac-0113",
+      "displayNo": 113,
+      "unit": "9",
+      "type": "判断题",
+      "stem": "液体吸湿剂以减湿为主，其处理过程比减湿冷却过程更偏向左边（　）。",
+      "sourceContentHash": "9457f0f3a1bec9930c7c59d6dd06c6e07403d0b2d583139039d1d7027cb9cc4a",
+      "contentHash": "9c153171360e73fc1f23040553c4323a9027f1e9f2afc94fcafe2203069d0d9d",
+      "answerHash": "78a1d082bd65b0fcb4544a758fea3911355fc39016475f537413ac880f1263a5",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "判断题",
+        "n": "3",
+        "s": "液体吸湿剂以减湿为主，其处理过程比减湿冷却过程更偏向左边（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "液体吸湿剂吸湿过程与减湿降温过程相仿，但以减湿为主。",
+        "id": 112,
+        "keywords": [
+          "液体吸湿剂吸湿过程与减湿降温过程相仿，但以减湿为主。"
+        ],
+        "cue": "液体吸湿剂吸湿过程与减湿降温过程相仿，但以减湿为主。"
+      }
+    },
+    {
+      "legacyIndex": 113,
+      "qid": "hvac-0114",
+      "displayNo": 114,
+      "unit": "9",
+      "type": "判断题",
+      "stem": "表冷器垂直安装时应使肋片保持垂直位置，以利于水滴及时落下（　）。",
+      "sourceContentHash": "8de46b82d3ace37bd0caa43c680496d74f26e7c4020c6642c39f4512a7271b05",
+      "contentHash": "d4a67ce11e4b77d38c2a2556f35336f55860fe9fbfadb84557f9d4b56119c433",
+      "answerHash": "140f6000e833421acf969b4a2e790e327cfba8e108c32c481acc3b61ffcb6f12",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "判断题",
+        "n": "4",
+        "s": "表冷器垂直安装时应使肋片保持垂直位置，以利于水滴及时落下（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "否则将因肋片存留积水而增加空气侧阻力、降低传热系数。",
+        "id": 113,
+        "keywords": [
+          "否则将因肋片存留积水而增加空气侧阻力、降低传热系数。"
+        ],
+        "cue": "肋片竖着装，凝水往下落。"
+      }
+    },
+    {
+      "legacyIndex": 114,
+      "qid": "hvac-0115",
+      "displayNo": 115,
+      "unit": "9",
+      "type": "判断题",
+      "stem": "组合式空调机组是由各种空气处理功能段根据需要组装而成的空气处理设备（　）。",
+      "sourceContentHash": "9b47394dc52463b6ae811313e54b96b3c89dfbc78685f56c3c6c029d8016845c",
+      "contentHash": "1184145d141c8edc4cb2498facedbb57fef4b493ebb7a5ee050a2696498db85f",
+      "answerHash": "005d57d91af396d20c4caa293db66dd7eeb5208818efe4769fb4a7e58450417c",
+      "frozenQuestion": {
+        "u": "9",
+        "t": "判断题",
+        "n": "5",
+        "s": "组合式空调机组是由各种空气处理功能段根据需要组装而成的空气处理设备（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "常用功能段包括空气混合、过滤、表冷器、送风机、回风机等。",
+        "id": 114,
+        "keywords": [
+          "常用功能段包括空气混合、过滤、表冷器、送风机、回风机等。"
+        ],
+        "cue": "常用功能段包括空气混合、过滤、表冷器、送风机、回风机等。"
+      }
+    },
+    {
+      "legacyIndex": 115,
+      "qid": "hvac-0116",
+      "displayNo": 116,
+      "unit": "10",
+      "type": "单选题",
+      "stem": "在i－d图上确定送风状态点时，送风状态点O距室内状态点N越远，则（　）。",
+      "sourceContentHash": "434fef0c921cf5d60a64286f3cf6e6c559f1fa051bd9f542155ce8058d9ad86f",
+      "contentHash": "1bba713649a9c4b2b19e601eef26ca11e234f17960e713a92a2bf86e867921ac",
+      "answerHash": "f19a1c6a36f40d9d81d6976679f16e74436bd185eb09402068213680a28c3685",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "单选题",
+        "n": "1",
+        "s": "在i－d图上确定送风状态点时，送风状态点O距室内状态点N越远，则（　）。",
+        "o": [
+          "A. 送风温差越小，所需送风量越大",
+          "B. 送风温差越大，所需送风量越小",
+          "C. 送风温差与送风量均不变",
+          "D. 送风量越大且能耗越低"
+        ],
+        "key": "B",
+        "exp": "因此送风状态点的选择涉及经济技术的比较。",
+        "id": 115,
+        "keywords": [
+          "送风温差越大，所需送风量越小"
+        ],
+        "cue": "送风温差越大，所需送风量越小"
+      }
+    },
+    {
+      "legacyIndex": 116,
+      "qid": "hvac-0117",
+      "displayNo": 117,
+      "unit": "10",
+      "type": "单选题",
+      "stem": "按空气处理设备的设置情况，空气调节系统可分为（　）。",
+      "sourceContentHash": "c22b057f346db73d6fb5ca0d361a22b145f61ca3118aac840149c67b66fd1cbf",
+      "contentHash": "2d326c114f37fe07bbf187c80209dca3c952ad14c8e45526db66938d5800a2f4",
+      "answerHash": "5dd8d95f5793015b525ef6c34bf46933d252e3e47c8b6c6c8b8922371c48a5d0",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "单选题",
+        "n": "2",
+        "s": "按空气处理设备的设置情况，空气调节系统可分为（　）。",
+        "o": [
+          "A. 集中式、半集中式、全分散式",
+          "B. 全空气、全水、空气—水、冷剂系统",
+          "C. 封闭式、直流式、混合式",
+          "D. 高速系统、低速系统"
+        ],
+        "key": "A",
+        "exp": "其余三项分别对应按介质、按空气来源、按风道流速的分类。",
+        "id": 116,
+        "keywords": [
+          "集中式、半集中式、全分散式"
+        ],
+        "cue": "集中式、半集中式、全分散式"
+      }
+    },
+    {
+      "legacyIndex": 117,
+      "qid": "hvac-0118",
+      "displayNo": 118,
+      "unit": "10",
+      "type": "单选题",
+      "stem": "高速空调系统主风道中的流速可达（　）。",
+      "sourceContentHash": "f6d191f5d7920d6c06953cb4093bf8b41b04632a5e33b38b94a3e557ecd286ef",
+      "contentHash": "e0c6fd1977837b78c2bd0f1e749e41309abe7abc4d8b31cfcb6264bda5412258",
+      "answerHash": "11b04aa5223a63d3ceedc80e119dc636f41d34a6ef189964b6b096718cd4bbf2",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "单选题",
+        "n": "3",
+        "s": "高速空调系统主风道中的流速可达（　）。",
+        "o": [
+          "A. 8～12m/s",
+          "B. 20～30m/s",
+          "C. 5～8m/s",
+          "D. 30～40m/s"
+        ],
+        "key": "B",
+        "exp": "低速空调系统风道流速一般不超过8～12m/s，风道断面较大。",
+        "id": 117,
+        "keywords": [
+          "20～30m/s"
+        ],
+        "cue": "20～30m/s"
+      }
+    },
+    {
+      "legacyIndex": 118,
+      "qid": "hvac-0119",
+      "displayNo": 119,
+      "unit": "10",
+      "type": "单选题",
+      "stem": "确定一次回风系统新风量的依据不包括（　）。",
+      "sourceContentHash": "53ecf563d71c2510f2b6769247b7d0a06bdba87590e8afc541ae9a2ce71e7f8b",
+      "contentHash": "e8c176fcdccf1d3cecbad8d9fdca61fb8d16c9bbd0972d3477d06b262e858870",
+      "answerHash": "268f741125df21262cd21315f103ad7d5db2a29a974af2f96eade5a72b7dad45",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "单选题",
+        "n": "4",
+        "s": "确定一次回风系统新风量的依据不包括（　）。",
+        "o": [
+          "A. 卫生要求",
+          "B. 补充局部排风量",
+          "C. 保持空调房间正压的要求",
+          "D. 房间围护结构的热惰性"
+        ],
+        "key": "D",
+        "exp": "教材10.3.2节列出三个因素。",
+        "id": 118,
+        "keywords": [
+          "房间围护结构的热惰性"
+        ],
+        "cue": "新风三依据：卫生、补排、正压。"
+      }
+    },
+    {
+      "legacyIndex": 119,
+      "qid": "hvac-0120",
+      "displayNo": 120,
+      "unit": "10",
+      "type": "单选题",
+      "stem": "下列系统中，按负担室内负荷所用介质分类属于“制冷剂系统”的是（　）。",
+      "sourceContentHash": "81ec5e567a8768252a44ac940a5466260cb9f4448efe992982fd979d8e78be52",
+      "contentHash": "3ac8bcf46815d7bfc32384c0008011b84d08b79ad35b67649214c7a9aad8e578",
+      "answerHash": "c68fd59620b8c5dedf648fcda316ad534c441b6c0135c33a4a742d611d43db1c",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "单选题",
+        "n": "5",
+        "s": "下列系统中，按负担室内负荷所用介质分类属于“制冷剂系统”的是（　）。",
+        "o": [
+          "A. 风机盘管加新风系统",
+          "B. 全空气系统",
+          "C. 多联机空调系统",
+          "D. 全水系统"
+        ],
+        "key": "C",
+        "exp": "多联机（VRV）为一台室外机通过配管连接两台或两台以上室内机的一次制冷剂空调系统。",
+        "id": 119,
+        "keywords": [
+          "多联机空调系统"
+        ],
+        "cue": "多联机走制冷剂。"
+      }
+    },
+    {
+      "legacyIndex": 120,
+      "qid": "hvac-0121",
+      "displayNo": 121,
+      "unit": "10",
+      "type": "判断题",
+      "stem": "一次回风系统中回风量越大、新风量越小就越经济，因此可以无限制地减少新风量（　）。",
+      "sourceContentHash": "84f70602a5a1b8eece92121d15aa9719f30296032352b8c91cbb0dd2df998d0d",
+      "contentHash": "e22711cf97a7ed5559f4b1327ec0f8116675984e1f665cacae81cf83b6849a15",
+      "answerHash": "ffc170232974618997a325c5acc19ffd0464c9dca1e416b2e134f7d53a411227",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "判断题",
+        "n": "1",
+        "s": "一次回风系统中回风量越大、新风量越小就越经济，因此可以无限制地减少新风量（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "新风量受卫生要求、补充局部排风量和保持正压三个因素制约，不能无限制减少。",
+        "id": 120,
+        "keywords": [
+          "新风量受卫生要求、补充局部排风量和保持正压三个因素制约，不能无限制减少。"
+        ],
+        "cue": "新风受卫生、补排、正压约束。"
+      }
+    },
+    {
+      "legacyIndex": 121,
+      "qid": "hvac-0122",
+      "displayNo": 122,
+      "unit": "10",
+      "type": "判断题",
+      "stem": "直流式（全新风式）空调系统全部使用室外新风，不利用回风（　）。",
+      "sourceContentHash": "8681382cde62e91832e463fee044968c235bf888c8c333e9aa3fa72c6393864b",
+      "contentHash": "2a71250a1da29c1630772666e79923752ee004876e24057e30e205de513c30d5",
+      "answerHash": "c08ba3203aaee7806aa94fc59f27cb4a18224e4b3bbe866addf8e11c3fbe2c43",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "判断题",
+        "n": "2",
+        "s": "直流式（全新风式）空调系统全部使用室外新风，不利用回风（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "按空气来源分类中，直流式系统的处理空气全部来自室外。",
+        "id": 121,
+        "keywords": [
+          "按空气来源分类中，直流式系统的处理空气全部来自室外。"
+        ],
+        "cue": "直流全新风，回风不参与。"
+      }
+    },
+    {
+      "legacyIndex": 122,
+      "qid": "hvac-0123",
+      "displayNo": 123,
+      "unit": "10",
+      "type": "判断题",
+      "stem": "分散式空调系统采用直接蒸发或冷媒冷却方式，结构紧凑、安装方便、使用灵活（　）。",
+      "sourceContentHash": "1da81a87dad11a4b5cc7336e56be2449187108f218722bac7b50fa77447e9212",
+      "contentHash": "bbc05e0060e48822764d0d2dd7a6a597eab04c2aa502103d01230c3157ff7778",
+      "answerHash": "409cedc2a09b70e51682e868f042e2caa966d4041259e167bd5f9009538a8cd5",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "判断题",
+        "n": "3",
+        "s": "分散式空调系统采用直接蒸发或冷媒冷却方式，结构紧凑、安装方便、使用灵活（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "如窗式、挂壁机、吊装机、立柜式机组等。",
+        "id": 122,
+        "keywords": [
+          "如窗式、挂壁机、吊装机、立柜式机组等。"
+        ],
+        "cue": "如窗式、挂壁机、吊装机、立柜式机组等。"
+      }
+    },
+    {
+      "legacyIndex": 123,
+      "qid": "hvac-0124",
+      "displayNo": 124,
+      "unit": "10",
+      "type": "判断题",
+      "stem": "冬季由于室内余热比夏季少，热湿比可能为负值，送风温度往往高于室温（　）。",
+      "sourceContentHash": "91952c4bf4d69e64e547554f0507e4d5a62e6dfd45de8398582c032b2e3a574b",
+      "contentHash": "184dec71413a308154b33037a45927b1cdcd47f47ce7b0d3b9d2db8a0eeefd01",
+      "answerHash": "7642ad6ecdc02ff7426b63105b2a36a02c6a0b92f1ead2ebc41056590bdcff66",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "判断题",
+        "n": "4",
+        "s": "冬季由于室内余热比夏季少，热湿比可能为负值，送风温度往往高于室温（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "因此冬季送风焓值大于室内焓值；工程上多采用全年固定送风量。",
+        "id": 123,
+        "keywords": [
+          "因此冬季送风焓值大于室内焓值；工程上多采用全年固定送风量。"
+        ],
+        "cue": "因此冬季送风焓值大于室内焓值；工程上多采用全年固定送风量。"
+      }
+    },
+    {
+      "legacyIndex": 124,
+      "qid": "hvac-0125",
+      "displayNo": 125,
+      "unit": "10",
+      "type": "判断题",
+      "stem": "多联机空调系统按负担室内负荷所用介质分类属于全空气系统（　）。",
+      "sourceContentHash": "dd3091576645770e943bce999816835b84f9cc01a997d93e2558f55951a035dc",
+      "contentHash": "7a820eeaec937556100775b05fa2b4826a5f12e1e67940de4d197074d1b04fed",
+      "answerHash": "fb9c14e3a70663a4d4bf6a2c7198eadb6d7b9cdb55861c177599117cff1541d1",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "判断题",
+        "n": "5",
+        "s": "多联机空调系统按负担室内负荷所用介质分类属于全空气系统（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "多联机（VRV）属于制冷剂系统，室外侧采用风冷换热、室内侧采用直接蒸发换热。",
+        "id": 124,
+        "keywords": [
+          "多联机（VRV）属于制冷剂系统，室外侧采用风冷换热、室内侧采用直接蒸发换热。"
+        ],
+        "cue": "多联机按介质分，归制冷剂系统。"
+      }
+    },
+    {
+      "legacyIndex": 125,
+      "qid": "hvac-0126",
+      "displayNo": 126,
+      "unit": "12",
+      "type": "单选题",
+      "stem": "由于空气本身的粘滞性及其与管壁间的摩擦而产生的沿程能量损失称为（　）。",
+      "sourceContentHash": "f44ae87fd320fa48cc0855fe05e8a64dc2c66b22d022a926eadcd8a3a9602cf5",
+      "contentHash": "6caf87cedddaac307fcaee81208727d175278b68257587f72593ada9ef191db9",
+      "answerHash": "5744d739817ab348a4c07227e4682aecf6aa97aecc6d99e9a050edf2ab0d0666",
+      "frozenQuestion": {
+        "u": "12",
+        "t": "单选题",
+        "n": "1",
+        "s": "由于空气本身的粘滞性及其与管壁间的摩擦而产生的沿程能量损失称为（　）。",
+        "o": [
+          "A. 局部阻力",
+          "B. 摩擦阻力（沿程阻力）",
+          "C. 设备阻力",
+          "D. 热压阻力"
+        ],
+        "key": "B",
+        "exp": "空气流经管件及设备时因流速大小、方向变化及涡流造成的集中能量损失称为局部阻力。",
+        "id": 125,
+        "keywords": [
+          "摩擦阻力（沿程阻力）"
+        ],
+        "cue": "长管摩擦是沿程，弯头变化是局部。"
+      }
+    },
+    {
+      "legacyIndex": 126,
+      "qid": "hvac-0127",
+      "displayNo": 127,
+      "unit": "12",
+      "type": "单选题",
+      "stem": "将矩形风管折算成当量圆风管时，若两者空气流速相等且比摩阻相等，此时圆风管直径称为（　）。",
+      "sourceContentHash": "3f2c07eafeaa529f893d2781b4b26804c87cba857462afd66acd8f2f78a7b4e2",
+      "contentHash": "4511af64813d2d088d383112eb964953a741e021ef5a024c228119c8fa13e00c",
+      "answerHash": "ad20c6b26db0d32b1fad375eb26724a6e5a7542210313f662c659447aeb3a45a",
+      "frozenQuestion": {
+        "u": "12",
+        "t": "单选题",
+        "n": "2",
+        "s": "将矩形风管折算成当量圆风管时，若两者空气流速相等且比摩阻相等，此时圆风管直径称为（　）。",
+        "o": [
+          "A. 流速当量直径",
+          "B. 流量当量直径",
+          "C. 水力半径",
+          "D. 公称直径"
+        ],
+        "key": "A",
+        "exp": "若两者空气流量相等且比摩阻相等，则为流量当量直径。",
+        "id": 126,
+        "keywords": [
+          "流速当量直径"
+        ],
+        "cue": "等流速叫流速当量，等流量叫流量当量。"
+      }
+    },
+    {
+      "legacyIndex": 127,
+      "qid": "hvac-0128",
+      "displayNo": 128,
+      "unit": "12",
+      "type": "单选题",
+      "stem": "风管水力计算的常用方法不包括（　）。",
+      "sourceContentHash": "e64075dd2a6c8d18d114a18c5e787d1552dcb3b2037d8062d6ef402e3d45c3e0",
+      "contentHash": "cf62ee37d4d4b420592931da453b6a1967f5acf7410e22393f798edcd57d2c9a",
+      "answerHash": "85ed51c00c34d6673d4a91b96707980a79b736219cf6c5e93e2c42a185de0314",
+      "frozenQuestion": {
+        "u": "12",
+        "t": "单选题",
+        "n": "3",
+        "s": "风管水力计算的常用方法不包括（　）。",
+        "o": [
+          "A. 假定流速法",
+          "B. 压损平均法",
+          "C. 静压复得法",
+          "D. 换气次数法"
+        ],
+        "key": "D",
+        "exp": "教材12.2.2节介绍假定流速法、压损平均法、静压复得法三种方法。",
+        "id": 127,
+        "keywords": [
+          "换气次数法"
+        ],
+        "cue": "换气次数法"
+      }
+    },
+    {
+      "legacyIndex": 128,
+      "qid": "hvac-0129",
+      "displayNo": 129,
+      "unit": "12",
+      "type": "单选题",
+      "stem": "风管与通风机及空气处理机组等振动设备的连接处应装设柔性接头，其长度宜为（　）。",
+      "sourceContentHash": "b75dbac81cbb6fc3983d3c68b2ac4166113a33d3194b96e5c4477663f5138cdc",
+      "contentHash": "fb9897750f6fde7e13de78f30d3ab5d1cde81eda43320ee4d02a1eba75c29239",
+      "answerHash": "522e4978dec07ffcdee8093c4dc086151e8ba0e244b334e8321fde40f6fe8612",
+      "frozenQuestion": {
+        "u": "12",
+        "t": "单选题",
+        "n": "4",
+        "s": "风管与通风机及空气处理机组等振动设备的连接处应装设柔性接头，其长度宜为（　）。",
+        "o": [
+          "A. 50mm～100mm",
+          "B. 150mm～300mm",
+          "C. 300mm～500mm",
+          "D. 500mm～800mm"
+        ],
+        "key": "B",
+        "exp": "教材12.3.1节风管系统布置要求。",
+        "id": 128,
+        "keywords": [
+          "150mm～300mm"
+        ],
+        "cue": "150mm～300mm"
+      }
+    },
+    {
+      "legacyIndex": 129,
+      "qid": "hvac-0130",
+      "displayNo": 130,
+      "unit": "12",
+      "type": "单选题",
+      "stem": "通风、空气调节系统风管道上防火阀的动作温度宜为（　）。",
+      "sourceContentHash": "80eab97fe72d54349f23c88f2b00df5100b3c308bc70c99bff5cd9abc96e3644",
+      "contentHash": "5764b15476a5db8a82f5346c05ce6dfae9439ed4482af21a863e16416fefc7ed",
+      "answerHash": "df59a1644074a16b0050bc02c96ac12758ee3966880a7acc84667aebe828253e",
+      "frozenQuestion": {
+        "u": "12",
+        "t": "单选题",
+        "n": "5",
+        "s": "通风、空气调节系统风管道上防火阀的动作温度宜为（　）。",
+        "o": [
+          "A. 50℃",
+          "B. 70℃",
+          "C. 100℃",
+          "D. 280℃"
+        ],
+        "key": "B",
+        "exp": "教材12.3.1节：通风空调系统风管应依据规范设防火阀，动作温度宜为70℃。",
+        "id": 129,
+        "keywords": [
+          "70℃"
+        ],
+        "cue": "通风空调防火阀，题库记七十。"
+      }
+    },
+    {
+      "legacyIndex": 130,
+      "qid": "hvac-0131",
+      "displayNo": 131,
+      "unit": "13",
+      "type": "单选题",
+      "stem": "蒸汽压缩式制冷循环由压缩机、冷凝器、节流阀和（　）组成。",
+      "sourceContentHash": "3658648a6371b9e7247ef0691929ad9736ea284b9fa4477cbbd24c177c0175a7",
+      "contentHash": "57acdc8e72706964a4a7eda3d49e12a8e1cd2840fbc467523450be04ac99a400",
+      "answerHash": "556871639f198db4786a772b51f05331b8ab939739b55da5b5daae3549b0cfd7",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "单选题",
+        "n": "1",
+        "s": "蒸汽压缩式制冷循环由压缩机、冷凝器、节流阀和（　）组成。",
+        "o": [
+          "A. 蒸发器",
+          "B. 吸收器",
+          "C. 发生器",
+          "D. 冷却塔"
+        ],
+        "key": "A",
+        "exp": "四个部件依次用管道连接成封闭系统，充注适当制冷工质即构成压缩式制冷机。",
+        "id": 130,
+        "keywords": [
+          "蒸发器"
+        ],
+        "cue": "压缩、冷凝、节流、蒸发，四步循环。"
+      }
+    },
+    {
+      "legacyIndex": 131,
+      "qid": "hvac-0132",
+      "displayNo": 132,
+      "unit": "13",
+      "type": "单选题",
+      "stem": "溴化锂吸收式制冷机组主要由发生器、冷凝器、蒸发器和（　）组成。",
+      "sourceContentHash": "93b8cbed45f3e2370d1c53882c0d6fc3395ab39aa90d8f2305e17f1070c776c0",
+      "contentHash": "645aee252d3a29d04afa164cb49908274479a2cd252ef18ab22def39a9d695cc",
+      "answerHash": "327694cd6359bc7426c3c0290d8ad824202bdd1e327dafd09cfef4225a7ca560",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "单选题",
+        "n": "2",
+        "s": "溴化锂吸收式制冷机组主要由发生器、冷凝器、蒸发器和（　）组成。",
+        "o": [
+          "A. 压缩机",
+          "B. 吸收器",
+          "C. 节流阀",
+          "D. 储液器"
+        ],
+        "key": "B",
+        "exp": "四个热交换设备组成制冷剂循环与吸收剂循环两个环路。",
+        "id": 131,
+        "keywords": [
+          "吸收器"
+        ],
+        "cue": "发生、冷凝、蒸发、吸收。"
+      }
+    },
+    {
+      "legacyIndex": 132,
+      "qid": "hvac-0133",
+      "displayNo": 133,
+      "unit": "13",
+      "type": "单选题",
+      "stem": "热泵循环中，向高温热源供应的热量Q1与从低温热源取得的热量Q0、消耗的机械功AL之间的关系是（　）。",
+      "sourceContentHash": "1cdb69fc85092859eb1ad11ac2f4ba18a7996edd6b48dadae4f13368ab219d25",
+      "contentHash": "f6a1df28b14db5dbf15f71fc6557cc94019c66d6d0b71c958cc954b2dcce1ea4",
+      "answerHash": "cf736b057e09bc1bebcbb979d0e5d76f90c01e54c2aa329c8d09e7cea3580162",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "单选题",
+        "n": "3",
+        "s": "热泵循环中，向高温热源供应的热量Q1与从低温热源取得的热量Q0、消耗的机械功AL之间的关系是（　）。",
+        "o": [
+          "A. Q1＝Q0－AL",
+          "B. Q1＝Q0＋AL",
+          "C. Q1＝AL－Q0",
+          "D. Q1＝Q0×AL"
+        ],
+        "key": "B",
+        "exp": "符合热力学第一定律。",
+        "id": 132,
+        "keywords": [
+          "Q1＝Q0＋AL"
+        ],
+        "cue": "供热＝取热＋做功，Q1=Q0+AL。"
+      }
+    },
+    {
+      "legacyIndex": 133,
+      "qid": "hvac-0134",
+      "displayNo": 134,
+      "unit": "13",
+      "type": "单选题",
+      "stem": "地源热泵利用地球表面浅层地热资源作为冷热源，其深度通常小于（　）。",
+      "sourceContentHash": "c4b8ef0ca2588c7ebb94cd69afd6a5d43ac3f5aab2c43448221d0cc918d59b89",
+      "contentHash": "b11efd438dcc8e05138c592ffe41d2f04c8dcddb44c43ab89ab2966466a110ed",
+      "answerHash": "c13c4ca5573b781e9628dfe08a19e85aecac4d6501029bf759abfec57709da79",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "单选题",
+        "n": "4",
+        "s": "地源热泵利用地球表面浅层地热资源作为冷热源，其深度通常小于（　）。",
+        "o": [
+          "A. 100米",
+          "B. 200米",
+          "C. 400米",
+          "D. 1000米"
+        ],
+        "key": "C",
+        "exp": "教材13.2.2节对地源热泵的说明。",
+        "id": 133,
+        "keywords": [
+          "400米"
+        ],
+        "cue": "400米"
+      }
+    },
+    {
+      "legacyIndex": 134,
+      "qid": "hvac-0135",
+      "displayNo": 135,
+      "unit": "13",
+      "type": "单选题",
+      "stem": "空调冷（热）水系统中，各用户供、回水管路总长度相同的系统称为（　）。",
+      "sourceContentHash": "46c982a9079f0e5fc7ba674cf1e46c9123756030f0c87dd4f7c8929c08431267",
+      "contentHash": "58f75488e3d595ec8a80468b4b5f5283bbced98c925daa5b5446794a480e2800",
+      "answerHash": "b532e837432577b8f9ba5f54179d8f73ce6cb4b8d79a0ec02dfe18c1320a2809",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "单选题",
+        "n": "5",
+        "s": "空调冷（热）水系统中，各用户供、回水管路总长度相同的系统称为（　）。",
+        "o": [
+          "A. 同程式系统",
+          "B. 异程式系统",
+          "C. 开式系统",
+          "D. 定流量系统"
+        ],
+        "key": "A",
+        "exp": "异程式系统各用户供、回水管路总长度不同。",
+        "id": 134,
+        "keywords": [
+          "同程式系统"
+        ],
+        "cue": "同程看总路程相同。"
+      }
+    },
+    {
+      "legacyIndex": 135,
+      "qid": "hvac-0136",
+      "displayNo": 136,
+      "unit": "13",
+      "type": "多选题",
+      "stem": "按工作原理，制冷压缩机可分为（　）。",
+      "sourceContentHash": "5b7f7c6deb00e62047547ae63f1f67a79f29ceb33746a3f5230990dd52a4cfcf",
+      "contentHash": "c4a42ce3f30609804c24d81bb4a6c9f4ed666e24e9bfa5f1389c824340a6291a",
+      "answerHash": "397508852e92aa9587a53276b164f55e2a6d095564cb9a4ebf8c15a3c54caedf",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "多选题",
+        "n": "1",
+        "s": "按工作原理，制冷压缩机可分为（　）。",
+        "o": [
+          "A. 容积型（如活塞式、螺杆式）",
+          "B. 速度型（如离心式）",
+          "C. 吸收型",
+          "D. 蒸发型"
+        ],
+        "key": "AB",
+        "exp": "活塞式又称往复式；离心式根据工作轮数量分为单级式和多级式。",
+        "id": 135,
+        "keywords": [
+          "容积型（如活塞式、螺杆式）",
+          "速度型（如离心式）"
+        ],
+        "cue": "容积型（如活塞式、螺杆式） · 速度型（如离心式）"
+      }
+    },
+    {
+      "legacyIndex": 136,
+      "qid": "hvac-0137",
+      "displayNo": 137,
+      "unit": "13",
+      "type": "多选题",
+      "stem": "冷凝器按冷却介质和结构形式可分为（　）。",
+      "sourceContentHash": "51cf30c2fc479a47ec51c183c511e0ebe3caf8c3df16ed77a0828b0499073ee9",
+      "contentHash": "d29920015fa58ec0ac27c749224de08afdbdebe046d3ca82c6cbd27f662313ab",
+      "answerHash": "ff28a3dd5b44955d2d5e91b996b1c6f6de2e9da6c3669b9fb6ac7066636326c2",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "多选题",
+        "n": "2",
+        "s": "冷凝器按冷却介质和结构形式可分为（　）。",
+        "o": [
+          "A. 水冷式",
+          "B. 空气冷却式（风冷式）",
+          "C. 水—空气冷却式",
+          "D. 蒸发冷凝式"
+        ],
+        "key": "ABCD",
+        "exp": "水冷式又分立式壳管式、卧式壳管式和套管式等。",
+        "id": 136,
+        "keywords": [
+          "水冷式",
+          "空气冷却式（风冷式）",
+          "水—空气冷却式",
+          "蒸发冷凝式"
+        ],
+        "cue": "水冷式 · 空气冷却式（风冷式） · 水—空气冷却式 · 蒸发冷凝式"
+      }
+    },
+    {
+      "legacyIndex": 137,
+      "qid": "hvac-0138",
+      "displayNo": 138,
+      "unit": "13",
+      "type": "多选题",
+      "stem": "空调冷（热）水系统主要由（　）等组成。",
+      "sourceContentHash": "4792b3fb7ec4755c24ccf77fc7c417321a81f787d7788f9dd6d0b968dd1dd8a4",
+      "contentHash": "4253a657bf9e2d219fbe43d3eba7ffb227c88b234fc7b34951f633103813035b",
+      "answerHash": "12c7a6700c24101b94cc47db9f7b05ebdc23824ed34e7e5d94fad0a76d9d08ed",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "多选题",
+        "n": "3",
+        "s": "空调冷（热）水系统主要由（　）等组成。",
+        "o": [
+          "A. 冷（热）水水源、供回水管",
+          "B. 阀门、仪表、集箱",
+          "C. 水泵、空调机组或风机盘管",
+          "D. 膨胀水箱"
+        ],
+        "key": "ABCD",
+        "exp": "膨胀水箱设置在系统的最高点，用以容纳或补充系统水量。",
+        "id": 137,
+        "keywords": [
+          "冷（热）水水源、供回水管",
+          "阀门、仪表、集箱",
+          "水泵、空调机组或风机盘管",
+          "膨胀水箱"
+        ],
+        "cue": "冷（热）水水源、供回水管 · 阀门、仪表、集箱 · 水泵、空调机组或风机盘管 · 膨胀水箱"
+      }
+    },
+    {
+      "legacyIndex": 138,
+      "qid": "hvac-0139",
+      "displayNo": 139,
+      "unit": "13",
+      "type": "多选题",
+      "stem": "冰蓄冷空调的作用有（　）。",
+      "sourceContentHash": "684b41e3f5548dace5d0645da3e4bd00aaa2350b390b3f4d09a87fd5484f51d2",
+      "contentHash": "0675cbb63b84bbaf422b7977b48d1f0948e7548e28b3ec52a3c06e188c607010",
+      "answerHash": "18a3c178b19402fc61e944dd13c30d3ace663dc41e31e1d8a057a73e3588c83d",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "多选题",
+        "n": "4",
+        "s": "冰蓄冷空调的作用有（　）。",
+        "o": [
+          "A. 削峰填谷、平衡电力负荷",
+          "B. 改善发电机组效率、减少环境污染",
+          "C. 减小机组装机容量、节省电力花费",
+          "D. 改善制冷机组运行效率"
+        ],
+        "key": "ABCD",
+        "exp": "利用夜间低谷电力制冰蓄冷，白天融冰释冷。",
+        "id": 138,
+        "keywords": [
+          "削峰填谷、平衡电力负荷",
+          "改善发电机组效率、减少环境污染",
+          "减小机组装机容量、节省电力花费",
+          "改善制冷机组运行效率"
+        ],
+        "cue": "夜间制冰，白天释冷。"
+      }
+    },
+    {
+      "legacyIndex": 139,
+      "qid": "hvac-0140",
+      "displayNo": 140,
+      "unit": "13",
+      "type": "判断题",
+      "stem": "对于风冷式冷冻机组，不需要设置冷却水系统（　）。",
+      "sourceContentHash": "69f32f4433d610d78865c6741f7f3ad3fea6e4d993512bdda10a4f012c6ea623",
+      "contentHash": "97dfad6ffdb67d52c4c720d8a0b21182889c7d4de7117b8b44eb6beb2ded0cc4",
+      "answerHash": "6170a8c91c8570842c241c27fb1b60b120f07ffb5919ebcd4f2e60e8581b4b31",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "判断题",
+        "n": "1",
+        "s": "对于风冷式冷冻机组，不需要设置冷却水系统（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "冷却水系统的作用是将冷冻机中冷凝器的散热带走，风冷机组由空气带走热量。",
+        "id": 139,
+        "keywords": [
+          "冷却水系统的作用是将冷冻机中冷凝器的散热带走，风冷机组由空气带走热量。"
+        ],
+        "cue": "风冷向空气散热，省去冷却水系统。"
+      }
+    },
+    {
+      "legacyIndex": 140,
+      "qid": "hvac-0141",
+      "displayNo": 141,
+      "unit": "13",
+      "type": "判断题",
+      "stem": "开式循环系统水中含氧量高，管路和设备易腐蚀，且为克服系统静压水头水泵能耗高（　）。",
+      "sourceContentHash": "5a9047690aae8c9cc663a37df18f347e93490a81373f50e25116d70dbd91b3e8",
+      "contentHash": "e6ca7aff14933590682b968fe7209095cb41b9ba442ca6173a50662522bb9842",
+      "answerHash": "1b8ff6abf6f38c5cf2a0454ff68295cea78a5bde078ccc4fccc71b84f09d9ab8",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "判断题",
+        "n": "2",
+        "s": "开式循环系统水中含氧量高，管路和设备易腐蚀，且为克服系统静压水头水泵能耗高（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "开式系统的贮水箱（或水池）与大气相通，因此这类系统使用越来越少。",
+        "id": 140,
+        "keywords": [
+          "开式系统的贮水箱（或水池）与大气相通，因此这类系统使用越来越少。"
+        ],
+        "cue": "开式接触空气，易腐蚀且有静压能耗。"
+      }
+    },
+    {
+      "legacyIndex": 141,
+      "qid": "hvac-0142",
+      "displayNo": 142,
+      "unit": "13",
+      "type": "判断题",
+      "stem": "冷却水泵一般不设备用泵，可设置备用部件以供急需（　）。",
+      "sourceContentHash": "ff7907d20cebd5e0d0fe5362bf5f99595072683e81dc8e77fe7c941092a2971c",
+      "contentHash": "33742d5fec5fbfd3e2c0b131e08c3a50cf19d25d9fea07fdd4d3bb0886bfc7ad",
+      "answerHash": "6c22f81cf32cab6952327918e772543eefd95845bf114dc3292cc39c258a32f3",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "判断题",
+        "n": "3",
+        "s": "冷却水泵一般不设备用泵，可设置备用部件以供急需（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材13.4节冷却水循环系统设备选择要求。",
+        "id": 141,
+        "keywords": [
+          "教材13.4节冷却水循环系统设备选择要求。"
+        ],
+        "cue": "教材13.4节冷却水循环系统设备选择要求。"
+      }
+    },
+    {
+      "legacyIndex": 142,
+      "qid": "hvac-0143",
+      "displayNo": 143,
+      "unit": "13",
+      "type": "判断题",
+      "stem": "空调冷冻水系统的总阻力由沿程阻力、局部阻力两部分组成（　）。",
+      "sourceContentHash": "903c4098d41f483e0446b6c8d37d39fe6a852379ac11842591cb2bcfc0b20e8c",
+      "contentHash": "5782af5b9dc48f80c2d9500d417fcd4a493ac79aa78b862b33de0a4d098d638c",
+      "answerHash": "7459b484d54ed678aaedc56c24f03329663595e44a8eaf1eec413a68cce67675",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "判断题",
+        "n": "4",
+        "s": "空调冷冻水系统的总阻力由沿程阻力、局部阻力两部分组成（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "总阻力H＝h_A＋h_B＋h_C，还包括设备局部阻力h_C。",
+        "id": 142,
+        "keywords": [
+          "总阻力H＝h_A＋h_B＋h_C，还包括设备局部阻力h_C。"
+        ],
+        "cue": "沿程、局部、设备，三项都要计。"
+      }
+    },
+    {
+      "legacyIndex": 143,
+      "qid": "hvac-0144",
+      "displayNo": 144,
+      "unit": "13",
+      "type": "判断题",
+      "stem": "选择空调水系统水泵时，应在计算流量和扬程基础上分别加10%～20%的安全量（　）。",
+      "sourceContentHash": "8f3a5b8ef95f50ccc8ae5d41ab6b74b7295fc35b416826ca1336a3e8e65d0c71",
+      "contentHash": "8493248b71b96ec02bd8990d90889fb0a712e10c7d4034a1577583340bcd8385",
+      "answerHash": "c8ba7162388114107f95dad09c2942bac55674f1c2ad0c57a34e570a1e47c52b",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "判断题",
+        "n": "5",
+        "s": "选择空调水系统水泵时，应在计算流量和扬程基础上分别加10%～20%的安全量（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "即Q水泵＝1.1Q，H水泵＝1.1～1.2H；工作点应落在最高效率区。",
+        "id": 143,
+        "keywords": [
+          "即Q水泵＝1.1Q，H水泵＝1.1～1.2H；工作点应落在最高效率区。"
+        ],
+        "cue": "依原文：流量加一成，扬程加一至两成。"
+      }
+    },
+    {
+      "legacyIndex": 144,
+      "qid": "hvac-0145",
+      "displayNo": 145,
+      "unit": "14",
+      "type": "单选题",
+      "stem": "建筑物用能系统不包括（　）。",
+      "sourceContentHash": "f6692f23abb96c8fa2deb3fa1c432d3be0b3967a7ea781062a487b1c27c1b8b6",
+      "contentHash": "e25b39b755947546294a0aff078b3a6a416c0a99501393866298cbebee87433a",
+      "answerHash": "1bc482c16c5547cb049ef994c388d71753f04911a87a770d7af24749bcd38150",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "单选题",
+        "n": "1",
+        "s": "建筑物用能系统不包括（　）。",
+        "o": [
+          "A. 采暖空调系统",
+          "B. 照明系统",
+          "C. 电梯系统",
+          "D. 市政供水管网"
+        ],
+        "key": "D",
+        "exp": "建筑用能系统主要包括采暖空调、照明、电梯、给排水动力系统和厨房及办公用能等。",
+        "id": 144,
+        "keywords": [
+          "市政供水管网"
+        ],
+        "cue": "市政供水管网"
+      }
+    },
+    {
+      "legacyIndex": 145,
+      "qid": "hvac-0146",
+      "displayNo": 146,
+      "unit": "14",
+      "type": "单选题",
+      "stem": "空调系统的能耗不包括（　）。",
+      "sourceContentHash": "033bb0ac5b4b10e788e74572585fdf1525062fe6e81fb71c9f746a9580c0c400",
+      "contentHash": "850e2e3bc6611bb42c89349464dd5c7b6eeeee20545e9a08036057ca85db413c",
+      "answerHash": "48576fbac4b41b455ec676b7036f14d16b54682ed75187bb2f97408797a33f00",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "单选题",
+        "n": "2",
+        "s": "空调系统的能耗不包括（　）。",
+        "o": [
+          "A. 制冷主机",
+          "B. 冷冻水泵和冷却水泵",
+          "C. 冷却塔和组合式空调机组",
+          "D. 室内办公设备"
+        ],
+        "key": "D",
+        "exp": "教材14.1.2节：空调系统能耗包括制冷主机、冷冻水泵、冷却水泵、冷却塔和组合式空调机组。",
+        "id": 145,
+        "keywords": [
+          "室内办公设备"
+        ],
+        "cue": "室内办公设备"
+      }
+    },
+    {
+      "legacyIndex": 146,
+      "qid": "hvac-0147",
+      "displayNo": 147,
+      "unit": "14",
+      "type": "单选题",
+      "stem": "一般冷水机组的冷却水设计温度为出水37℃、回水32℃，该温度水平属于（　）。",
+      "sourceContentHash": "15499aca3c0aca67445fed9d5c24955f4106a0bfeb67df602250c3521d35f6d6",
+      "contentHash": "44046d5b5e6fe46f001d9267e04a93bed2bb608e5a912f62fda99eeedacf350a",
+      "answerHash": "4ed49ef1df95fc3064ea67df5e448937a2e5955d1757ac7a78757a9004d681f5",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "单选题",
+        "n": "3",
+        "s": "一般冷水机组的冷却水设计温度为出水37℃、回水32℃，该温度水平属于（　）。",
+        "o": [
+          "A. 高品位热源",
+          "B. 低品位热源",
+          "C. 中品位热源",
+          "D. 不能回收的热源"
+        ],
+        "key": "B",
+        "exp": "因此全热回收设计时要考虑提高冷凝压力，或与高温源热泵、辅助热源结合。",
+        "id": 146,
+        "keywords": [
+          "低品位热源"
+        ],
+        "cue": "低品位热源"
+      }
+    },
+    {
+      "legacyIndex": 147,
+      "qid": "hvac-0148",
+      "displayNo": 148,
+      "unit": "14",
+      "type": "单选题",
+      "stem": "太阳能空调的实现途径之一是进行光—热转换，用热作为能源制冷，其形式一般分为（　）。",
+      "sourceContentHash": "7eaa939ebd6a10fb3cb832aeaf7189812a55d2f85be71f0df37731a900514f75",
+      "contentHash": "c450d280dffdb4615108c18ddeac8e6c004dbd0ac5e3a6c3913b56b13564c194",
+      "answerHash": "1af89287727feeee02846aa0abf092be0466923661946dcd00097dd72908c19c",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "单选题",
+        "n": "4",
+        "s": "太阳能空调的实现途径之一是进行光—热转换，用热作为能源制冷，其形式一般分为（　）。",
+        "o": [
+          "A. 吸收式和吸附式",
+          "B. 压缩式和吸收式",
+          "C. 蒸发式和冷凝式",
+          "D. 辐射式和对流式"
+        ],
+        "key": "A",
+        "exp": "另一条途径是利用光伏技术产生电力，以电力推动常规压缩式制冷机制冷。",
+        "id": 147,
+        "keywords": [
+          "吸收式和吸附式"
+        ],
+        "cue": "吸收式和吸附式"
+      }
+    },
+    {
+      "legacyIndex": 148,
+      "qid": "hvac-0149",
+      "displayNo": 149,
+      "unit": "14",
+      "type": "单选题",
+      "stem": "太阳能吸收式空调中，制冷机性能系数（COP）随热媒水温度的升高而（　）。",
+      "sourceContentHash": "697a1d2972a954278da564b4af975dbe4b94062e8992c3239f862a5a258b2e8c",
+      "contentHash": "4bbdbe88271119a659db7b1bb131a50af94a8f5f897ef3d9e1f8ee58fc393310",
+      "answerHash": "d8324f2b39ca27cfe68719dbed613d435658153986eabe70ce4378d678bf57fb",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "单选题",
+        "n": "5",
+        "s": "太阳能吸收式空调中，制冷机性能系数（COP）随热媒水温度的升高而（　）。",
+        "o": [
+          "A. 提高",
+          "B. 降低",
+          "C. 不变",
+          "D. 先升后降"
+        ],
+        "key": "A",
+        "exp": "受造价、工艺、效率等限制，此类系统一般适用于有一定规模的中央空调。",
+        "id": 148,
+        "keywords": [
+          "提高"
+        ],
+        "cue": "提高"
+      }
+    },
+    {
+      "legacyIndex": 149,
+      "qid": "hvac-0150",
+      "displayNo": 150,
+      "unit": "14",
+      "type": "多选题",
+      "stem": "空调系统节能方面的主要工作有（　）。",
+      "sourceContentHash": "d4b8471a9455b342c5d81e9056681a0c2d14222ce933c0c4473a7a720c1bcca4",
+      "contentHash": "190aa7a594ed0582bb96aecd574c7fae82f19dbc53a103a38e707ec0b31145d2",
+      "answerHash": "f85a95ccc74ec354d83a90c3198b44f4cc7e1cabcb003e4d7c90a76759554205",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "多选题",
+        "n": "1",
+        "s": "空调系统节能方面的主要工作有（　）。",
+        "o": [
+          "A. 提高制冷主机效率，强化换热及有效隔热",
+          "B. 提高组合式空调机组、空调水系统及冷却塔的节能效率",
+          "C. 优化系统运行管理，采用各种形式的热回收设备",
+          "D. 发展太阳能、地热等新能源利用形式"
+        ],
+        "key": "ABCD",
+        "exp": "教材14.1.2节列出的节能工作内容。",
+        "id": 149,
+        "keywords": [
+          "提高制冷主机效率，强化换热及有效隔热",
+          "提高组合式空调机组、空调水系统及冷却塔的节能效率",
+          "优化系统运行管理，采用各种形式的热回收设备",
+          "发展太阳能、地热等新能源利用形式"
+        ],
+        "cue": "提高制冷主机效率，强化换热及有效隔热 · 提高组合式空调机组、空调水系统及冷却塔的节能效率 · 优化系统运行管理，采用各种形式的热回收设备 · 发展太阳能、地热等新能源利用形式"
+      }
+    },
+    {
+      "legacyIndex": 150,
+      "qid": "hvac-0151",
+      "displayNo": 151,
+      "unit": "14",
+      "type": "多选题",
+      "stem": "空调系统热回收技术包括（　）。",
+      "sourceContentHash": "b0a10778fb033ebc049367ab28f4284cd51281ffa1fb85873898706c4360d51c",
+      "contentHash": "ff81506d1c40a19ce943749dc322c8254a8d2b227a20aca3bd56686a6b55682f",
+      "answerHash": "5cb733fc678148170b600bd3df7849d12589ce91214b3305ce54880934bdd4af",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "多选题",
+        "n": "2",
+        "s": "空调系统热回收技术包括（　）。",
+        "o": [
+          "A. 冷水机组余热的部分热回收",
+          "B. 冷水机组余热的全热回收",
+          "C. 排风能量回收",
+          "D. 空气处理过程中的能量回收"
+        ],
+        "key": "ABCD",
+        "exp": "教材14.2节内容。",
+        "id": 150,
+        "keywords": [
+          "冷水机组余热的部分热回收",
+          "冷水机组余热的全热回收",
+          "排风能量回收",
+          "空气处理过程中的能量回收"
+        ],
+        "cue": "冷水机组余热的部分热回收 · 冷水机组余热的全热回收 · 排风能量回收 · 空气处理过程中的能量回收"
+      }
+    },
+    {
+      "legacyIndex": 151,
+      "qid": "hvac-0152",
+      "displayNo": 152,
+      "unit": "14",
+      "type": "判断题",
+      "stem": "空调系统热回收技术是在制冷的同时制取生活热水（　）。",
+      "sourceContentHash": "c3ab86d3a60f6676f7eae1f34e10d571b2d4b312ee5185dbbf21b873b95ab775",
+      "contentHash": "32f1a182c0d003bf100a48830972257728f3e8ad2e0b46c6ee3a58ffb30b4e2a",
+      "answerHash": "0d2125e748d3196d4275b86570faa238f03aac69bd8a64d82c2c8c55892bc024",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "判断题",
+        "n": "1",
+        "s": "空调系统热回收技术是在制冷的同时制取生活热水（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "非常适合宾馆、医院、大型工矿企业等既需要空调又需要热水的单位。",
+        "id": 151,
+        "keywords": [
+          "非常适合宾馆、医院、大型工矿企业等既需要空调又需要热水的单位。"
+        ],
+        "cue": "制冷排出的热，回收做热水。"
+      }
+    },
+    {
+      "legacyIndex": 152,
+      "qid": "hvac-0153",
+      "displayNo": 153,
+      "unit": "14",
+      "type": "判断题",
+      "stem": "部分热回收是将冷却水的排热全部加以利用（　）。",
+      "sourceContentHash": "3c53a60b2f6af9b863c86c5c61f1a6889dee705be20331f91cd9e9d3ce54daef",
+      "contentHash": "2462fdb77506aeae518c3187d2e7545b2a9d5ce55ee69c6b60afa4018deba86f",
+      "answerHash": "75f5cdb1192eac0414113c83a1712ba7050094f1bb2cb7dca6e563bcfd7681d8",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "判断题",
+        "n": "2",
+        "s": "部分热回收是将冷却水的排热全部加以利用（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "全部热回收才是将冷却水排热全部利用；部分热回收是用高效热交换装置回收其中一部分热量制取热水。",
+        "id": 152,
+        "keywords": [
+          "全部热回收才是将冷却水排热全部利用；部分热回收是用高效热交换装置回收其中一部分热量制取热水。"
+        ],
+        "cue": "全部回收才全用，部分回收只用一部分。"
+      }
+    },
+    {
+      "legacyIndex": 153,
+      "qid": "hvac-0154",
+      "displayNo": 154,
+      "unit": "14",
+      "type": "判断题",
+      "stem": "太阳能吸附式制冷是利用固体吸附剂对制冷剂的吸附作用来制冷（　）。",
+      "sourceContentHash": "a4702c2c568a7b3d73456d863ebcf925970d8735ca2d7d357bb05135bfd6c316",
+      "contentHash": "9b7798bd236187d0554b613bfae8ffca891a1142c72febf420678bf38ff02703",
+      "answerHash": "3b08de1a2ad189f32bd03a568ae4aa21cc080a8983e8d92395c2bd3da3f311e0",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "判断题",
+        "n": "3",
+        "s": "太阳能吸附式制冷是利用固体吸附剂对制冷剂的吸附作用来制冷（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "常用分子筛—水、活性炭—甲醇、硅胶—水及氯化钙—氨等。",
+        "id": 153,
+        "keywords": [
+          "常用分子筛—水、活性炭—甲醇、硅胶—水及氯化钙—氨等。"
+        ],
+        "cue": "吸附看固体吸附剂。"
+      }
+    },
+    {
+      "legacyIndex": 154,
+      "qid": "hvac-0155",
+      "displayNo": 155,
+      "unit": "14",
+      "type": "判断题",
+      "stem": "建筑节能是在保证室内热环境质量的前提下，减少供热、空调制冷制热、照明、热水供应的能耗（　）。",
+      "sourceContentHash": "594ceec6f44abc86073b7b04f99d877cd4bd2cb3e28b73d5871adada0e6021ba",
+      "contentHash": "ec14538a70b234229e479132904056fc3c6f99438bb21486b909f4da18acfb68",
+      "answerHash": "6e4fb953ad413fbb6fc3628154d653a66a81d778d8ab6ab649c86bb214b1e054",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "判断题",
+        "n": "4",
+        "s": "建筑节能是在保证室内热环境质量的前提下，减少供热、空调制冷制热、照明、热水供应的能耗（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "√",
+        "exp": "教材14.1节对建筑节能的定义。",
+        "id": 154,
+        "keywords": [
+          "教材14.1节对建筑节能的定义。"
+        ],
+        "cue": "教材14.1节对建筑节能的定义。"
+      }
+    },
+    {
+      "legacyIndex": 155,
+      "qid": "hvac-0156",
+      "displayNo": 156,
+      "unit": "14",
+      "type": "判断题",
+      "stem": "空调系统各部分能耗比例是固定的，不随建筑不同而变化（　）。",
+      "sourceContentHash": "fe8459e95cb3f6ab81f8257c386142955b49e7a06d819bbf12f52e9fd1d0ea45",
+      "contentHash": "0ea6f6e8ffe5faa2f0a9cb75eebf9a041f08e42301e0f0fda6b65b966ab26858",
+      "answerHash": "a99109587c6e16b99aa71a0bd00786d0130548dac48e71eeca0354075ffe1641",
+      "frozenQuestion": {
+        "u": "14",
+        "t": "判断题",
+        "n": "5",
+        "s": "空调系统各部分能耗比例是固定的，不随建筑不同而变化（　）。",
+        "o": [
+          "√ 正确",
+          "× 错误"
+        ],
+        "key": "×",
+        "exp": "各部分在空调系统中的能耗比例随建筑不同而有所差异。",
+        "id": 155,
+        "keywords": [
+          "各部分在空调系统中的能耗比例随建筑不同而有所差异。"
+        ],
+        "cue": "建筑不同，能耗比例随之变化。"
+      }
+    },
+    {
+      "legacyIndex": 156,
+      "qid": "hvac-0157",
+      "displayNo": 157,
+      "unit": "8",
+      "type": "简答题",
+      "stem": "写出综合温度的含义和表达式",
+      "sourceContentHash": "3daae5dc08e49b01bdfbe0a858a45522429616e186b2f217a0259909af29efb9",
+      "contentHash": "7a2215c3da62f38d0ede7ed0a2c753b75fdf3068e94c3ad5671ccd8bde26de8b",
+      "answerHash": "a11f7ff46f7b8baac2212bb1a7d925dc6ea5e75ed58f325633f6ced2f5af8b5f",
+      "frozenQuestion": {
+        "u": "8",
+        "t": "简答题",
+        "s": "写出综合温度的含义和表达式",
+        "exp": "（1）含义：将建筑物外围护结构所受的室外温度与太阳辐射热效应结合形成的等效温度参数称为综合温度（室外空气计算温度、太阳辐射等效温度、长波辐射温差），用来评价外围护结构热作用。（2）tz=tw+ρIαw,所谓综合温度，实际上相当于室外空气温度由原来的tw增加了一个太阳辐射的等效温度ρIαw值。",
+        "o": [],
+        "id": 156,
+        "keywords": [
+          "（1）含义：将建筑物外围护结构所受的室外温度与太阳辐射热效应结合形成的等效温度参数称为综合温度（室外空气计算温度、太阳辐射等效温度、长波辐射温差），用来评价外围护结构热作用。（2）tz=tw+ρIαw,所谓综合温度，实际上相当于室外空气温度由原来的tw增加了一个太阳辐射的等效温度ρIαw值。"
+        ],
+        "cue": "综合温度把室外温度与太阳辐射的热效应合起来。先记含义，表达式请对照教材。",
+        "warning": "原文公式“ρIαw”的乘除关系不清，背公式前请对照教材或老师讲义。"
+      }
+    },
+    {
+      "legacyIndex": 157,
+      "qid": "hvac-0158",
+      "displayNo": 158,
+      "unit": "10",
+      "type": "简答题",
+      "stem": "试分别说明一 、二次回风系统的特点和运用场合。",
+      "sourceContentHash": "87c542c8e61f8efa288959eb0f07816a6ae77dae737b0e2727e2a43d44608003",
+      "contentHash": "671fcaf54021631457b6ef976ce86e00e74d6afa1c7141b3b9ce68b9d0dcd506",
+      "answerHash": "8ffa3c6bf442ff8189ef13a577e311ee66c3c71ff46eaa3cc92532d2c7ec72c5",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "简答题",
+        "s": "试分别说明一 、二次回风系统的特点和运用场合。",
+        "exp": "答：（1）一次回风：新风与回风先混合→再经表冷器（或喷水室）集中处理→送风。系统简单、初投资低，但存在“再热”能耗，适用于热湿比较稳定的普通舒适性空调（商场、普通办公）。\n（2）二次回风：仅让部分回风（一次回风）与新风混合后进入表冷器，降温除湿到机器露点，再与剩余回风（二次回风）混合，使送风温度升高、含湿量不变，从而取消再热器。系统节能、温湿度控制精度高，但风平衡、控制复杂，适用于恒温恒湿或高换气次数场合（精密车间、医院手术室、电子厂房）。",
+        "o": [],
+        "id": 157,
+        "keywords": [
+          "答：（1）一次回风：新风与回风先混合→再经表冷器（或喷水室）集中处理→送风。系统简单、初投资低，但存在“再热”能耗，适用于热湿比较稳定的普通舒适性空调（商场、普通办公）。\n（2）二次回风：仅让部分回风（一次回风）与新风混合后进入表冷器，降温除湿到机器露点，再与剩余回风（二次回风）混合，使送风温度升高、含湿量不变，从而取消再热器。系统节能、温湿度控制精度高，但风平衡、控制复杂，适用于恒温恒湿或高换气次数场合（精密车间、医院手术室、电子厂房）。"
+        ],
+        "cue": "一次先混后处理；二次分回风，后混合升温，减少再热。"
+      }
+    },
+    {
+      "legacyIndex": 158,
+      "qid": "hvac-0159",
+      "displayNo": 159,
+      "unit": "10",
+      "type": "计算题",
+      "stem": "空调房间夏季负荷Q=5.00kw，余湿量很小可忽略不计,室内设计参数tn =26℃，φn =60%已知当地夏季空调室外计算参数tw =35℃，iw =90kJ/kg，大气压力B=101325pa，现采用一次回风系统处理空气，室内允许波动范围为±0. 5℃，新风比为15%，试求空气处理所需的冷量。",
+      "sourceContentHash": "4bbe6d9f1379006d65d0d737fab957ab8be3dbd593775c3769d188d8a6daf6a7",
+      "contentHash": "e10b884749d8f04360372790c6c3ddd1d9d134a0d18c9ee99bfbae0825ce5c67",
+      "answerHash": "ccf9b056a17a086b52a87dc380fe6e51ea2aed826ef00174f81c7520f8f93798",
+      "frozenQuestion": {
+        "u": "10",
+        "t": "计算题",
+        "s": "空调房间夏季负荷Q=5.00kw，余湿量很小可忽略不计,室内设计参数tn =26℃，φn =60%已知当地夏季空调室外计算参数tw =35℃，iw =90kJ/kg，大气压力B=101325pa，现采用一次回风系统处理空气，室内允许波动范围为±0. 5℃，新风比为15%，试求空气处理所需的冷量。",
+        "exp": "答：热湿比：ε=Q/W=5000/0=∞；（1）在h-d图定出N点（26℃，60 %）→iN≈58.5 kJ/kg；（2）按±0.5 ℃精度取送风温差7℃→to=19℃，做ε线交95 %线得机器露点L（iL≈42 kJ/kg）；（3）总风量G=Q/(iN－iO)=5/(58.5－45.2)=0.376 kg/s；（4）新风量Gw=0.15G=0.056 kg/s；（5）混合点C焓值 iC=(Gw·iW+(GGw)·iN)/G=0.15×90+0.85×58.5≈63.2 kJ/kg；（6）系统冷量 Q=G·(iC－iL)=0.376×(63.2－42)=7.97 kW。因此空气处理所需得冷量为7.97kW。",
+        "o": [],
+        "id": 158,
+        "keywords": [
+          "答：热湿比：ε=Q/W=5000/0=∞；（1）在h-d图定出N点（26℃，60 %）→iN≈58.5 kJ/kg；（2）按±0.5 ℃精度取送风温差7℃→to=19℃，做ε线交95 %线得机器露点L（iL≈42 kJ/kg）；（3）总风量G=Q/(iN－iO)=5/(58.5－45.2)=0.376 kg/s；（4）新风量Gw=0.15G=0.056 kg/s；（5）混合点C焓值 iC=(Gw·iW+(GGw)·iN)/G=0.15×90+0.85×58.5≈63.2 kJ/kg；（6）系统冷量 Q=G·(iC－iL)=0.376×(63.2－42)=7.97 kW。因此空气处理所需得冷量为7.97kW。"
+        ],
+        "cue": "先定状态，再算风量，再混新回风，最后算设备冷量。原文数值与过程需核对。",
+        "warning": "原文送风状态、机器露点及焓值的推导存在疑点，7.97 kW 是原文给出的结果，建议请老师核对。"
+      }
+    },
+    {
+      "legacyIndex": 159,
+      "qid": "hvac-0160",
+      "displayNo": 160,
+      "unit": "13",
+      "type": "简答题",
+      "stem": "什么是两管制、三管制和四管制系统?各有何优缺点?",
+      "sourceContentHash": "c90e3a24e86ec7e965d303aa85eebc7ecc26f836de5fc8f642bcd1d45fcb2c14",
+      "contentHash": "016dfa6ef9fe4e20dcd794edd6ab95b61f97b380ce4cecbd83edc36db96e611b",
+      "answerHash": "d75814e6d8cf6474f38a2bffa642eafe9a0deeb575f017d8929bdb9ed97bbab8",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "简答题",
+        "s": "什么是两管制、三管制和四管制系统?各有何优缺点?",
+        "exp": "两管制系统： 一根供水管，一根回水管。夏季供冷水，冬季供热水，通过阀门切换。\n优点： 管路简单，初投资低，占用空间小。\n缺点： 无法同时供冷和供热，不能满足过渡季节或不同区域对冷热的差异化需求。\n三管制系统： 一根冷水供水管，一根热水供水管，一根共用回水管。\n优点： 可以实现不同区域同时供冷和供热。\n缺点： 存在冷、热水混合损失，能耗高；系统控制复杂；回水管路的水力工况难以平衡。目前已很少使用。\n四管制系统： 两根供水管（冷、热各一），两根回水管（冷、热各一）。\n优点： 灵活性最高，可随时、按需为不同区域提供冷或热水，无混合损失，能效高。\n缺点： 管路最复杂，初投资最高，占用建筑空间最大。适用于对舒适性要求高、需要同时供冷供热的高档酒店、医院等场所。",
+        "o": [],
+        "id": 159,
+        "keywords": [
+          "两管制系统： 一根供水管，一根回水管。夏季供冷水，冬季供热水，通过阀门切换。\n优点： 管路简单，初投资低，占用空间小。\n缺点： 无法同时供冷和供热，不能满足过渡季节或不同区域对冷热的差异化需求。\n三管制系统： 一根冷水供水管，一根热水供水管，一根共用回水管。\n优点： 可以实现不同区域同时供冷和供热。\n缺点： 存在冷、热水混合损失，能耗高；系统控制复杂；回水管路的水力工况难以平衡。目前已很少使用。\n四管制系统： 两根供水管（冷、热各一），两根回水管（冷、热各一）。\n优点： 灵活性最高，可随时、按需为不同区域提供冷或热水，无混合损失，能效高。\n缺点： 管路最复杂，初投资最高，占用建筑空间最大。适用于对舒适性要求高、需要同时供冷供热的高档酒店、医院等场所。"
+        ],
+        "cue": "两管冷热切换；三管共回有混损；四管冷热独立、造价高。"
+      }
+    },
+    {
+      "legacyIndex": 160,
+      "qid": "hvac-0161",
+      "displayNo": 161,
+      "unit": "13",
+      "type": "简答题",
+      "stem": "空调冷却水系统的作用是什么?主要由哪些部分组成?",
+      "sourceContentHash": "01ee427b57f008b6dfcf13735d1d7791b8416c17ccb25834047f612a72e840c9",
+      "contentHash": "a0ef9e5bfcb25b6d4bf9e9ab80763703337447cd7ab70289c8b4026ce9193dc1",
+      "answerHash": "9b56f3c251e0e771a7a525e7c84894ced841557763bc335eea8d32c91ec165cc",
+      "frozenQuestion": {
+        "u": "13",
+        "t": "简答题",
+        "s": "空调冷却水系统的作用是什么?主要由哪些部分组成?",
+        "exp": "冷凝器和制冷压缩机在工作时因发热会影响其效率，一般采用水来冷却。空调冷却水系统是专为水冷式制冷机组服务的。它的作用是将制冷机组冷凝器中制冷剂释放的热量带走，并通过冷却塔将其排放到大气中，从而保证制冷机组的正常运行。\n中央空调冷凝器的冷却水系统由冷却循环泵、冷却塔、水处理池和节流阀等组成。",
+        "o": [],
+        "id": 160,
+        "keywords": [
+          "冷凝器和制冷压缩机在工作时因发热会影响其效率，一般采用水来冷却。空调冷却水系统是专为水冷式制冷机组服务的。它的作用是将制冷机组冷凝器中制冷剂释放的热量带走，并通过冷却塔将其排放到大气中，从而保证制冷机组的正常运行。\n中央空调冷凝器的冷却水系统由冷却循环泵、冷却塔、水处理池和节流阀等组成。"
+        ],
+        "cue": "冷凝器放热→冷却水带走→冷却塔排向大气。"
+      }
+    }
+  ]
+}

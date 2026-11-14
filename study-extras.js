@@ -145,6 +145,7 @@
   document.addEventListener('DOMContentLoaded',()=>{
     const menu=document.querySelector('.tool-menu');
     if(menu){
+      const migration=document.createElement('button');migration.id='migration-pilot';migration.textContent='记录迁移试点 · 通风空调';migration.onclick=()=>{window.dispatchEvent(new Event('study-before-update'));location.href=new URL('migration/',root).href;};menu.append(migration);
       const button=document.createElement('button');button.textContent='离线与桌面入口';button.onclick=openOfflineHelp;menu.append(button);
       const status=document.createElement('small');status.dataset.offlineStatus='';menu.append(status);
       const update=document.createElement('button');update.dataset.updateSite='';update.textContent='保存并加载新版';update.hidden=true;update.onclick=applyUpdate;menu.append(update);
