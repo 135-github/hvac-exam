@@ -138,6 +138,7 @@ function renderHome() {
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
     '<details class="footnote"><summary>内容与教材</summary><p>按你提供的《复习重点》15项重点和3组案例整理，共35张记背卡。教材为吕丽荣等编写的《建筑电气施工技术》。这里是结合课程知识与相关标准编写的复习提纲，不是教材逐字摘录或官方试卷；P10、P74按你标记的考点归类，尚未取得对应书页原文。</p><p>标准版本和适用条件写在要点中，案例缺少条件处单独说明。助记只帮助回忆，答题时用完整要点。各卡片下可展开阅读相关资料。</p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
   bindFreeSettings();
+  window.StudyExtras?.home({qs,read:record,begin:start,subject:'construction'});
   document.getElementById('core-only').onclick=()=>start(qs.filter(q=>Number(q.u)<=15).map(q=>q.id),'15项重点','recall');
   document.getElementById('cases-only').onclick=()=>start(qs.filter(q=>Number(q.u)>15).map(q=>q.id),'3组案例','recall');
   document.getElementById('numbers-only').onclick=()=>start(qs.filter(q=>q.tags.includes('数字')).map(q=>q.id),'数字速记','recall');
@@ -406,6 +407,7 @@ function renderQuestion() {
     document.getElementById('feedback').scrollIntoView({block:'start'});
   },true);
   action(s.index===s.ids.length-1?'本轮小结':a.revealed?'下一题':'先跳过',next,a.revealed);
+  window.StudyExtras?.caseSteps(q,a,{save,mode:s.mode});
 }
 function updateChoiceUI(q,a) {
   const node=document.getElementById('choice-status');
@@ -603,6 +605,8 @@ window.addEventListener('storage',event=>{
   try{data=normalize(JSON.parse(event.newValue));go('home');toast('已同步其他标签页的进度');}catch{}
 });
 document.addEventListener('focusin',event=>{
+  // Do not move a pointer-clicked button between pointerdown and click.
+  if(event.target.matches('button,a,summary') && window.StudyExtras?.pointerRecent())return;
   clearTimeout(toastTimer);document.getElementById('toast').style.display='none';
   const target=event.target,dock=document.getElementById('actions');
   if(!dock||!target.getBoundingClientRect||target.closest('dialog,#actions')||getComputedStyle(dock).position!=='fixed')return;
@@ -619,3 +623,14 @@ document.addEventListener('keydown',event=>{
  const choices=[...document.querySelectorAll('#options .option:not(:disabled)')];
  if(/^[1-4]$/.test(event.key)&&choices[Number(event.key)-1]){event.preventDefault();choices[Number(event.key)-1].click();}
 });
+
+// A new release is activated only when the learner chooses to load it.
+window.addEventListener('study-before-update',()=>{commitPendingAnswer();save();});
+// Review-sheet links open a stable original question and preserve the parked round.
+{
+ const requested=new URLSearchParams(location.search).get('question');
+ if(requested && /^\d+$/.test(requested) && Number(requested)>=1 && Number(requested)<=qs.length){
+  const url=new URL(location.href);url.searchParams.delete('question');history.replaceState(null,'',url.pathname+url.search+url.hash);
+  start([Number(requested)-1],'从速记回看','recall');
+ }
+}

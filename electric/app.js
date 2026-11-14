@@ -132,6 +132,7 @@ function renderHome() {
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
     '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工高级工考证日期为2026年11月21日，具体时段以准考证为准。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
   bindFreeSettings();
+  window.StudyExtras?.home({qs,read:record,begin:start,subject:'electric'});
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
   document.getElementById('browse').onclick=()=>start(qs.map(q=>q.id),'随手翻翻','read');
@@ -592,6 +593,8 @@ window.addEventListener('storage',event=>{
   try{data=normalize(JSON.parse(event.newValue));go('home');toast('已同步其他标签页的进度');}catch{}
 });
 document.addEventListener('focusin',event=>{
+  // Do not move a pointer-clicked button between pointerdown and click.
+  if(event.target.matches('button,a,summary') && window.StudyExtras?.pointerRecent())return;
   clearTimeout(toastTimer);document.getElementById('toast').style.display='none';
   const target=event.target,dock=document.getElementById('actions');
   if(!dock||!target.getBoundingClientRect||target.closest('dialog,#actions')||getComputedStyle(dock).position!=='fixed')return;
@@ -608,3 +611,14 @@ document.addEventListener('keydown',event=>{
  const choices=[...document.querySelectorAll('#options .option:not(:disabled)')];
  if(/^[1-4]$/.test(event.key)&&choices[Number(event.key)-1]){event.preventDefault();choices[Number(event.key)-1].click();}
 });
+
+// A new release is activated only when the learner chooses to load it.
+window.addEventListener('study-before-update',()=>{commitPendingAnswer();save();});
+// Review-sheet links open a stable original question and preserve the parked round.
+{
+ const requested=new URLSearchParams(location.search).get('question');
+ if(requested && /^\d+$/.test(requested) && Number(requested)>=1 && Number(requested)<=qs.length){
+  const url=new URL(location.href);url.searchParams.delete('question');history.replaceState(null,'',url.pathname+url.search+url.hash);
+  start([Number(requested)-1],'从速记回看','answer');
+ }
+}

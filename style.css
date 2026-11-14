@@ -120,7 +120,7 @@ details summary { cursor:pointer; min-height:48px; padding:10px 0; }
  .answer-dock{position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));left:12px;right:12px;margin:0;padding:7px;gap:7px;}
  .question-wrap{padding-bottom:110px;}.answer-dock button{font-size:15px;padding:10px 5px;min-height:58px;}
  .answer-dock button small{font-size:11px;}.toolbar select{max-width:100%;}
- body:has(textarea:focus) .answer-dock{position:static;}
+ /* Keep the dock fixed while typing; changing layout on blur can swallow the first tap. */
  .question-meta{font-size:12px;gap:5px;}.quiet{padding:10px 8px;}
 }
 @media(prefers-reduced-motion:reduce){button{transition:none}}

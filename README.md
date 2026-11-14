@@ -62,3 +62,15 @@
 - `construction/review.txt` 可下载离线阅读；网页支持卡片回忆、自评复习、个人助记、笔记、收藏、导入导出。
 - 内容重点区分：控制电缆普通支架≤2层；灯具>10kg固定悬吊装置5倍载荷≥15min；案例缺少保温、额定电压等条件时不做无条件判定。
 - `node tests/construction.cjs` 验证35张卡片、章节覆盖、移动端布局、考试时间边界、草稿续学和三个学科的记录隔离；与原浏览器脚本共用Playwright环境设置。
+
+
+## 碎片时间、分步案例和离线（2026-11-14）
+
+- 首页“手头还有几分钟？”按3/10/30分钟估算选题；以题型估算耗时，优先到期和薄弱内容，不计时、不催促。另开一轮仍保留原练习。
+- 建筑电气13张案例卡支持找问题、写做法、说理由三步草稿和逐步核对，仍可直接看完整答案。草稿随原学习记录备份导出。
+- `review/` 提供每科三页速记，可打印或存为PDF；条目链接回稳定原题号。精选不代替完整题库。
+- `study-extras.js/css` 为共享可选工具，三科原答案和存储键不变。
+- Service worker缓存23个必要静态资源，包括三科与速记页。初次成功缓存后离线可用；外部资料不缓存。更新完整缓存成功后等待，用户点“学习记录→保存并加载新版”才激活，不自动打断练习。
+- 更新静态资源时同步提升`sw.js`的CACHE版本及首页资源版本；新文件需加入FILES清单。缓存失败不激活不完整版本。学习记录使用localStorage，缓存清理不清理记录。
+- Web实现参考：[MDN Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)、[Cache.addAll](https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll)。
+- `node tests/study-extras.cjs` 实测碎片时间选题、13×3步案例与草稿、速记返回原题、真正断网下三科切换，以及缓存失败重试和新版等待激活。使用与其他浏览器测试相同的Playwright环境变量。
