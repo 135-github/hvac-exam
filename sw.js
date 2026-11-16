@@ -1,10 +1,10 @@
 /* Versioned, complete offline bundle. A waiting update activates only on user request. */
 'use strict';
-const CACHE='study-pocket-20261116-ui';
+const CACHE='study-pocket-20261116-voxel';
 const BASE=new URL('./',self.location.href);
 const FILES=["index.html", "app.js", "style.css", "courses.css", "questions.js", "favicon.svg", "study-extras.js", "study-extras.css", "manifest.webmanifest", "electric/index.html", "electric/app.js", "electric/electric.css", "electric/questions.js", "construction/index.html", "construction/app.js", "construction/construction.css", "construction/questions.js", "construction/review.txt", "review/hvac.html", "review/electric.html", "review/construction.html", "review/review.css", "review/review.js"];
 FILES.push('migration/index.html','migration/app.js','migration/store.js','migration/engine.js','migration/style.css','migration/manifests/hvac.json');
-FILES.push('ui.css');
+FILES.push('ui.css','voxel.css','theme.js');
 const urls=FILES.map(file=>new URL(file,BASE).href);
 const paths=new Set(urls.map(url=>new URL(url).pathname));
 self.addEventListener('install',event=>event.waitUntil((async()=>{
