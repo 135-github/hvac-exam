@@ -36,14 +36,14 @@ const server=http.createServer((req,res)=>{
   }
   await page.setViewportSize({width:390,height:844});
   if(process.env.SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.SCREENSHOT_DIR,'construction-home.png'),fullPage:true});
-  await page.locator('#core-only').click();assert.equal(await page.evaluate(()=>data.session.ids.length),bank.qs.filter(q=>q.examFocus==='marked'&&!q.key).length);
+  await page.locator('#core-only').click();assert.equal(await page.evaluate(()=>data.session.ids.length),bank.qs.filter(q=>q.examFocus==='marked').length);
   await page.locator('#back').click();await page.locator('.reference-entry summary').click();await page.locator('#cases-only').click();assert.equal(await page.evaluate(()=>data.session.ids.length),13);
   await page.locator('#back').click();await page.locator('#numbers-only').click();assert((await page.evaluate(()=>data.session.ids.length))>8);
   for(const q of bank.qs){
    await page.evaluate(id=>start([id],'要点显示检查','recall'),q.id);
    assert.equal(await page.locator('.study-points').count(),0);
    assert.equal(await page.locator('#draft').count(),1);
-   await page.getByRole('button',{name:'翻看答案',exact:true}).click();
+   await page.getByRole('button',{name:'展开必背要点',exact:true}).click();
    assert.equal(await page.locator('.study-points li').count(),q.points.length);
    assert.equal(await page.locator('.study-points li').first().innerText(),q.points[0]);
    assert.equal(await page.locator('.source-links a').count(),q.sources.length);

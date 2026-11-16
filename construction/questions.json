@@ -46,7 +46,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器有哪些常见分类？各适合什么场景？"
     },
     {
       "id": 1,
@@ -72,7 +75,10 @@
       "pageRef": "P117",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "配电箱怎样分类？动力箱和照明箱有什么区别？"
     },
     {
       "id": 2,
@@ -100,7 +106,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "总等电位、局部等电位、辅助等电位怎样区分？"
     },
     {
       "id": 3,
@@ -133,7 +142,10 @@
       "revision": "notes-20261116-1",
       "mergedInto": [
         88
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "一般照明、分区一般照明、局部照明、混合照明怎样记？"
     },
     {
       "id": 4,
@@ -160,7 +172,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "TN、TT、IT中的字母分别表示什么？"
     },
     {
       "id": 5,
@@ -187,7 +202,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "TN-C、TN-S、TN-C-S有什么区别？最容易错在哪里？"
     },
     {
       "id": 6,
@@ -213,7 +231,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "TT和IT系统各有什么特点？"
     },
     {
       "id": 7,
@@ -248,7 +269,10 @@
       "revision": "notes-20261116-1",
       "mergedInto": [
         79
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "水下灯具安装有哪些必背点？"
     },
     {
       "id": 8,
@@ -275,7 +299,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "插座接线、安装和检查应答哪些要点？"
     },
     {
       "id": 9,
@@ -305,7 +332,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电动机为什么要降压启动？常见启动方式如何选？"
     },
     {
       "id": 10,
@@ -345,7 +375,10 @@
       "mergedInto": [
         84,
         85
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电动机启动前、试运行中、结束后分别检查什么？"
     },
     {
       "id": 11,
@@ -373,7 +406,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "断路器、熔断器、接触器、热继电器、隔离开关、RCD怎样区分？"
     },
     {
       "id": 12,
@@ -407,7 +443,10 @@
       "revision": "notes-20261116-1",
       "mergedInto": [
         89
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "建筑物防雷分哪几类？分类依据是什么？"
     },
     {
       "id": 13,
@@ -436,7 +475,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "年预计雷击次数N的常考分界怎样记？"
     },
     {
       "id": 14,
@@ -464,7 +506,10 @@
       "pageRef": "P10（原提纲指定，原页未提供）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "检验批验收合格的条件、组织人员和程序是什么？"
     },
     {
       "id": 15,
@@ -503,7 +548,10 @@
       "mergedInto": [
         35,
         86
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器送电试运行按什么顺序答？有哪些关键检查？"
     },
     {
       "id": 16,
@@ -532,7 +580,10 @@
       "pageRef": "P74",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "母线送电前应检查什么？"
     },
     {
       "id": 17,
@@ -558,7 +609,10 @@
       "pageRef": "P74",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "母线如何送电并检查运行情况？"
     },
     {
       "id": 18,
@@ -586,7 +640,10 @@
       "pageRef": "P96～97",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器安装的主要工序与质量控制点有哪些？"
     },
     {
       "id": 19,
@@ -625,7 +682,10 @@
       "mergedInto": [
         49,
         50
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电缆沟内敷设应抓住哪些要点？"
     },
     {
       "id": 20,
@@ -674,7 +734,10 @@
           "section": "案例2·直埋铠装"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "直埋电缆的埋深、砂层、保护板和验收要求怎样记？"
     },
     {
       "id": 21,
@@ -716,7 +779,10 @@
           "section": "案例5·恒定均布载荷试验"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "恒定均布载荷强度试验：测什么、几倍、多久？"
     },
     {
       "id": 22,
@@ -758,7 +824,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例一①：把钢丝绳挂在顶盖吊环搬运整台变压器，对吗？吊芯用哪里？"
     },
     {
       "id": 23,
@@ -793,7 +862,10 @@
           "section": "案例1·顶盖坡度"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例一②：油浸式变压器向气体继电器方向只升高0.5%，如何改？"
     },
     {
       "id": 24,
@@ -834,7 +906,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例一③：10kV油浸式变压器已有干粉灭火器，专用灭火系统如何答？"
     },
     {
       "id": 25,
@@ -878,7 +953,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例二①：农田0.9m、上下砂50mm、盖板两侧50mm、给水管下0.3m、YJV、缆间90mm，逐条判断。"
     },
     {
       "id": 26,
@@ -905,7 +983,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例二②：电力电缆和控制电缆穿入同一根排管，怎么分析？"
     },
     {
       "id": 27,
@@ -947,7 +1028,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例二③：消防控制线与广播控制线在普通支架上双层敷设，双层本身有错吗？"
     },
     {
       "id": 28,
@@ -975,7 +1059,10 @@
       "pageRef": "页码待核（原提纲补充，未找到对应标记原页）",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例二④：直埋电缆回填前应履行哪些隐蔽验收程序？"
     },
     {
       "id": 29,
@@ -1017,7 +1104,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三①：60m镀锌槽盒只首尾接地，连接板每端1个普通螺栓且无跨接，如何改？"
     },
     {
       "id": 30,
@@ -1059,7 +1149,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三②：水平支架间距3.5m，吊杆φ6mm，错在哪里？"
     },
     {
       "id": 31,
@@ -1102,7 +1195,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三③：槽盒在蒸汽管正上方、净距0.2m，应怎样判断？"
     },
     {
       "id": 32,
@@ -1143,7 +1239,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三④：电缆与绝缘导线混敷、同一交流回路分在两个金属槽盒，如何改？"
     },
     {
       "id": 33,
@@ -1189,7 +1288,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三⑤：塑料导管墙槽用M5砂浆、表面覆盖10mm，怎么改？"
     },
     {
       "id": 34,
@@ -1233,7 +1335,10 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "案例资料",
+      "cardPrompt": "案例三⑥：镀锌钢导管接头用熔焊圆钢跨接，如何改？"
     },
     {
       "id": 35,
@@ -1272,7 +1377,11 @@
       "revision": "marked-focus-1",
       "mergedFrom": [
         15
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器空载运行多久、无异常后，方可投入负荷运行？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 36,
@@ -1321,7 +1430,11 @@
         "安装方式看如何支承：悬挂或落地。",
         "敷设方式分明装、暗装；制造方式分标准、非标准。",
         "动力和照明属于用途分类；电压分类是高压和低压。"
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "配电箱按功能可分为哪些类型？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 37,
@@ -1352,7 +1465,11 @@
       "pageRef": "P74",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "硬母线送电前后，操作次序怎样安排？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 38,
@@ -1395,7 +1512,11 @@
           "section": "三相相色"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "L1、L2、L3相色依次是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 39,
@@ -1426,7 +1547,11 @@
       "examFocus": "marked",
       "pageRef": "P222（表8.3标题划红线）",
       "markType": "红线",
-      "markEvidence": "表8.3标题红线，按该表记滚球半径"
+      "markEvidence": "表8.3标题红线，按该表记滚球半径",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "第一、第二、第三类防雷的滚球半径依次是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 40,
@@ -1457,7 +1582,11 @@
       "examFocus": "marked",
       "pageRef": "P219、P222",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "分别背出一、二、三类防雷网格的尺寸要求。",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 41,
@@ -1488,7 +1617,11 @@
       "examFocus": "marked",
       "pageRef": "P219",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "一、二、三类防雷引下线间距上限依次为多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 42,
@@ -1519,7 +1652,11 @@
       "examFocus": "marked",
       "pageRef": "P219",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "教材表8.1中，三类建筑的接地装置和电阻要求分别是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 43,
@@ -1550,7 +1687,11 @@
       "examFocus": "marked",
       "pageRef": "P230",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "高层建筑防侧击雷，教材P230划线数字是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 44,
@@ -1581,7 +1722,11 @@
       "examFocus": "marked",
       "pageRef": "P206",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "分别背出铜、钢等电位联结干线与支线的最小截面积。",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 45,
@@ -1612,7 +1757,11 @@
       "examFocus": "marked",
       "pageRef": "P192",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "水平接地体埋设的两项划线要求是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 46,
@@ -1658,7 +1807,11 @@
           "section": "临时用电配置"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "三级配电、二级保护和“一机一箱一闸一漏”分别指什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 47,
@@ -1693,7 +1846,11 @@
         "5台以下且总容量50kW以下，制定安全用电和电气防火措施。"
       ],
       "examScope": "只考星标数量、容量门槛",
-      "revision": "marked-focus-1"
+      "revision": "marked-focus-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "用电设备数量或容量达到什么条件时，需编制临时用电施工组织设计？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 48,
@@ -1724,7 +1881,11 @@
       "pageRef": "P242",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "临时用电施工组织设计应经过哪些编制、审核、批准程序？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 49,
@@ -1762,7 +1923,11 @@
       "revision": "marked-focus-1",
       "mergedFrom": [
         19
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电缆沟、隧道的排水坡度不应小于多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 50,
@@ -1810,7 +1975,11 @@
       "latestMaterials": true,
       "mergedFrom": [
         19
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "高低压、电力控制、强弱电控制电缆分层时，谁在上方？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 51,
@@ -1849,7 +2018,11 @@
           "section": "案例2·砂层与盖板"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "直埋电缆上下砂层厚度、保护板向两侧超出宽度分别是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 52,
@@ -1884,7 +2057,11 @@
         "接头、转弯等位置另按要求设置标志；前一数字单位mm，后一数字m。"
       ],
       "examScope": "只考回填高度与直线标志间距",
-      "revision": "marked-focus-1"
+      "revision": "marked-focus-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "直埋电缆回填高出地面多少？直线段标志间距是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 53,
@@ -1925,7 +2102,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "YJ、铠装数字2／3／4、外护层数字1／2／3分别代表什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 54,
@@ -1956,7 +2137,11 @@
       "examFocus": "marked",
       "pageRef": "P178",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电缆头制作对温度、湿度有哪些要求？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 55,
@@ -1995,7 +2180,11 @@
           "section": "增设接线盒"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "无弯、一个弯、两个弯、三个弯，管长每超过多少应增设接线盒？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 56,
@@ -2034,7 +2223,11 @@
           "section": "弯曲半径"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "明配一般、两盒间仅一弯、暗配、地下或混凝土内，弯曲半径各为几倍D？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 57,
@@ -2073,7 +2266,11 @@
           "section": "线槽允许偏差"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "线槽水平、垂直安装允许偏差怎样记？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 58,
@@ -2108,7 +2305,11 @@
         "两端用专用接头连接牢固；数字标明来自手写旁注。"
       ],
       "examScope": "只考红色旁注长度",
-      "revision": "marked-focus-1"
+      "revision": "marked-focus-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "金属软管的照明、动力连接长度，照片旁注分别是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 59,
@@ -2147,7 +2348,11 @@
           "section": "母线槽安装前绝缘"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "封闭母线槽安装前，逐节绝缘电阻不应小于多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 60,
@@ -2192,7 +2397,11 @@
           "section": "母线槽机械防护"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "母线槽垂直敷设的机械防护高度是多少？哪些场所例外？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 61,
@@ -2224,7 +2433,11 @@
       "pageRef": "P76",
       "markType": "仅参考",
       "markEvidence": "未见本条红线或五角星；保留资料、旧笔记和进度，不纳入默认考试练习。",
-      "examScope": "参考资料：不纳入默认考试练习"
+      "examScope": "参考资料：不纳入默认考试练习",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "非镀锌与镀锌桥架的保护联结要求有什么区别？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 62,
@@ -2263,7 +2476,11 @@
           "section": "电缆绝缘测试"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "照片中的低压电缆用多大电压兆欧表？绝缘电阻下限是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 63,
@@ -2302,7 +2519,11 @@
           "section": "漏电保护"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "剩余电流保护器中，L、N、PE怎样连接？动作电流和时间怎样记？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 64,
@@ -2333,7 +2554,11 @@
       "examFocus": "marked",
       "pageRef": "P123",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "相线截面积S不同时，保护导体最小截面积Sp怎样取值？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 65,
@@ -2374,7 +2599,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "断路器的安装方向、接线方向、脱扣复位，以及胶盖刀闸的操作要求是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 66,
@@ -2415,7 +2644,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电动机冷态、热态分别允许启动几次？冷态启动间隔是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 67,
@@ -2457,7 +2690,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电动机出现哪些情况，应进行抽芯检查？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 68,
@@ -2495,7 +2732,11 @@
           "section": "绝缘油作用"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器绝缘油的作用，教材列出哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 69,
@@ -2536,7 +2777,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按教材分别背出疏散、一般备用和安全照明的电源转换时间。",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 70,
@@ -2580,7 +2825,11 @@
           "section": "防火分区应急回路"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "应急照明如何按防火分区设置回路？跨区线路怎样处理？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 71,
@@ -2624,7 +2873,11 @@
           "section": "霓虹灯与航空障碍灯"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "汞灯再启动、霓虹灯电压与航空障碍灯供电等级分别怎样记？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 72,
@@ -2673,7 +2926,11 @@
           "section": "案例5·固定门槛字迹待核"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "灯具质量大于3kg时，教材要求怎样固定？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 73,
@@ -2716,7 +2973,11 @@
           "section": "10kV距离"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按教材，10kV高压验电时人体与带电体安全距离至少多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 74,
@@ -2746,7 +3007,11 @@
       "examFocus": "marked",
       "pageRef": "P2～3",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "从建设项目到分项工程，按层级顺序背出五个名称。",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 75,
@@ -2776,7 +3041,11 @@
       "examFocus": "marked",
       "pageRef": "P2～3",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "单项工程、单位工程、分部工程与分项工程，分别怎样区分？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 76,
@@ -2812,7 +3081,11 @@
         "支线不得串联；本页不是P10检验批合格条件原文。"
       ],
       "examScope": "只考第（6）条模拟动作试验",
-      "revision": "marked-focus-1"
+      "revision": "marked-focus-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "动力和照明工程的漏电保护装置应做什么试验？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 77,
@@ -2842,7 +3115,11 @@
       "examFocus": "marked",
       "pageRef": "P162",
       "markType": "红线",
-      "markEvidence": "对应照片中的红线或红色圈注考点"
+      "markEvidence": "对应照片中的红线或红色圈注考点",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "架空线路的组成包括哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 78,
@@ -2881,7 +3158,11 @@
           "section": "保护系数K"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "爆炸危险场所相关接地条款中，教材给出的安全系数K怎样选？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 79,
@@ -2928,7 +3209,11 @@
       "latestMaterials": true,
       "mergedFrom": [
         7
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "教材P150所标水下灯具的额定电压是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 80,
@@ -2969,7 +3254,11 @@
         }
       ],
       "latestMaterials": true,
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "铜铜、铝铝、铜铝母线搭接怎样处理？环境不同有何区别？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 81,
@@ -3006,7 +3295,11 @@
           "section": "案例3·支架间距"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "教材P76桥架水平敷设的一般支撑跨距为多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 82,
@@ -3035,7 +3328,11 @@
       "examFocus": "marked",
       "markType": "红线",
       "pageRef": "P96",
-      "markEvidence": "基础中心、标高及轨距配轮距的红线"
+      "markEvidence": "基础中心、标高及轨距配轮距的红线",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器基础验收的划线检查项目包括哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 83,
@@ -3063,7 +3360,11 @@
       "examFocus": "marked",
       "markType": "红线",
       "pageRef": "P97",
-      "markEvidence": "高低压侧朝向的红线"
+      "markEvidence": "高低压侧朝向的红线",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "教材要求变压器就位时高、低压侧分别朝向哪里？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 84,
@@ -3095,7 +3396,11 @@
       "markEvidence": "2h的红框与五角星",
       "mergedFrom": [
         10
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电动机空载试运行一般为多久？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 85,
@@ -3134,7 +3439,11 @@
       "latestMaterials": true,
       "mergedFrom": [
         10
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "多台电动机启动时，容量次序怎样安排？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 86,
@@ -3166,7 +3475,11 @@
       "markEvidence": "运行记录项目的红线",
       "mergedFrom": [
         15
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "变压器试运行需记录的划线项目有哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 87,
@@ -3202,7 +3515,11 @@
           "section": "电光源分类"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按发光原理，教材把电光源分为哪两大类？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 88,
@@ -3245,7 +3562,11 @@
       "mergedFrom": [
         3
       ],
-      "revision": "notes-20261116-1"
+      "revision": "notes-20261116-1",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "背出四种照明方式，并说明分区、局部与混合照明的区别。",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 89,
@@ -3285,7 +3606,11 @@
       "latestMaterials": true,
       "mergedFrom": [
         12
-      ]
+      ],
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "建筑物防雷分类依据包括哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 90,
@@ -3310,7 +3635,10 @@
       "examFocus": "marked",
       "markType": "红线 / ★",
       "pageRef": "P74（图3.64）",
-      "markEvidence": "图3.64旁的五角星"
+      "markEvidence": "图3.64旁的五角星",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "回看图3.64：图示装置叫什么？"
     },
     {
       "id": 91,
@@ -3337,7 +3665,10 @@
       "markType": "红线",
       "pageRef": "P71；页码待核（照片50：母线槽安装一般要求第5条）",
       "markEvidence": "P71外壳连接句的红线",
-      "warning": "两处教材表述易混淆，本卡只作原文对照与自评。"
+      "warning": "两处教材表述易混淆，本卡只作原文对照与自评。",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "母线槽外壳连接：P71红线与安装一般要求应怎样区分？"
     },
     {
       "id": 92,
@@ -3367,7 +3698,11 @@
       "cue": "穿管绝缘导线，铜1.0、铝2.5。",
       "exp": "P39红色旁注：穿管敷设绝缘导线的最小截面积，铜1.0mm²、铝2.5mm²。",
       "textbook": "教材 P39（照片22红色旁注）。",
-      "examScope": "只考题干所指的红色手写旁注"
+      "examScope": "只考题干所指的红色手写旁注",
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "穿管敷设的绝缘导线，照片旁注的铜、铝最小截面积分别是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 93,
@@ -3406,7 +3741,11 @@
           "section": "案例1·连接管坡度"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "P97中，与变压器顶盖坡度相区别，红色旁注的“连接管”坡度是多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 94,
@@ -3442,7 +3781,11 @@
           "section": "主控项目"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "什么是主控项目？定义中的四个关键词是什么？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 95,
@@ -3478,7 +3821,11 @@
           "section": "抽样检测"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "涉及结构安全和使用功能的重要分部工程，应进行什么检查？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 96,
@@ -3515,7 +3862,11 @@
           "section": "穿管限制"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "哪些不同类别的线路一般不应同管？同一交流回路又应怎样敷设？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 97,
@@ -3552,7 +3903,11 @@
           "section": "强弱电线槽"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按新资料，强、弱电线路同槽敷设应怎样理解？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 98,
@@ -3590,7 +3945,11 @@
           "section": "母线槽特点"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "笔记列出的母线槽特点有哪些？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 99,
@@ -3629,7 +3988,11 @@
           "section": "电缆标示牌"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "本页电缆敷设笔记要求在哪些位置设置标示牌？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 100,
@@ -3666,7 +4029,11 @@
           "section": "桥架填充率"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "电缆桥架横断面填充率，电力电缆与控制电缆分别不大于多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 101,
@@ -3708,7 +4075,11 @@
           "section": "插座安装高度（重复合并）"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按新资料给出的一般安装要求，插座距地面不低于多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 102,
@@ -3744,7 +4115,11 @@
           "section": "低压钠灯"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "低压钠灯适用于哪类场所？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 103,
@@ -3780,7 +4155,11 @@
           "section": "安全照明光源"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按笔记，安全照明宜采用哪类光源？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 104,
@@ -3817,7 +4196,11 @@
           "section": "节日彩灯"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "彩带灯每个灯泡功率、节日彩灯每单相回路灯泡数，分别不宜超过多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 105,
@@ -3855,7 +4238,11 @@
           "section": "自然接地体"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "新资料列举了哪四类自然接地体？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 106,
@@ -3893,7 +4280,11 @@
           "section": "垂直接地体"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "垂直接地体一般长多少？埋深不小于多少？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 107,
@@ -3930,7 +4321,11 @@
           "section": "接地装置关系"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "独立避雷针与建筑物上的防雷装置，其接地关系怎样区分？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     },
     {
       "id": 108,
@@ -3967,7 +4362,11 @@
           "section": "专用保护零线引出"
         }
       ],
-      "latestMaterials": true
+      "latestMaterials": true,
+      "studyFormat": "annotation",
+      "sourceForm": "教材或手写背诵资料",
+      "cardPrompt": "按本页保护接零系统笔记，专用保护零线可由哪些位置引出？",
+      "quizOrigin": "依据资料改编的自测题，非原卷选择题"
     }
   ],
   "sources": {
@@ -4030,6 +4429,9 @@
     "supplementQuestionCount": 59,
     "newQuestionCount": 15,
     "mergedSummaryCount": 6,
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-16",
+    "annotationCount": 84,
+    "selfTestCount": 69,
+    "defaultStudyFormat": "annotation"
   }
 }

@@ -15,7 +15,7 @@ const server=http.createServer((req,res)=>{let u=decodeURIComponent(req.url.spli
  await new Promise(r=>server.listen(0,'127.0.0.1',r));browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||'msedge'});
  const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.LIVE_BASE||`http://127.0.0.1:${server.address().port}/hvac-exam/`;
- for(const dir of ['','electric/','construction/']){await page.goto(base+dir);assert.equal(await page.locator('.course-switch a').last().locator('small').innerText(),'69题＋15卡');}
+ for(const dir of ['','electric/','construction/']){await page.goto(base+dir);assert.equal(await page.locator('.course-switch a').last().locator('small').innerText(),'84卡 · 69自测');}
  await page.click('#new-materials');const ids=await page.evaluate(()=>data.session.ids);assert.equal(ids.length,59);assert.equal(new Set(ids).size,ids.length);assert(ids.every(id=>bank.qs[id].latestMaterials&&!bank.qs[id].mergedInto));
  await page.evaluate(()=>{data.records[3]={note:'旧照明笔记 <不丢失>',seen:7,star:true};data.records[88]={note:'新题原笔记',seen:2};save();start([88,101],'合并记录','answer');});
  await page.locator('.merged-records summary').click();assert.match(await page.locator('.merged-records').innerText(),/旧照明笔记 <不丢失>/);assert.equal(await page.locator('#note').inputValue(),'新题原笔记');
