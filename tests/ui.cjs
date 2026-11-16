@@ -10,7 +10,7 @@ for(const dir of ['','electric/','construction/']){
  await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(root,'..','tmp','ui-'+(dir.replace('/','')||'hvac')+'-home.png'),fullPage:true});
  await page.evaluate(()=>start([0,1],'界面检查',qs[0].key?'answer':'recall'));
  if(dir!=='construction/'){
-  const wrong=await page.evaluate(()=>qs[0].o.find(o=>!qs[0].key.includes(o[0]))[0]);await page.locator(`.option[data-key="${wrong}"]`).click();await page.getByRole('button',{name:'提交答案',exact:true}).click();assert.equal(await page.locator('.card').getAttribute('data-result'),'wrong');
+  const wrong=await page.evaluate(()=>qs[0].o.find(o=>!qs[0].key.includes(o[0]))[0]);await page.locator(`.option[data-key="${wrong}"]`).click();assert.equal(await page.locator('.card').getAttribute('data-result'),'wrong');
  }else await page.click('#peek');
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);const r=await page.locator('.answer-dock').boundingBox();assert(r.x>=0&&r.x+r.width<=width+1);}
  await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(root,'..','tmp','ui-'+(dir.replace('/','')||'hvac')+'-question.png'),fullPage:true});

@@ -3,11 +3,11 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=path.resolve(__dirname,'..');
 const bank=JSON.parse(fs.readFileSync(path.join(root,'construction/questions.json'),'utf8'));
-assert.equal(bank.qs.length,35);
+assert.equal(bank.qs.length,80);
 assert.equal(bank.qs.filter(q=>+q.u<=15).length,22);
-assert.equal(bank.qs.filter(q=>+q.u>15).length,13);
-assert.equal(new Set(bank.qs.map(q=>q.u)).size,18);
-bank.qs.forEach((q,i)=>{assert.equal(q.id,i);assert.equal(q.key,'');assert(q.points.length>=3);assert(q.cue);q.sources.forEach(key=>assert(bank.sources[key]));});
+assert.equal(bank.qs.filter(q=>q.t==='案例分析').length,13);
+assert.equal(new Set(bank.qs.map(q=>q.u)).size,19);
+bank.qs.forEach((q,i)=>{assert.equal(q.id,i);if(i<35)assert.equal(q.key,'');else assert(q.key);assert(q.points.length>=3);assert(q.cue);q.sources.forEach(key=>assert(bank.sources[key]));});
 const server=http.createServer((req,res)=>{
   const prefix='/hvac-exam/',url=decodeURIComponent(req.url.split('?')[0]);
   if(!url.startsWith(prefix)){res.writeHead(404);return res.end();}
@@ -72,6 +72,6 @@ const server=http.createServer((req,res)=>{
   await page.locator('#resume').click();assert.equal(await page.locator('#note').inputValue(),'我的记忆 <b>原样保留</b>');
   const dateStates=await page.evaluate(()=>{const old=Date.now;const states=['2026-11-16T23:00:00+08:00','2026-11-17T08:29:00+08:00','2026-11-17T08:30:00+08:00','2026-11-17T10:30:00+08:00'].map(v=>{Date.now=()=>new Date(v).getTime();return examState();});Date.now=old;return states;});
   assert.deepEqual(dateStates,['距离考试 1 天','今天考试','考试进行中','本场考试已结束']);
-  assert.deepEqual(errors,[]);console.log('PASS: 35 cards, 18 chapters, recall/self-rating, drafts/notes, date boundaries, mobile layout, 3-subject isolation.');
+  assert.deepEqual(errors,[]);console.log('PASS: 35 cards + 45 questions, 19 chapters, recall/self-rating, drafts/notes, date boundaries, mobile layout, 3-subject isolation.');
  }finally{if(browser)await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

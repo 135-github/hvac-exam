@@ -9,7 +9,7 @@ const escapeHTML = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&a
 let view = 'home';
 let filters = {unit:'', type:'', search:''};
 let toastTimer;
-const fresh = () => ({records:{},session:null,pausedSessions:[],settings:{count:5,unit:'',type:'',scope:'all',order:'sequence',mode:'recall',autoNext:false,focus:false,font:'normal'},letter:''});
+const fresh = () => ({records:{},session:null,pausedSessions:[],settings:{count:5,unit:'',type:'',scope:'all',order:'sequence',mode:'recall',instantAnswer:true,autoNext:false,focus:false,font:'normal'},letter:''});
 
 function toast(text) {
   const node = document.getElementById('toast');
@@ -51,12 +51,13 @@ function normalize(value) {
     if(qs[id]) result.records[id]={...r,level:Math.min(r.level||0,5)};
   }
   const settings=value.settings||{};
-  result.settings.count=Number.isInteger(settings.count)&&settings.count>=1&&settings.count<=35?settings.count:5;
+  result.settings.count=Number.isInteger(settings.count)&&settings.count>=1&&settings.count<=qs.length?settings.count:5;
   result.settings.unit=units[settings.unit]?settings.unit:'';
   result.settings.type=qs.some(q=>q.t===settings.type)?settings.type:'';
   result.settings.scope=['all','unseen','wrong','star','later','due'].includes(settings.scope)?settings.scope:'all';
   result.settings.order=['sequence','random','smart'].includes(settings.order)?settings.order:'sequence';
   result.settings.mode=['answer','read','recall'].includes(settings.mode)?settings.mode:'answer';
+  result.settings.instantAnswer=settings.instantAnswer!==false;
   result.settings.autoNext=settings.autoNext===true;
   result.settings.focus=settings.focus===true;
   result.settings.font=settings.font==='large'?'large':'normal';
@@ -115,7 +116,7 @@ function renderHome() {
   const today=qs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
   main.innerHTML='<small>建筑电气施工技术 · 15 项重点 · 3 组案例</small><h1>忙里，记牢一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
     '<div class="home-grid"><section class="ticket electric-ticket" aria-label="建筑电气题库概览"><div class="ticket-top"><div><small>建筑电气施工技术</small><div class="ticket-date">11.17<span> 上午</span></div></div><span class="exam-state">'+examState()+'</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">先自己回忆，再展开要点。35 张卡片覆盖全部重点与案例，记得多少由你判断。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="core-only">背 15 项重点</button><button id="cases-only">练 3 组案例</button><button id="numbers-only">数字速记</button><a href="./review.txt" download>下载完整提纲 ↓</a></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">先自己回忆，再展开要点。45 道教材选择题＋35 张复习卡。选择题点选即判，答对直接下一题；卡片仍可自评。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="textbook-quiz">刷 45 道教材题</button><button id="core-only">背 15 项重点</button><button id="cases-only">练 3 组案例</button><button id="numbers-only">数字速记</button><a href="./review.txt" download>下载完整提纲 ↓</a></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
@@ -124,24 +125,27 @@ function renderHome() {
     '<label>重点章节<select id="free-unit"><option value="">全部重点章节</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select></label>'+
     '<label>题型<select id="free-type"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select></label>'+
     '<label>出题顺序<select id="free-order"><option value="sequence">按重点顺序</option><option value="random">随机抽题</option><option value="smart">智能推荐</option></select></label>'+
-    '<label>本轮题量<input id="free-count" type="number" min="1" max="35" inputmode="numeric"></label>'+
+    '<label>本轮题量<input id="free-count" type="number" min="1" max="80" inputmode="numeric"></label>'+
     '<label>练习方式<select id="free-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="auto-next">自评“记住了”后自动下一题</label>'+
     '<p id="available" class="muted"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
-    '<div class="stats"><button id="all"><b>'+done+'<small> / 35</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
-    '<section class="panel progress-panel"><div class="topline"><div><h3>走过的每一道题</h3><small>'+Math.round(done/qs.length*100)+'% 已接触</small></div><button id="open-map" class="quiet">选一道 →</button></div><div class="stitches" role="img" aria-label="35道题中已接触'+done+'道">'+qs.map(q=>'<span aria-hidden="true" class="stitch '+(record(q.id).wrong?'weak':record(q.id).level>=3?'mastered':record(q.id).seen?'seen':record(q.id).viewed?'viewed':'')+'"></span>').join('')+'</div><div class="map-legend"><span>浅绿 · 看过</span><span>深绿 · 巩固</span><span>暖橙 · 再练</span></div><p class="today-note">'+(today?'今天，已经拾起 '+today+' 道题。':'从任意一道开始，都算数。')+'</p>'+
+    '<div class="stats"><button id="all"><b>'+done+'<small> / 80</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
+    '<section class="panel progress-panel"><div class="topline"><div><h3>走过的每一道题</h3><small>'+Math.round(done/qs.length*100)+'% 已接触</small></div><button id="open-map" class="quiet">选一道 →</button></div><div class="stitches" role="img" aria-label="80道题中已接触'+done+'道">'+qs.map(q=>'<span aria-hidden="true" class="stitch '+(record(q.id).wrong?'weak':record(q.id).level>=3?'mastered':record(q.id).seen?'seen':record(q.id).viewed?'viewed':'')+'"></span>').join('')+'</div><div class="map-legend"><span>浅绿 · 看过</span><span>深绿 · 巩固</span><span>暖橙 · 再练</span></div><p class="today-note">'+(today?'今天，已经拾起 '+today+' 道题。':'从任意一道开始，都算数。')+'</p>'+
     '<details><summary class="section-toggle">按重点章节看看</summary>'+Object.entries(units).map(([u,title])=>{
       const list=qs.filter(q=>q.u===u),count=list.filter(q=>record(q.id).seen||record(q.id).viewed).length;
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>内容与教材</summary><p>按你提供的《复习重点》15项重点和3组案例整理，共35张记背卡。教材为吕丽荣等编写的《建筑电气施工技术》。这里是结合课程知识与相关标准编写的复习提纲，不是教材逐字摘录或官方试卷；P10、P74按你标记的考点归类，尚未取得对应书页原文。</p><p>标准版本和适用条件写在要点中，案例缺少条件处单独说明。助记只帮助回忆，答题时用完整要点。各卡片下可展开阅读相关资料。</p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
+    '<details class="footnote"><summary>内容与教材</summary><p>根据53张教材照片修订，现有45道选择题、35张原复习卡。教材为吕丽荣、方友村《建筑电气施工技术》。每题标注对应页码或照片位置；属于复习改写，不是官方试卷。</p><p>P74、P101等已按照片核对；P10及未拍到的内容仍标“待教材核对”。教材正文、手写旁注和原规范补充分开注明，有冲突处不设为唯一正确答案。</p><p>原卡片序号、笔记和进度保留；修订卡建议重温，旧掌握标记不等于新内容已掌握。<a href="./textbook-audit.txt">查看核对范围与待确认项</a></p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
   const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
+  const quizEntry=document.getElementById('textbook-quiz');quizEntry.className='primary big-start';
+  homeGrid.querySelector('.start-panel .quick-entry').before(quizEntry);
   bindFreeSettings();
   window.StudyExtras?.home({qs,read:record,begin:start,subject:'construction'});
+  document.getElementById('textbook-quiz').onclick=()=>start(qs.filter(q=>q.key).map(q=>q.id),'教材划线选择题','answer');
   document.getElementById('core-only').onclick=()=>start(qs.filter(q=>Number(q.u)<=15).map(q=>q.id),'15项重点','recall');
-  document.getElementById('cases-only').onclick=()=>start(qs.filter(q=>Number(q.u)>15).map(q=>q.id),'3组案例','recall');
+  document.getElementById('cases-only').onclick=()=>start(qs.filter(q=>q.t==='案例分析').map(q=>q.id),'3组案例','recall');
   document.getElementById('numbers-only').onclick=()=>start(qs.filter(q=>q.tags.includes('数字')).map(q=>q.id),'数字速记','recall');
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
@@ -172,7 +176,7 @@ function pool() {
 }
 function renderSetup() {
   const title={practice:'按自己的节奏，复习。',wrong:'再遇见，就记住。',star:'留给自己的重点。',due:'今天，再回想一次。',later:'先放一放，等你回来。'}[view];
-  main.innerHTML='<small>'+({practice:'全部 35 张记背卡',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
+  main.innerHTML='<small>'+({practice:'45 道教材题与 35 张复习卡',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
     '<div class="toolbar"><select id="unit" aria-label="重点章节"><option value="">全部重点章节</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、标题、要点或注记" aria-label="搜索题号、题目或注记"></div><div id="results"></div>';
   for(const key of ['unit','type','search']) {
     const node=document.getElementById(key);
@@ -245,7 +249,7 @@ function bindFreeSettings() {
     node.onchange=()=>{
       if(key==='count') {
         const n=Number(node.value);
-        if(!Number.isInteger(n)||n<1||n>qs.length){toast('题量可以选 1 到 35 道');node.value=data.settings.count;return;}
+        if(!Number.isInteger(n)||n<1||n>qs.length){toast('题量可以选 1 到 80 道');node.value=data.settings.count;return;}
         data.settings.count=n;
       } else data.settings[key]=node.value;
       save();update();
@@ -257,7 +261,7 @@ function bindFreeSettings() {
     let list=freePool();
     if(!list.length){toast('这个范围暂时没有题目，可以换个条件。');return;}
     const count=Number(document.getElementById('free-count').value);
-    if(!all&&(!Number.isInteger(count)||count<1||count>qs.length)){toast('题量可以选 1 到 35 道');return;}
+    if(!all&&(!Number.isInteger(count)||count<1||count>qs.length)){toast('题量可以选 1 到 80 道');return;}
     data.settings.count=all?list.length:count;
     if(data.settings.order==='random')list=shuffled(list);
     if(data.settings.order==='smart')list=shuffled(list).sort((a,b)=>priority(b)-priority(a));
@@ -300,10 +304,13 @@ function openStudySettings() {
     '<label>练习方式<select id="session-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label>'+
     '<label>题目字号<select id="font-size"><option value="normal">标准</option><option value="large">大字</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="focus-toggle">专注模式：收起页头和底部导航</label>'+
+    '<label class="switch-line"><input type="checkbox" id="instant-answer">点选即判题：单选即判，多选选满即判；答对直接下一题</label>'+
     '<label class="switch-line"><input type="checkbox" id="session-auto-next">自评“记住了”后自动下一题</label>'+
     '<div class="study-actions"><button id="later">'+(record(id).later?'取消留待稍后':'这道题留待稍后')+'</button><button id="end-round">这次先到这里</button></div><p class="muted">选择会自动保存。暂停后，位置和草稿也会留下。</p>';
   document.body.append(dialog);
   dialog.querySelector('#close-study').onclick=()=>dialog.close();
+  const instant=dialog.querySelector('#instant-answer');instant.checked=data.settings.instantAnswer;
+  instant.onchange=()=>{data.settings.instantAnswer=instant.checked;save();renderQuestion();};
   const mode=dialog.querySelector('#session-mode');mode.value=s.mode;
   mode.onchange=()=>{commitPendingAnswer();s.mode=mode.value;save();dialog.close();renderQuestion();};
   const font=dialog.querySelector('#font-size');font.value=data.settings.font;
@@ -386,8 +393,10 @@ function renderQuestion() {
       button.setAttribute('aria-pressed',String(selected));
       button.disabled=a.revealed;
       button.onclick=()=>{
+        if(a.revealed || data.session!==s || s.ids[s.index]!==id)return;
         a.selected=q.t==='多选题'?(a.selected.includes(key)?a.selected.filter(v=>v!==key):[...a.selected,key]):[key];
         save();updateChoiceUI(q,a);
+        if(data.settings.instantAnswer && s.mode==='answer' && a.selected.length===q.key.length)submitCurrentAnswer();
       };
       options.append(button);
     }
@@ -399,21 +408,24 @@ function renderQuestion() {
   action('上一题',()=>moveTo(s.index-1));
   document.getElementById('actions').lastElementChild.disabled=s.index===0;
   if(a.revealed)renderFeedback(q,a);
-  else action(q.key&&s.mode==='answer'?'提交答案':'翻看答案',()=>{
-    if(q.key&&s.mode==='answer'&&!a.selected.length){toast('先选一个答案，再提交。');return;}
-    a.revealed=true;
-    markViewed(id);
-    if(q.key&&s.mode==='answer')a.correct=[...a.selected].sort().join('')===[...q.key].sort().join('');
-    commitPendingAnswer();
-    save();renderQuestion();
-    document.getElementById('feedback').scrollIntoView({block:'start'});
-  },true);
+  else action(q.key&&s.mode==='answer'?(data.settings.instantAnswer?'提前提交当前选择':'提交答案'):'翻看答案',submitCurrentAnswer,true);
   action(s.index===s.ids.length-1?'本轮小结':a.revealed?'下一题':'先跳过',next,a.revealed);
   window.StudyExtras?.caseSteps(q,a,{save,mode:s.mode});
 }
+function submitCurrentAnswer() {
+  const s=data.session;if(!s||s.finished)return;
+  const id=s.ids[s.index],q=qs[id],a=currentAnswer();
+  if(!q||a.revealed)return;
+  if(q.key&&s.mode==='answer'&&!a.selected.length){toast('先选择答案。');return;}
+  a.revealed=true;markViewed(id);
+  if(q.key&&s.mode==='answer')a.correct=[...a.selected].sort().join('')===[...q.key].sort().join('');
+  commitPendingAnswer();save();
+  if(a.correct===true&&(data.settings.instantAnswer||data.settings.correctAutoNext)){next();toast('答对了 ✓');return;}
+  renderQuestion();document.getElementById('feedback')?.scrollIntoView({block:'start'});
+}
 function updateChoiceUI(q,a) {
   const node=document.getElementById('choice-status');
-  if(node)node.textContent=!q.key||data.session.mode!=='answer'||a.revealed?'':q.t==='多选题'?'多选题 · 已选 '+a.selected.length+' 项 · 可再次点击取消':'选择一项，再点下方提交';
+  if(node)node.textContent=!q.key||data.session.mode!=='answer'||a.revealed?'':data.settings.instantAnswer?(q.t==='多选题'?'选满 '+q.key.length+' 项自动判题 · 已选 '+a.selected.length+' 项 · 未满可取消':'点选即判题 · 答对直接下一题'):(q.t==='多选题'?'多选题 · 已选 '+a.selected.length+' 项 · 可再次点击取消':'选择一项，再点下方提交');
   document.querySelectorAll('#options .option').forEach(button=>{
     const key=button.dataset.key,selected=a.selected.includes(key),correct=q.key.includes(key);
     button.classList.toggle('selected',selected);
@@ -441,7 +453,7 @@ function renderFeedback(q,a) {
   const heading=a.correct===undefined?'对照答案，看看记住了多少':a.correct?'答对了':'记住这一次，下次再试';
   document.getElementById('feedback').innerHTML='<div class="feedback"><h3>'+heading+'</h3>'+
     (q.key?'<div class="answer-comparison">'+(typeof a.correct==='boolean'?'<p>你的答案 <b>'+escapeHTML([...a.selected].sort().join('、'))+'</b></p>':'')+'<p>'+ '正确答案'+' <b>'+escapeHTML([...q.key].join('、'))+'</b></p></div>':'')+
-    '<div class="study-points"><h4>答题要点</h4><ol>'+q.points.map(point=>'<li>'+escapeHTML(point)+'</li>').join('')+'</ol></div>'+(q.trap?'<p class="point-trap"><b>别混淆：</b>'+escapeHTML(q.trap)+'</p>':'')+'<details class="source-links"><summary>延伸阅读</summary>'+q.sources.map(key=>{const item=window.BANK.sources[key];return '<a href="'+escapeHTML(item[1])+'" target="_blank" rel="noopener">'+escapeHTML(item[0])+' ↗</a>';}).join('')+'</details>'+
+    '<p class="textbook-source">'+escapeHTML(q.textbook)+'</p><div class="study-points"><h4>答题要点</h4><ol>'+q.points.map(point=>'<li>'+escapeHTML(point)+'</li>').join('')+'</ol></div>'+(q.trap?'<p class="point-trap"><b>别混淆：</b>'+escapeHTML(q.trap)+'</p>':'')+'<details class="source-links"><summary>延伸阅读</summary>'+q.sources.map(key=>{const item=window.BANK.sources[key];return '<a href="'+escapeHTML(item[1])+'" target="_blank" rel="noopener">'+escapeHTML(item[0])+' ↗</a>';}).join('')+'</details>'+
     (q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+
     '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
     '</div>';
@@ -561,9 +573,9 @@ function saveBookmark() {
   ctx.setLineDash([8,10]);ctx.beginPath();ctx.moveTo(65,445);ctx.lineTo(1015,445);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#273d36';ctx.font='58px Inter, sans-serif';ctx.fillText('一点一点，记得更牢',115,555);
   ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('08:30—10:30 · 120 分钟',115,635);
-  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('15 项重点 · 3 组案例 · 35 张卡片',115,690);
+  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('45 道教材题 · 35 张复习卡',115,690);
   const done=qs.filter(q=>record(q.id).seen||record(q.id).viewed).length;
-  ctx.fillText('已接触 '+done+' / 35 道',115,790);
+  ctx.fillText('已接触 '+done+' / 80 道',115,790);
   for(let i=0;i<qs.length;i++){
     ctx.fillStyle=record(i).seen?'#719079':record(i).viewed?'#bacbb1':'#e6e8df';
     ctx.fillRect(115+(i%23)*37,825+Math.floor(i/23)*28,23,17);

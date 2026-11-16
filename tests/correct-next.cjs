@@ -8,7 +8,7 @@ browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'msedge',hea
 const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const base=process.env.LIVE_BASE||`http://127.0.0.1:${server.address().port}/hvac-exam/`;
 for(const dir of ['','electric/']){
- await page.goto(base+dir);assert.equal(await page.evaluate(()=>data.settings.correctAutoNext),true);
+ await page.goto(base+dir);assert.equal(await page.evaluate(()=>data.settings.correctAutoNext),true);await page.evaluate(()=>{data.settings.instantAnswer=false;save();});
  const questions=await page.evaluate(()=>['单选题','多选题','判断题'].map(t=>qs.find(q=>q.t===t)));
  for(const q of questions){
   await page.evaluate(id=>{data.settings.autoNext=true;start([id,(id+1)%qs.length],'自动下一题测试','answer');},q.id);

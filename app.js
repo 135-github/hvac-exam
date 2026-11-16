@@ -13,7 +13,7 @@ const escapeHTML = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&a
 let view = 'home';
 let filters = {unit:'', type:'', search:''};
 let toastTimer;
-const fresh = () => ({records:{},session:null,pausedSessions:[],settings:{count:5,unit:'',type:'',scope:'all',order:'sequence',mode:'answer',autoNext:false,correctAutoNext:true,focus:false,font:'normal'},letter:''});
+const fresh = () => ({records:{},session:null,pausedSessions:[],settings:{count:5,unit:'',type:'',scope:'all',order:'sequence',mode:'answer',instantAnswer:true,autoNext:false,correctAutoNext:true,focus:false,font:'normal'},letter:''});
 
 function toast(text) {
   const node = document.getElementById('toast');
@@ -61,6 +61,7 @@ function normalize(value) {
   result.settings.scope=['all','unseen','wrong','star','later','due'].includes(settings.scope)?settings.scope:'all';
   result.settings.order=['sequence','random','smart'].includes(settings.order)?settings.order:'sequence';
   result.settings.mode=['answer','read','recall'].includes(settings.mode)?settings.mode:'answer';
+  result.settings.instantAnswer=settings.instantAnswer!==false;
   result.settings.autoNext=settings.autoNext===true;
   result.settings.correctAutoNext=settings.correctAutoNext!==false;
   result.settings.focus=settings.focus===true;
@@ -340,11 +341,14 @@ function openStudySettings() {
     '<label>练习方式<select id="session-mode"><option value="answer">作答后看解析</option><option value="read">直接背题看解析</option><option value="recall">回忆卡片</option></select></label>'+
     '<label>题目字号<select id="font-size"><option value="normal">标准</option><option value="large">大字</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="focus-toggle">专注模式：收起页头和底部导航</label>'+
-    '<label class="switch-line"><input type="checkbox" id="correct-auto-next">答对自动下一题，答错停留</label>'+
+    '<label class="switch-line"><input type="checkbox" id="correct-auto-next">手动提交后答对自动下一题，答错停留</label>'+
+    '<label class="switch-line"><input type="checkbox" id="instant-answer">点选即判题：单选即判，多选选满即判；答对直接下一题</label>'+
     '<label class="switch-line"><input type="checkbox" id="session-auto-next">自评“记住了”后自动下一题</label>'+
     '<div class="study-actions"><button id="later">'+(record(id).later?'取消留待稍后':'这道题留待稍后')+'</button><button id="end-round">这次先到这里</button></div><p class="muted">选择会自动保存。暂停后，位置和草稿也会留下。</p>';
   document.body.append(dialog);
   dialog.querySelector('#close-study').onclick=()=>dialog.close();
+  const instant=dialog.querySelector('#instant-answer');instant.checked=data.settings.instantAnswer;
+  instant.onchange=()=>{data.settings.instantAnswer=instant.checked;save();renderQuestion();};
   const mode=dialog.querySelector('#session-mode');mode.value=s.mode;
   mode.onchange=()=>{commitPendingAnswer();s.mode=mode.value;save();dialog.close();renderQuestion();};
   const font=dialog.querySelector('#font-size');font.value=data.settings.font;
@@ -429,8 +433,10 @@ function renderQuestion() {
       button.setAttribute('aria-pressed',String(selected));
       button.disabled=a.revealed;
       button.onclick=()=>{
+        if(a.revealed || data.session!==s || s.ids[s.index]!==id)return;
         a.selected=q.t==='多选题'?(a.selected.includes(key)?a.selected.filter(v=>v!==key):[...a.selected,key]):[key];
         save();updateChoiceUI(q,a);
+        if(data.settings.instantAnswer && s.mode==='answer' && a.selected.length===q.key.length)submitCurrentAnswer();
       };
       options.append(button);
     }
@@ -442,22 +448,23 @@ function renderQuestion() {
   action('上一题',()=>moveTo(s.index-1));
   document.getElementById('actions').lastElementChild.disabled=s.index===0;
   if(a.revealed)renderFeedback(q,a);
-  else action(q.key&&s.mode==='answer'?'提交答案':'翻看答案',()=>{
-    if(q.key&&s.mode==='answer'&&!a.selected.length){toast('先选一个答案，再提交。');return;}
-    a.revealed=true;
-    markViewed(id);
-    if(q.key&&s.mode==='answer')a.correct=[...a.selected].sort().join('')===[...q.key].sort().join('');
-    commitPendingAnswer();
-    save();
-    if(a.correct===true&&data.settings.correctAutoNext){next();toast('答对了 ✓');return;}
-    renderQuestion();
-    document.getElementById('feedback').scrollIntoView({block:'start'});
-  },true);
+  else action(q.key&&s.mode==='answer'?(data.settings.instantAnswer?'提前提交当前选择':'提交答案'):'翻看答案',submitCurrentAnswer,true);
   action(s.index===s.ids.length-1?'本轮小结':a.revealed?'下一题':'先跳过',next,a.revealed);
+}
+function submitCurrentAnswer() {
+  const s=data.session;if(!s||s.finished)return;
+  const id=s.ids[s.index],q=qs[id],a=currentAnswer();
+  if(!q||a.revealed)return;
+  if(q.key&&s.mode==='answer'&&!a.selected.length){toast('先选择答案。');return;}
+  a.revealed=true;markViewed(id);
+  if(q.key&&s.mode==='answer')a.correct=[...a.selected].sort().join('')===[...q.key].sort().join('');
+  commitPendingAnswer();save();
+  if(a.correct===true&&(data.settings.instantAnswer||data.settings.correctAutoNext)){next();toast('答对了 ✓');return;}
+  renderQuestion();document.getElementById('feedback')?.scrollIntoView({block:'start'});
 }
 function updateChoiceUI(q,a) {
   const node=document.getElementById('choice-status');
-  if(node)node.textContent=!q.key||data.session.mode!=='answer'||a.revealed?'':q.t==='多选题'?'多选题 · 已选 '+a.selected.length+' 项 · 可再次点击取消':'选择一项，再点下方提交';
+  if(node)node.textContent=!q.key||data.session.mode!=='answer'||a.revealed?'':data.settings.instantAnswer?(q.t==='多选题'?'选满 '+q.key.length+' 项自动判题 · 已选 '+a.selected.length+' 项 · 未满可取消':'点选即判题 · 答对直接下一题'):(q.t==='多选题'?'多选题 · 已选 '+a.selected.length+' 项 · 可再次点击取消':'选择一项，再点下方提交');
   document.querySelectorAll('#options .option').forEach(button=>{
     const key=button.dataset.key,selected=a.selected.includes(key),correct=q.key.includes(key);
     button.classList.toggle('selected',selected);
