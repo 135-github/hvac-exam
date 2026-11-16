@@ -6,7 +6,7 @@ assert.deepEqual(bank.qs.slice(0,35).map(q=>[q.id,q.u,q.s]),old.qs.map(q=>[q.id,
 const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'construction/questions.js'),'utf8'),ctx);assert.deepEqual(JSON.parse(JSON.stringify(ctx.window.BANK)),bank);
 assert.equal(bank.qs.filter(q=>q.key).length,bank.meta.objectiveCount);
 assert.match(bank.qs[15].exp,/24h/);assert(!/10min|3～5/.test(bank.qs[15].exp));assert.match(bank.qs[15].referencePoints.join(' '),/10min/);
-assert.match(bank.qs[14].textbook,/未见P10/);assert.match(bank.qs[21].textbook,/15min不是/);
+assert.match(bank.qs[14].textbook,/未见P10/);assert.match(bank.qs[21].textbook,/至少15min/);
 for(const q of bank.qs){assert(q.textbook);assert(q.cue);assert.equal(q.exp,q.points.join('\n'));if(q.key){assert(q.o.length>=4);assert([...q.key].every(k=>q.o.some(o=>o[0]===k)));assert.equal(new Set(q.key).size,q.key.length);}}
 const server=http.createServer((req,res)=>{const u=decodeURIComponent(req.url.split('?')[0]);if(!u.startsWith('/hvac-exam/')){res.writeHead(404);return res.end();}let p=path.resolve(root,u.slice(11));if(p!==root&&!p.startsWith(root+path.sep)){res.writeHead(403);return res.end();}if(fs.existsSync(p)&&fs.statSync(p).isDirectory())p=path.join(p,'index.html');if(!fs.existsSync(p)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',({'.js':'text/javascript','.html':'text/html','.css':'text/css'}[path.extname(p)]||'text/plain')+';charset=utf-8');res.end(fs.readFileSync(p));});
 (async()=>{let browser;try{

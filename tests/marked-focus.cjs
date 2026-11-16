@@ -1,10 +1,10 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=path.resolve(__dirname,'..'),bank=require('../construction/questions.json');
-assert.equal(bank.qs.filter(q=>q.examFocus==='marked').length,64);
-assert.equal(bank.qs.filter(q=>q.examFocus==='reference').length,30);
-for(const id of [1,14,16,17,36,37,48,61])assert.equal(bank.qs[id].examFocus,'reference');
-for(const id of [3,7,10,15,23,39,51,60,72,76,79])assert.equal(bank.qs[id].examFocus,'marked');
+assert.equal(bank.qs.filter(q=>q.examFocus==='marked').length,84);
+assert.equal(bank.qs.filter(q=>q.examFocus==='reference').length,25);
+for(const id of [1,14,16,17,37,48,61])assert.equal(bank.qs[id].examFocus,'reference');
+for(const id of [21,22,23,24,36,39,51,60,72,76,79])assert.equal(bank.qs[id].examFocus,'marked');
 for(const q of bank.qs){assert(q.pageRef&&q.markEvidence);assert(/P\d+|页码待核/.test(q.pageRef));}
 assert(!/0.3|0.5m/.test(bank.qs[79].s+bank.qs[79].o.join('')));
 assert(!/2.2m|40m|24h/.test(bank.qs[60].exp));
@@ -24,15 +24,15 @@ const server=http.createServer((req,res)=>{
  // Give unmarked items high priority too: every default entrance must still exclude them.
  await page.evaluate(()=>{for(const q of qs)data.records[q.id]={seen:1,wrong:true,due:1};save();go('home');});
  const check=async()=>assert(await page.evaluate(()=>data.session.ids.length>0&&data.session.ids.every(id=>qs[id].examFocus==='marked')));
- for(const button of ['textbook-quiz','core-only','numbers-only','one','browse','quick-five']){await page.click('#'+button);await check();await page.click('#back');}
+ for(const button of ['textbook-quiz','core-only','numbers-only','one','browse','quick-five','new-materials','exam-cases']){await page.click('#'+button);await check();await page.click('#back');}
  await page.locator('#time-pocket summary').click();await page.locator('[data-minutes="3"]').click();await check();await page.click('#back');
  await page.locator('.free-settings summary').click();await page.click('#choose-all');await check();await page.click('#back');
  await page.evaluate(()=>startSmart());await check();await page.click('#back');
- await page.click('#open-map');assert.equal(await page.locator('.picker-grid button').count(),64);await page.selectOption('#map-filter','reference');assert.equal(await page.locator('.picker-grid button').count(),30);await page.click('#close-picker');
- await page.click('#review-now');assert.equal(await page.locator('.list-item').count(),64);
- await page.selectOption('#focus','reference');assert.equal(await page.locator('.list-item').count(),30);
+ await page.click('#open-map');assert.equal(await page.locator('.picker-grid button').count(),84);await page.selectOption('#map-filter','reference');assert.equal(await page.locator('.picker-grid button').count(),25);await page.click('#close-picker');
+ await page.click('#review-now');assert.equal(await page.locator('.list-item').count(),84);
+ await page.selectOption('#focus','reference');assert.equal(await page.locator('.list-item').count(),25);
  await page.getByRole('button',{name:'首页',exact:true}).click();await page.locator('.reference-entry summary').click();await page.click('#reference-only');
- assert.equal(await page.locator('#focus').inputValue(),'reference');assert.equal(await page.locator('.list-item').count(),30);
+ assert.equal(await page.locator('#focus').inputValue(),'reference');assert.equal(await page.locator('.list-item').count(),25);
  for(const q of bank.qs){
   await page.evaluate(id=>start([id],'页码检查','answer'),q.id);
   assert((await page.locator('.question-source').innerText()).includes(q.pageRef));assert.equal(await page.locator('.study-points').count(),0);
@@ -41,10 +41,10 @@ const server=http.createServer((req,res)=>{
  // A changed key must reopen the answer, keeping old response, notes and learning records.
  await page.evaluate(()=>{
   const backup=fresh();backup.records[60]={note:'旧笔记保留',star:true,seen:4,right:3};
-  backup.session={id:'old',ids:[60,36],index:0,title:'旧练习',mode:'answer',answers:{60:{selected:['A','B','D'],draft:'旧草稿',revealed:true,correct:true,rated:true}}};
+  backup.session={id:'old',ids:[60,37],index:0,title:'旧练习',mode:'answer',answers:{60:{selected:['A','B','D'],draft:'旧草稿',revealed:true,correct:true,rated:true}}};
   data=normalize(backup);save();renderQuestion();
  });
- assert.deepEqual(await page.evaluate(()=>[data.session.ids,record(60).note,record(60).seen,currentAnswer().draft,currentAnswer().revealed,currentAnswer().previousResponse.selected]),[[60,36],'旧笔记保留',4,'旧草稿',false,['A','B','D']]);
+ assert.deepEqual(await page.evaluate(()=>[data.session.ids,record(60).note,record(60).seen,currentAnswer().draft,currentAnswer().revealed,currentAnswer().previousResponse.selected]),[[60,37],'旧笔记保留',4,'旧草稿',false,['A','B','D']]);
  await page.reload();await page.click('#resume');assert.equal(await page.evaluate(()=>currentAnswer().draft),'旧草稿');
  await page.locator('.option[data-key="A"]').tap();assert.equal(await page.evaluate(()=>data.session.index),1);assert.match(await page.locator('.question-source').innerText(),/参考资料/);
  await page.evaluate(()=>start([44,55],'双选检查','answer'));await page.locator('.option[data-key="A"]').tap();assert.equal(await page.evaluate(()=>data.session.index),0);await page.locator('.option[data-key="B"]').tap();assert.equal(await page.evaluate(()=>data.session.index),1);

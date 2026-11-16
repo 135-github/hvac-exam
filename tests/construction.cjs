@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=path.resolve(__dirname,'..');
 const bank=JSON.parse(fs.readFileSync(path.join(root,'construction/questions.json'),'utf8'));
-assert.equal(bank.qs.length,94);
+assert.equal(bank.qs.length,109);
 assert.equal(bank.qs.filter(q=>+q.u<=15).length,22);
 assert.equal(bank.qs.filter(q=>q.t==='案例分析').length,13);
 assert.equal(new Set(bank.qs.map(q=>q.u)).size,19);

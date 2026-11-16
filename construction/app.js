@@ -4,8 +4,8 @@ const focusQs=qs.filter(q=>q.examFocus==='marked');
 const focusChoices=focusQs.filter(q=>q.key);
 const focusCards=focusQs.filter(q=>!q.key);
 const focusUnits=Object.entries(units).filter(([u])=>focusQs.some(q=>q.u===u));
-const scopeLabel=q=>q.examFocus==='marked'?'考试重点 · '+q.markType:'参考资料 · 非考试范围';
-const sourceLine=q=>'<p class="question-source"><b>参考页码：'+escapeHTML(q.pageRef)+'</b><span>'+escapeHTML(scopeLabel(q))+'</span>'+(q.examScope?'<small>本题范围：'+escapeHTML(q.examScope)+'</small>':'')+'</p>';
+const scopeLabel=q=>q.mergedInto?'已合并归档 · 旧记录保留':q.examFocus==='marked'?'考试重点 · '+q.markType:'参考资料 · 非考试范围';
+const sourceLine=q=>'<p class="question-source"><b>参考页码：'+escapeHTML(q.pageRef)+'</b><span>'+escapeHTML(scopeLabel(q))+'</span>'+(q.supplements?.length?'<small>新资料：'+escapeHTML(q.supplements.map(s=>'第'+s.sheet+'页·'+s.section).join('；'))+'</small>':'')+(q.examScope?'<small>本题范围：'+escapeHTML(q.examScope)+'</small>':'')+'</p>';
 const STORAGE = 'construction-memory-v1';
 const DAY = 86400000;
 const intervals = [1,3,7,14,30];
@@ -127,9 +127,9 @@ function renderHome() {
   const wrong=focusQs.filter(q=>record(q.id).wrong).length;
   const due=focusQs.filter(isDue).length;
   const today=focusQs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
-  main.innerHTML='<small>建筑电气施工技术 · 红线 / ★ 考点</small><h1>忙里，记牢一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
+  main.innerHTML='<small>建筑电气施工技术 · 11月16日新资料已合并</small><h1>忙里，记牢一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
     '<div class="home-grid"><section class="ticket electric-ticket" aria-label="建筑电气题库概览"><div class="ticket-top"><div><small>建筑电气施工技术</small><div class="ticket-date">11.17<span> 上午</span></div></div><span class="exam-state">'+examState()+'</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">只练红线和星标：'+focusChoices.length+' 道选择题＋'+focusCards.length+' 张重点卡。每题先显示参考页码。选择题点选即判，答对直接下一题；卡片仍可自评。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="textbook-quiz">刷 '+focusChoices.length+' 道红线★题</button><button id="core-only">背红线★重点卡</button><button id="numbers-only">数字速记</button><a href="./review.txt" download>下载分区提纲 ↓</a></div><details class="reference-entry"><summary>参考资料与原案例 · 不纳入默认考试练习</summary><p>未标记内容留作查阅。原题号、笔记和学习记录保留。</p><button id="reference-only">查看参考资料</button><button id="cases-only">查看原3组案例（含未标记内容）</button></details><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">教材标记＋新资料：'+focusChoices.length+' 道选择题＋'+focusCards.length+' 张重点卡。每题先显示参考页码。选择题点选即判，答对直接下一题；卡片仍可自评。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="textbook-quiz">刷 '+focusChoices.length+' 道考试选择题</button><button id="core-only">背考试重点卡</button><button id="numbers-only">数字速记</button><button id="new-materials">练这次新资料</button><button id="exam-cases">新资料案例与对照卡</button><a href="../review/construction-new.html">新资料打印提纲 ↗</a><a href="./review.txt" download>下载分区提纲 ↓</a></div><details class="reference-entry"><summary>参考资料与旧记录</summary><p>未标记内容留作查阅。原题号、笔记和学习记录保留。</p><button id="reference-only">查看参考资料</button><button id="cases-only">查看全部原案例（含参考）</button></details><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
@@ -150,16 +150,18 @@ function renderHome() {
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>内容与教材</summary><p>按53张教材照片中的红线、五角星及红色旁注重新筛选。默认练习只出考试重点；同页未标记内容、未找到标记原页的旧资料放入参考区。教材为吕丽荣、方友村《建筑电气施工技术》。每题在作答前显示页码；遮挡页码注明待核及照片位置；属于复习改写，不是官方试卷。</p><p>P74、P101等已按照片核对；P10及未拍到的内容仍标“待教材核对”。教材正文、手写旁注和原规范补充分开注明，有冲突处不设为唯一正确答案。</p><p>原卡片序号、笔记和进度保留；修订卡建议重温，旧掌握标记不等于新内容已掌握。<a href="./textbook-audit.txt">查看核对范围与待确认项</a></p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
+    '<details class="footnote"><summary>内容与教材</summary><p>按53张教材照片的红线、五角星及红色旁注，加上11月16日新提供的7张手写资料整理。新增15道题，已有考点补充来源，6张重复总结卡合并归档；新资料对应旧案例进入考试范围。其余未标记教材邻文仍放入参考区。教材为吕丽荣、方友村《建筑电气施工技术》。每题在作答前显示页码；遮挡页码注明待核及照片位置；属于复习改写，不是官方试卷。</p><p>P74、P101等已按照片核对；P10及未拍到的内容仍标“待教材核对”。教材正文、手写旁注和原规范补充分开注明，有冲突处不设为唯一正确答案。</p><p>原卡片序号、笔记和进度保留；修订卡建议重温，旧掌握标记不等于新内容已掌握。<a href="./textbook-audit.txt">查看原教材核对范围</a> · <a href="./new-materials-audit.txt">查看新资料合并与待确认项</a></p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
   const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   const quizEntry=document.getElementById('textbook-quiz');quizEntry.className='primary big-start';
   homeGrid.querySelector('.start-panel .quick-entry').before(quizEntry);
   bindFreeSettings();
   window.StudyExtras?.home({qs:focusQs,read:record,begin:start,subject:'construction'});
-  document.getElementById('textbook-quiz').onclick=()=>start(focusChoices.map(q=>q.id),'红线★选择题','answer');
-  document.getElementById('core-only').onclick=()=>start(focusCards.map(q=>q.id),'红线★重点卡','recall');
+  document.getElementById('textbook-quiz').onclick=()=>start(focusChoices.map(q=>q.id),'考试重点选择题','answer');
+  document.getElementById('core-only').onclick=()=>start(focusCards.map(q=>q.id),'考试重点卡','recall');
   document.getElementById('reference-only').onclick=()=>{filters={focus:'reference',unit:'',type:'',search:''};go('practice');};
   document.getElementById('cases-only').onclick=()=>start(qs.filter(q=>q.t==='案例分析').map(q=>q.id),'原3组案例（含参考资料）','recall');
+  document.getElementById('new-materials').onclick=()=>start(focusQs.filter(q=>q.latestMaterials).map(q=>q.id),'11月16日新资料（已去重）','answer');
+  document.getElementById('exam-cases').onclick=()=>start(focusQs.filter(q=>q.latestMaterials&&!q.key).map(q=>q.id),'新资料案例与对照卡','recall');
   document.getElementById('numbers-only').onclick=()=>start(focusQs.filter(q=>q.tags.includes('数字')).map(q=>q.id),'数字速记','recall');
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
@@ -190,8 +192,8 @@ function pool() {
 }
 function renderSetup() {
   const title={practice:'按自己的节奏，复习。',wrong:'再遇见，就记住。',star:'留给自己的重点。',due:'今天，再回想一次。',later:'先放一放，等你回来。'}[view];
-  main.innerHTML='<small>'+({practice:'默认只出红线／星标题；参考资料可单独查看',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
-    '<div class="toolbar"><select id="focus" aria-label="考试或参考范围"><option value="marked">红线★考试重点</option><option value="reference">参考资料（非考试范围）</option><option value="all">全部资料（含旧笔记）</option></select><select id="unit" aria-label="重点章节"><option value="">全部重点章节</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、标题、要点或注记" aria-label="搜索题号、题目或注记"></div><div id="results"></div>';
+  main.innerHTML='<small>'+({practice:'默认练教材标记与新资料；参考资料可单独查看',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
+    '<div class="toolbar"><select id="focus" aria-label="考试或参考范围"><option value="marked">考试重点（含新资料）</option><option value="reference">参考资料（非考试范围）</option><option value="all">全部资料（含旧笔记）</option></select><select id="unit" aria-label="重点章节"><option value="">全部重点章节</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、标题、要点或注记" aria-label="搜索题号、题目或注记"></div><div id="results"></div>';
   for(const key of ['focus','unit','type','search']) {
     const node=document.getElementById(key);
     node.value=filters[key];
@@ -387,6 +389,8 @@ function renderQuestion() {
   main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
+  const related=[...(q.mergedInto||[]),...(q.mergedFrom||[])];
+  if(related.length){const panel=document.createElement('details');panel.className='merged-records';panel.innerHTML='<summary>合并关联题与旧笔记（原记录保留）</summary>'+related.map(other=>'<p><a href="?question='+(other+1)+'">第'+(other+1)+'题：'+escapeHTML(qs[other].s)+'</a></p><p>'+escapeHTML(record(other).note||'此题暂无个人笔记')+'</p>').join('');document.querySelector('.recall-note').after(panel);}
   document.getElementById('note').oninput=e=>{data.records[id]={...record(id),note:e.target.value};save();};
   document.getElementById('jump').onclick=()=>openQuestionPicker();
   document.getElementById('study-settings').onclick=openStudySettings;
@@ -587,7 +591,7 @@ function saveBookmark() {
   ctx.setLineDash([8,10]);ctx.beginPath();ctx.moveTo(65,445);ctx.lineTo(1015,445);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#273d36';ctx.font='58px Inter, sans-serif';ctx.fillText('一点一点，记得更牢',115,555);
   ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('08:30—10:30 · 120 分钟',115,635);
-  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText(focusChoices.length+' 道红线★题 · '+focusCards.length+' 张重点卡',115,690);
+  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText(focusChoices.length+' 道考试选择题 · '+focusCards.length+' 张重点卡',115,690);
   const done=focusQs.filter(q=>record(q.id).seen||record(q.id).viewed).length;
   ctx.fillText('已接触 '+done+' / '+focusQs.length+' 道考试重点',115,790);
   for(let i=0;i<focusQs.length;i++){
