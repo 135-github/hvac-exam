@@ -137,6 +137,7 @@ function renderHome() {
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
     '<details class="footnote"><summary>内容与教材</summary><p>按你提供的《复习重点》15项重点和3组案例整理，共35张记背卡。教材为吕丽荣等编写的《建筑电气施工技术》。这里是结合课程知识与相关标准编写的复习提纲，不是教材逐字摘录或官方试卷；P10、P74按你标记的考点归类，尚未取得对应书页原文。</p><p>标准版本和适用条件写在要点中，案例缺少条件处单独说明。助记只帮助回忆，答题时用完整要点。各卡片下可展开阅读相关资料。</p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
+  const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   bindFreeSettings();
   window.StudyExtras?.home({qs,read:record,begin:start,subject:'construction'});
   document.getElementById('core-only').onclick=()=>start(qs.filter(q=>Number(q.u)<=15).map(q=>q.id),'15项重点','recall');
@@ -362,6 +363,7 @@ function renderQuestion() {
     '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
+  main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
   document.getElementById('note').oninput=e=>{data.records[id]={...record(id),note:e.target.value};save();};

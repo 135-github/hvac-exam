@@ -132,6 +132,7 @@ function renderHome() {
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
     '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工高级工考证日期为2026年11月21日，具体时段以准考证为准。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
+  const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   bindFreeSettings();
   window.StudyExtras?.home({qs,read:record,begin:start,subject:'electric'});
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
@@ -357,6 +358,7 @@ function renderQuestion() {
     '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
+  main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
   document.getElementById('note').oninput=e=>{data.records[id]={...record(id),note:e.target.value};save();};

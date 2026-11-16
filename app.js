@@ -182,6 +182,7 @@ function renderHome() {
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的考前书签。</small></section>'+
     '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的 Word，共 65 道单选、37 道多选、54 道判断、4 道简答、1 道计算。助记词辅助回忆，参考答案沿用原文，有疑点的题目另作提示。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。考前会把较远的复习安排提前至 11 月 17 日上午 9 点。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 161 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
+  const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   bindFreeSettings();
   window.StudyExtras?.home({qs,read:record,begin:start,subject:'hvac'});
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
@@ -405,6 +406,7 @@ function renderQuestion() {
     '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2><p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
+  main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
   document.getElementById('note').oninput=e=>{data.records[id]={...record(id),note:e.target.value};save();};
