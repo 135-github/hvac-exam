@@ -20,6 +20,7 @@ const server=http.createServer((req,res)=>{let u=decodeURIComponent(req.url.spli
  await page.click('.stitch[data-question="55"]');assert.equal(await page.evaluate(()=>data.session.ids[data.session.index]),55);assert.equal(await page.evaluate(()=>data.session.mode),'recall');
  for(const q of bank.qs.filter(q=>q.examFocus==='marked')){
   await page.evaluate(id=>start([id],'注记卡核对','recall'),q.id);assert.equal(await page.locator('.card h2').innerText(),q.cardPrompt);assert.equal(await page.locator('.option').count(),0);assert.equal(await page.locator('.study-points').count(),0);
+  assert.deepEqual(await page.locator('.memorize-answer-body p').allTextContents(),q.points);assert(await page.locator('.memorize-answer-body').isVisible());assert.equal(await page.locator('#card-self-test').count(),q.key?1:0);
   assert((await page.locator('.question-source').innerText()).includes(q.pageRef));await page.getByRole('button',{name:'展开必背要点',exact:true}).click();
   assert.equal(await page.locator('.answer-comparison').count(),0);assert.equal(await page.locator('.study-points li').count(),q.points.length);assert.equal(await page.evaluate(()=>currentAnswer().correct),undefined);
  }
@@ -27,10 +28,20 @@ const server=http.createServer((req,res)=>{let u=decodeURIComponent(req.url.spli
  await page.getByRole('button',{name:'展开必背要点',exact:true}).click();assert.equal(await page.locator('#feedback .memory p').innerText(),'我的弯管口诀');await page.getByRole('button',{name:'记住了',exact:false}).click();assert.equal(await page.evaluate(()=>record(55).seen),1);assert.equal(await page.evaluate(()=>currentAnswer().correct),undefined);
  await page.click('#restart-question');assert.equal(await page.evaluate(()=>data.session.mode),'recall');assert.equal(await page.locator('.option').count(),0);
  await page.evaluate(()=>start([55],'直接阅读','read'));assert.equal(await page.locator('.option').count(),0);assert.equal(await page.locator('.answer-comparison').count(),0);assert(await page.locator('.study-points').count());
+ // A card is readable immediately, including when resuming an older recall session.
+ await page.evaluate(()=>start([49,55],'背答案与自测','recall'));await page.locator('#draft').fill('我的排水草稿');await page.locator('.recall-note summary').click();await page.locator('#note').fill('保留排水注记');
+ assert.match(await page.locator('.answer-main').innerText(),/不小于0\.5%/);assert(await page.evaluate(()=>document.querySelector('.card h2').nextElementSibling.matches('.memorize-answer')));
+ await page.locator('.memorize-answer summary').click();assert.equal(await page.locator('.memorize-answer-body').isVisible(),false);await page.reload();await page.click('#resume');assert(await page.locator('.memorize-answer-body').isVisible());
+ await page.click('#card-self-test');assert.equal(await page.locator('.memorize-answer').count(),0);assert.equal(await page.locator('.option').count(),4);await page.click('.option[data-key="A"]');assert.match(await page.locator('.answer-comparison').innerText(),/正确答案\s+B/);
+ await page.click('#quiz-to-card');assert.equal(await page.locator('#draft').inputValue(),'我的排水草稿');assert.equal(await page.locator('#note').inputValue(),'保留排水注记');assert.deepEqual(await page.evaluate(()=>data.session.ids),[49,55]);
+ await page.evaluate(()=>moveTo(1));await page.locator('#draft').fill('弯管草稿');await page.click('#card-self-test');await page.reload();await page.click('#resume');
+ for(const key of 'ABC'){await page.click('.option[data-key="'+key+'"]');assert.equal(await page.locator('.answer-comparison').count(),0);}
+ await page.click('.option[data-key="D"]');assert.equal(await page.locator('.summary-mark').count(),1);await page.click('#quiz-to-card');assert.equal(await page.locator('#draft').inputValue(),'弯管草稿');assert.equal(await page.evaluate(()=>data.session.index),1);
+ await page.evaluate(()=>start([49],'手机可见答案','recall'));
  for(const theme of ['simple','voxel','battleground']){await page.click('#theme-toggle');await page.click('[data-theme-choice="'+theme+'"]');for(const width of [320,390,1280]){await page.setViewportSize({width,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}}
  await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(root,'..','tmp','annotation-card.png'),fullPage:true});
  await page.click('#back');await page.click('#textbook-quiz');assert.equal(await page.evaluate(()=>data.session.mode),'answer');assert.equal(await page.evaluate(()=>data.session.ids.length),69);assert(await page.locator('.option').count());
  const target=await page.evaluate(()=>({id:data.session.ids[0],key:qs[data.session.ids[0]].key}));for(const key of target.key)await page.locator('.option[data-key="'+key+'"]').click();assert.equal(await page.evaluate(()=>data.session.index),1);
  await page.reload();await page.click('#resume');assert.equal(await page.evaluate(()=>data.session.mode),'answer');assert(await page.locator('.option').count());
- assert.deepEqual(errors,[]);console.log('PASS: annotation-first entrances; independent recall prompts; no choice cues or answer letters; all page refs and points; self-rating, drafts, notes and mnemonic retention; three themes; optional instant quiz and old-session continuation.');
+ assert.deepEqual(errors,[]);console.log('PASS: all 84 card answers visible by default; collapse and resume; source refs; linked single/multiple self-tests and return after reload; instant grading; draft/note retention; three themes and mobile widths.');
  }finally{if(browser)await browser.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

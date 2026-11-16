@@ -8,3 +8,12 @@
 .question-source{font-size:13px;line-height:1.7;padding:12px 14px;border-left:3px solid #53735a;background:#f2f5ed;overflow-wrap:anywhere}.question-source span,.question-source small{display:block;margin-top:4px}.question-source small{color:#536257}.reference-entry{margin-top:16px}.reference-entry p,.reference-points{font-size:13px;line-height:1.7}.reference-entry button{margin:6px 6px 0 0}.reference-points{padding:12px 0;color:#64746a}.toolbar select{min-width:0;max-width:100%}
 
 .annotation-intro{font-size:13px;color:var(--muted);padding:12px 0;border-bottom:1px dashed var(--line)}.study-points h4{color:var(--green)}
+
+/* Answers stay beside their question in every theme and at narrow widths. */
+.question-wrap .memorize-answer{margin:16px 0 20px;padding:18px 22px;border:2px solid var(--green);border-left-width:6px;background:var(--pale);color:var(--ink);overflow-wrap:anywhere}
+.question-wrap .memorize-answer summary{cursor:pointer;font-size:18px;font-weight:700;min-height:44px;line-height:1.5}
+.memorize-answer summary span{display:block;font-size:13px;font-weight:400;margin-top:4px}
+.question-wrap .memorize-answer .answer-main{font-size:clamp(22px,3vw,28px);font-weight:800;line-height:1.65;margin:12px 0}
+.question-wrap .memorize-answer .answer-detail{font-size:18px;line-height:1.8;margin:12px 0}
+.card-practice{margin:12px 0 18px}.card-practice button{min-height:44px;white-space:normal}
+@media(max-width:400px){.question-wrap .memorize-answer{padding:14px}.card-practice button{width:100%}}

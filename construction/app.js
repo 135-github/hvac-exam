@@ -53,7 +53,7 @@ function normalizeSession(old) {
       }
     }
   }
-  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',finished:old.finished===true};
+  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',finished:old.finished===true,returnSessionId:typeof old.returnSessionId==='string'?old.returnSessionId:undefined};
 }
 function sessionId() { return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9); }
 
@@ -133,7 +133,7 @@ function renderHome() {
   const today=focusQs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
   main.innerHTML='<small>建筑电气施工技术 · 11月16日新资料已合并</small><h1>忙里，记牢一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
     '<div class="home-grid"><section class="ticket electric-ticket" aria-label="建筑电气题库概览"><div class="ticket-top"><div><small>建筑电气施工技术</small><div class="ticket-date">11.17<span> 上午</span></div></div><span class="exam-state">'+examState()+'</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">教材标记＋新资料：'+focusCards.length+' 个考点以注记卡学习，其中 '+focusChoices.length+' 个附改编选择自测。先回忆，再看必背要点、口诀和易错点；每卡显示参考页码，支持个人注记。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="textbook-quiz">选择自测 · '+focusChoices.length+' 道（资料改编）</button><button id="core-only">背 '+focusCards.length+' 张考点注记卡</button><button id="numbers-only">数字速记</button><button id="new-materials">背这次新资料</button><button id="exam-cases">案例与对照注记卡</button><a href="../review/construction-new.html">新资料打印提纲 ↗</a><a href="./review.txt" download>下载分区提纲 ↓</a></div><details class="reference-entry"><summary>参考资料与旧记录</summary><p>未标记内容留作查阅。原题号、笔记和学习记录保留。</p><button id="reference-only">查看参考资料</button><button id="cases-only">查看全部原案例（含参考）</button></details><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="ticket-body"><div class="exam-time">08:30 — 10:30</div><p>考试时长 120 分钟 · 2026 年 11 月 17 日</p><p class="muted">教材标记＋新资料：'+focusCards.length+' 个考点以注记卡学习，其中 '+focusChoices.length+' 个附改编选择自测。题干下直接显示完整答案，可收起答案练习回忆；每卡显示参考页码，支持个人注记。</p><div class="ticket-actions"><button id="quick-five">记 5 张 · 几分钟</button><button id="review-now">复习薄弱点</button></div><div class="topic-entry"><button id="textbook-quiz">选择自测 · '+focusChoices.length+' 道（资料改编）</button><button id="core-only">背 '+focusCards.length+' 张考点注记卡</button><button id="numbers-only">数字速记</button><button id="new-materials">背这次新资料</button><button id="exam-cases">案例与对照注记卡</button><a href="../review/construction-new.html">新资料打印提纲 ↗</a><a href="./review.txt" download>下载分区提纲 ↓</a></div><details class="reference-entry"><summary>参考资料与旧记录</summary><p>未标记内容留作查阅。原题号、笔记和学习记录保留。</p><button id="reference-only">查看参考资料</button><button id="cases-only">查看全部原案例（含参考）</button></details><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制建筑电气题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>先背一张注记卡，熟悉后再做选择自测。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(data.session.mode==='answer'?qs[data.session.ids[data.session.index]].s:cardPrompt(qs[data.session.ids[data.session.index]]))+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先背一张</button><button id="browse">随手翻翻</button></div>'+
@@ -143,7 +143,7 @@ function renderHome() {
     '<label>考点类型（含自测题型）<select id="free-type"><option value="">全部题型</option>'+[...new Set(focusQs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select></label>'+
     '<label>出题顺序<select id="free-order"><option value="sequence">按重点顺序</option><option value="random">随机抽题</option><option value="smart">智能推荐</option></select></label>'+
     '<label>本轮题量<input id="free-count" type="number" min="1" max="'+focusQs.length+'" inputmode="numeric"></label>'+
-    '<label>练习方式<select id="free-mode"><option value="recall">注记卡 · 先回忆再展开</option><option value="read">注记卡 · 直接阅读</option><option value="answer">改编选择自测（无选项时回忆）</option></select></label></div>'+
+    '<label>练习方式<select id="free-mode"><option value="recall">注记卡 · 看答案背诵＋草稿</option><option value="read">注记卡 · 直接阅读</option><option value="answer">改编选择自测（无选项时回忆）</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="auto-next">自评“记住了”后自动下一题</label>'+
     '<p id="available" class="muted" role="status" aria-live="polite"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
@@ -154,7 +154,7 @@ function renderHome() {
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>内容与教材</summary><p>按53张教材照片的红线、五角星及红色旁注，加上11月16日新提供的7张手写资料整理。新增15道题，已有考点补充来源，6张重复总结卡合并归档；新资料对应旧案例进入考试范围。其余未标记教材邻文仍放入参考区。教材为吕丽荣、方友村《建筑电气施工技术》。背诵资料默认以注记卡展示；选择题均为资料改编，仅作自测。每卡在展开前显示页码；遮挡页码注明待核及照片位置；属于复习改写，不是官方试卷。</p><p>P74、P101等已按照片核对；P10及未拍到的内容仍标“待教材核对”。教材正文、手写旁注和原规范补充分开注明，有冲突处不设为唯一正确答案。</p><p>原卡片序号、笔记和进度保留；修订卡建议重温，旧掌握标记不等于新内容已掌握。<a href="./textbook-audit.txt">查看原教材核对范围</a> · <a href="./new-materials-audit.txt">查看新资料合并与待确认项</a></p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
+    '<details class="footnote"><summary>内容与教材</summary><p>按53张教材照片的红线、五角星及红色旁注，加上11月16日新提供的7张手写资料整理。新增15道题，已有考点补充来源，6张重复总结卡合并归档；新资料对应旧案例进入考试范围。其余未标记教材邻文仍放入参考区。教材为吕丽荣、方友村《建筑电气施工技术》。背诵资料默认以注记卡展示；选择题均为资料改编，仅作自测。每卡显示完整答案和参考页码；遮挡页码注明待核及照片位置；属于复习改写，不是官方试卷。</p><p>P74、P101等已按照片核对；P10及未拍到的内容仍标“待教材核对”。教材正文、手写旁注和原规范补充分开注明，有冲突处不设为唯一正确答案。</p><p>原卡片序号、笔记和进度保留；修订卡建议重温，旧掌握标记不等于新内容已掌握。<a href="./textbook-audit.txt">查看原教材核对范围</a> · <a href="./new-materials-audit.txt">查看新资料合并与待确认项</a></p><p>三个学科的笔记、收藏、草稿和进度分别保存。复习采用自评：没记住约10分钟后，有点模糊约1天后，记住后按1、3、7、14、30天安排；考前会优先把建议时间收在考试之前。换设备前可导出记录。</p><p><a href="https://www.xueyinonline.com/course/getposter?courseid=222689289" target="_blank" rel="noopener">查看吕丽荣课程介绍 ↗</a></p></details><details class="footnote"><summary>给忙碌的这两周</summary><p>开题、答辩、初稿、考证，日程很满。这里不要求你一口气学完，只帮你把刚才没记住的那一点，留到下次接着看。</p></details>';
   const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   const quizEntry=document.getElementById('core-only');quizEntry.className='primary big-start';
   homeGrid.querySelector('.start-panel .quick-entry').before(quizEntry);
@@ -208,7 +208,7 @@ function renderSetup() {
 }
 function renderResults() {
   const list=pool();
-  document.getElementById('results').innerHTML='<div class="modes"><button class="primary" id="order">顺序练习</button><button id="random">随机练习</button><button id="cards">背注记卡</button><button id="read">直接阅读</button></div><small>'+list.length+' 张注记卡 · 先回忆，再展开要点</small>'+
+  document.getElementById('results').innerHTML='<div class="modes"><button class="primary" id="order">顺序练习</button><button id="random">随机练习</button><button id="cards">背注记卡</button><button id="read">直接阅读</button></div><small>'+list.length+' 张注记卡 · 答案直接显示，可收起自背</small>'+
     (list.length?list.map(q=>'<button class="list-item" data-q="'+q.id+'"><small>第 '+(q.id+1)+' 号 · '+cardKind(q)+'</small><p>'+escapeHTML(cardPrompt(q))+'</p><small>'+escapeHTML(q.pageRef)+' · '+escapeHTML(scopeLabel(q))+'</small></button>').join(''):'<section class="panel empty">这里暂时没有题目。<p class="muted">可以换个筛选条件，或去题库继续练习。</p></section>');
   document.getElementById('order').onclick=()=>start(list.map(q=>q.id),'顺序练习');
   document.getElementById('random').onclick=()=>start(shuffled(list.map(q=>q.id)),'随机练习');
@@ -382,19 +382,32 @@ function currentAnswer() {
   const s=data.session,id=s.ids[s.index];
   return s.answers[id] ||= {selected:[],draft:'',revealed:false,rated:false,revision:qs[id].revision};
 }
+function cardAnswer(q) {
+  // The answer comes from the verified study points, never a personal mnemonic.
+  return '<details class="memorize-answer" open><summary>答案 · 直接背<span>点击可收起，自行回忆</span></summary><div class="memorize-answer-body">'+q.points.map((point,index)=>'<p class="'+(index===0?'answer-main':'answer-detail')+'">'+escapeHTML(point)+'</p>').join('')+'</div></details>';
+}
+function returnToCard() {
+  const s=data.session,id=s.ids[s.index];
+  const previous=data.pausedSessions.find(item=>item.id===s.returnSessionId);
+  if(previous){parkSession();data.pausedSessions=data.pausedSessions.filter(item=>item.id!==previous.id);data.session=previous;save();renderQuestion();window.scrollTo(0,0);}
+  else start([id],'看答案背诵','recall');
+}
 function renderQuestion() {
   if(!activeSession()){go('home');return;}
   applyAppearance(true);
   const s=data.session,id=s.ids[s.index],q=qs[id],a=currentAnswer(),r=record(id);
   const annotation=s.mode!=='answer'||!q.key;
+  if(annotation&&!a.cardSeen){a.cardSeen=true;a.peeked=true;markViewed(id);}
   if(s.mode==='read'&&!a.revealed){a.revealed=true;a.peeked=true;markViewed(id);}
   main.innerHTML='<div class="question-wrap"><div class="topline"><button id="back" class="quiet">← 暂停，回首页</button><button class="quiet" id="jump">选题 · '+(s.index+1)+' / '+s.ids.length+'</button></div><div class="session-tools"><button id="hint">助记提示</button><button id="peek">看答案</button><button id="study-settings">练习设置</button></div><button id="exit-focus" class="quiet">专注中 · 退出专注</button>'+
     '<section class="card"><div class="question-meta"><span>第 '+(id+1)+' 号 · '+(annotation?cardKind(q):'改编自测 · '+q.t)+'</span><button id="star" class="quiet" aria-pressed="'+!!r.star+'">'+(r.star?'★ 已收藏':'☆ 收藏')+'</button></div>'+
-    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(annotation?cardPrompt(q):q.s)+'</h2>'+sourceLine(q)+(annotation?'<p class="annotation-intro">先合上资料，用自己的话回忆；再展开必背要点。笔记和个人口诀会一直保留。</p>':'')+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
+    '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.cardSeen||x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(annotation?cardPrompt(q):q.s)+'</h2>'+(annotation?cardAnswer(q):'')+(q.key?'<div class="card-practice"><button id="'+(annotation?'card-self-test':'quiz-to-card')+'">'+(annotation?'做本卡'+q.t+'自测':'返回注记卡 · 看答案背诵')+'</button></div>':'')+sourceLine(q)+(annotation?'<p class="annotation-intro">答案已直接显示。可以照着背，也可以收起答案再回忆；详细讲解、口诀和个人注记在下方。</p>':'')+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
   main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
+  if(annotation&&q.key)document.getElementById('card-self-test').onclick=()=>{const origin=s.id;start([id],'本卡选择自测','answer');data.session.returnSessionId=origin;save();};
+  if(!annotation&&q.key)document.getElementById('quiz-to-card').onclick=returnToCard;
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
   const related=[...(q.mergedInto||[]),...(q.mergedFrom||[])];
   if(related.length){const panel=document.createElement('details');panel.className='merged-records';panel.innerHTML='<summary>合并关联题与旧笔记（原记录保留）</summary>'+related.map(other=>'<p><a href="?question='+(other+1)+'">第'+(other+1)+'题：'+escapeHTML(qs[other].s)+'</a></p><p>'+escapeHTML(record(other).note||'此题暂无个人笔记')+'</p>').join('');document.querySelector('.recall-note').after(panel);}
@@ -435,7 +448,7 @@ function renderQuestion() {
   document.getElementById('actions').lastElementChild.disabled=s.index===0;
   if(a.revealed)renderFeedback(q,a);
   else if(!(q.key&&s.mode==='answer'&&data.settings.instantAnswer))action(q.key&&s.mode==='answer'?'提交答案':'展开必背要点',submitCurrentAnswer,true);
-  action(s.index===s.ids.length-1?'本轮小结':a.revealed?'下一题':'先跳过',next,a.revealed);
+  action(s.index===s.ids.length-1?'本轮小结':a.revealed||a.cardSeen?'下一题':'先跳过',next,a.revealed);
   window.StudyExtras?.caseSteps(q,a,{save,mode:s.mode});
 }
 function submitCurrentAnswer() {
@@ -477,14 +490,14 @@ function reviewTime(grade,previous,now=Date.now()) {
 }
 function renderFeedback(q,a) {
   const annotation=data.session.mode!=='answer'||!q.key;
-  const heading=a.correct===undefined?'对照要点，看看能独立背出多少':a.correct?'答对了':'记住这一次，下次再试';
+  const heading=a.correct===undefined?'详细讲解与记忆辅助':a.correct?'答对了':'记住这一次，下次再试';
   document.getElementById('feedback').innerHTML='<div class="feedback"><h3>'+heading+'</h3>'+
     (q.key&&!annotation?'<div class="answer-comparison">'+(typeof a.correct==='boolean'?'<p>你的答案 <b>'+escapeHTML([...a.selected].sort().join('、'))+'</b></p>':'')+'<p>'+ '正确答案'+' <b>'+escapeHTML([...q.key].join('、'))+'</b></p></div>':'')+
     (q.referencePoints?.length?'<details class="reference-points"><summary>补充资料（未标记，不纳入本题考点）</summary><ul>'+q.referencePoints.map(p=>'<li>'+escapeHTML(p)+'</li>').join('')+'</ul></details>':'')+'<p class="textbook-source">'+escapeHTML(q.textbook)+'</p><div class="study-points"><h4>必背要点</h4><ol>'+q.points.map(point=>'<li>'+escapeHTML(point)+'</li>').join('')+'</ol></div>'+(q.trap?'<p class="point-trap"><b>别混淆：</b>'+escapeHTML(q.trap)+'</p>':'')+'<details class="source-links"><summary>延伸阅读</summary>'+q.sources.map(key=>{const item=window.BANK.sources[key];return '<a href="'+escapeHTML(item[1])+'" target="_blank" rel="noopener">'+escapeHTML(item[0])+' ↗</a>';}).join('')+'</details>'+
     (q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+
     '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
     '</div>';
-  if(annotation)document.querySelector('.study-points').before(document.querySelector('#feedback .memory'));
+  // Keep the complete explanation before the mnemonic.
   const editor=document.createElement('details');editor.className='mnemonic-editor';
   editor.innerHTML='<summary>换成我的助记</summary><label for="my-mnemonic">写下你脑海里的画面或顺口溜</label><textarea id="my-mnemonic" class="note" maxlength="500" placeholder="例如：电阻像窄门，电流经过要排队。">'+escapeHTML(record(q.id).mnemonic||'')+'</textarea><small>自动保存；清空后恢复题库助记。</small>';
   document.querySelector('#feedback .memory').after(editor);
@@ -551,23 +564,24 @@ function next() {
   commitPendingAnswer();
   const s=data.session;
   if(s.index<s.ids.length-1){s.index++;save();renderQuestion();window.scrollTo(0,0);return;}
-  s.finished=s.ids.every(id=>s.answers[id]?.revealed||s.answers[id]?.rated);save();
+  s.finished=s.ids.every(id=>s.answers[id]?.cardSeen||s.answers[id]?.revealed||s.answers[id]?.rated);save();
   renderSummary();
 }
 function renderSummary() {
   applyAppearance(false);
   const s=data.session;
-  const covered=s.ids.filter(id=>s.answers[id]?.revealed||s.answers[id]?.rated).length;
+  const covered=s.ids.filter(id=>s.answers[id]?.cardSeen||s.answers[id]?.revealed||s.answers[id]?.rated).length;
   s.finished=covered===s.ids.length;save();
   const completed=s.ids.filter(id=>s.answers[id]?.rated).length;
   const remembered=s.ids.filter(id=>s.answers[id]?.grade==='good').length;
   const weak=s.ids.filter(id=>s.answers[id]?.rated&&s.answers[id].grade!=='good');
-  main.innerHTML='<section class="panel empty"><div class="summary-mark" aria-hidden="true">✓</div><small>进度已经留好了。</small><h1>这次，就到这里。</h1><p>翻看 '+s.ids.filter(id=>s.answers[id]?.revealed).length+' 道 · 作答 / 自评 '+completed+' 道 · 记住 '+remembered+' 道</p><p class="muted">'+(weak.length?'还有 '+weak.length+' 道值得再回想一次。':'可以歇一会儿，再回来。')+'</p><div class="finish-actions"><button id="finish" class="primary">收好进度，回首页</button>'+
+  main.innerHTML='<section class="panel empty"><div class="summary-mark" aria-hidden="true">✓</div><small>进度已经留好了。</small><h1>这次，就到这里。</h1><p>翻看 '+s.ids.filter(id=>s.answers[id]?.cardSeen||s.answers[id]?.revealed).length+' 道 · 作答 / 自评 '+completed+' 道 · 记住 '+remembered+' 道</p><p class="muted">'+(weak.length?'还有 '+weak.length+' 道值得再回想一次。':'可以歇一会儿，再回来。')+'</p><div class="finish-actions"><button id="finish" class="primary">收好进度，回首页</button>'+
     (covered<s.ids.length?'<button id="remaining">继续还没看过的题</button>':'')+(weak.length?'<button id="retry">再看这 '+weak.length+' 道</button>':'')+'<button id="another">再来一小轮</button></div><p class="footnote">建筑电气独立题库 · 忙完手头的事，再接着来。</p></section>';
   document.getElementById('finish').onclick=()=>{if(s.finished)data.session=null;save();go('home');};
   document.getElementById('another').onclick=()=>startSmart(s.ids);
+  if(s.returnSessionId){const button=document.createElement('button');button.id='quiz-to-card';button.textContent='返回刚才的注记卡';button.onclick=returnToCard;document.querySelector('.finish-actions').prepend(button);}
   if(weak.length)document.getElementById('retry').onclick=()=>start(weak,'再巩固一次');
-  if(covered<s.ids.length)document.getElementById('remaining').onclick=()=>{s.index=s.ids.findIndex(id=>!s.answers[id]?.revealed&&!s.answers[id]?.rated);save();renderQuestion();};
+  if(covered<s.ids.length)document.getElementById('remaining').onclick=()=>{s.index=s.ids.findIndex(id=>!s.answers[id]?.cardSeen&&!s.answers[id]?.revealed&&!s.answers[id]?.rated);save();renderQuestion();};
   window.scrollTo(0,0);
 }
 async function copyLink() {
