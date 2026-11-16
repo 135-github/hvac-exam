@@ -29,6 +29,7 @@ const server = http.createServer((req, res) => {
     let total = 0;
     for (const [dir, key] of [['','hvac-memory-v2'],['electric/','electric-memory-v1']]) {
       await page.goto(base + dir);
+      await page.evaluate(()=>{data.settings.correctAutoNext=false;save();});
       for (const width of [320,390,1280]) {
         await page.setViewportSize({width,height:844});
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

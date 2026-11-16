@@ -126,7 +126,7 @@ function renderHome() {
     '<label>出题顺序<select id="free-order"><option value="sequence">按重点顺序</option><option value="random">随机抽题</option><option value="smart">智能推荐</option></select></label>'+
     '<label>本轮题量<input id="free-count" type="number" min="1" max="35" inputmode="numeric"></label>'+
     '<label>练习方式<select id="free-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label></div>'+
-    '<label class="switch-line"><input type="checkbox" id="auto-next">自评后自动进入下一题</label>'+
+    '<label class="switch-line"><input type="checkbox" id="auto-next">自评“记住了”后自动下一题</label>'+
     '<p id="available" class="muted"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
     '<div class="stats"><button id="all"><b>'+done+'<small> / 35</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
@@ -299,7 +299,7 @@ function openStudySettings() {
     '<label>练习方式<select id="session-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label>'+
     '<label>题目字号<select id="font-size"><option value="normal">标准</option><option value="large">大字</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="focus-toggle">专注模式：收起页头和底部导航</label>'+
-    '<label class="switch-line"><input type="checkbox" id="session-auto-next">自评后自动进入下一题</label>'+
+    '<label class="switch-line"><input type="checkbox" id="session-auto-next">自评“记住了”后自动下一题</label>'+
     '<div class="study-actions"><button id="later">'+(record(id).later?'取消留待稍后':'这道题留待稍后')+'</button><button id="end-round">这次先到这里</button></div><p class="muted">选择会自动保存。暂停后，位置和草稿也会留下。</p>';
   document.body.append(dialog);
   dialog.querySelector('#close-study').onclick=()=>dialog.close();
@@ -503,7 +503,7 @@ function rate(grade,updateView=true) {
   data.records[id]={...record(id),seen:(r.seen||0)+1,right:(r.right||0)+(correct?1:0),wrong:grade!=='good',level,due:reviewTime(grade,r),last:Date.now(),lastGoodDay:grade==='good'?dayKey():r.lastGoodDay,ratingToken:a.ratingToken};
   a.rated=true;a.grade=grade;a.editRating=false;a.skipAuto=false;
   save();
-  if(updateView){if(data.settings.autoNext&&!editing)next();else renderQuestion();}
+  if(updateView){if(data.settings.autoNext&&!editing&&grade==='good'&&a.correct!==false)next();else renderQuestion();}
 }
 function next() {
   commitPendingAnswer();
