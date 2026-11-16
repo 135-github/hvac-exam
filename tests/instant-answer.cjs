@@ -4,8 +4,8 @@ const bank=JSON.parse(fs.readFileSync(path.join(root,'construction/questions.jso
 const old=JSON.parse(cp.execFileSync('git',['show','88dac47:construction/questions.json'],{cwd:root,encoding:'utf8'}));
 assert.deepEqual(bank.qs.slice(0,35).map(q=>[q.id,q.u,q.s]),old.qs.map(q=>[q.id,q.u,q.s]),'Old IDs and topics must retain notes');
 const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'construction/questions.js'),'utf8'),ctx);assert.deepEqual(JSON.parse(JSON.stringify(ctx.window.BANK)),bank);
-assert.equal(bank.qs.filter(q=>q.key).length,45);
-assert.match(bank.qs[15].exp,/10min/);assert.match(bank.qs[15].exp,/3～5/);assert.match(bank.qs[15].exp,/24h/);
+assert.equal(bank.qs.filter(q=>q.key).length,bank.meta.objectiveCount);
+assert.match(bank.qs[15].exp,/24h/);assert(!/10min|3～5/.test(bank.qs[15].exp));assert.match(bank.qs[15].referencePoints.join(' '),/10min/);
 assert.match(bank.qs[14].textbook,/未见P10/);assert.match(bank.qs[21].textbook,/15min不是/);
 for(const q of bank.qs){assert(q.textbook);assert(q.cue);assert.equal(q.exp,q.points.join('\n'));if(q.key){assert(q.o.length>=4);assert([...q.key].every(k=>q.o.some(o=>o[0]===k)));assert.equal(new Set(q.key).size,q.key.length);}}
 const server=http.createServer((req,res)=>{const u=decodeURIComponent(req.url.split('?')[0]);if(!u.startsWith('/hvac-exam/')){res.writeHead(404);return res.end();}let p=path.resolve(root,u.slice(11));if(p!==root&&!p.startsWith(root+path.sep)){res.writeHead(403);return res.end();}if(fs.existsSync(p)&&fs.statSync(p).isDirectory())p=path.join(p,'index.html');if(!fs.existsSync(p)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',({'.js':'text/javascript','.html':'text/html','.css':'text/css'}[path.extname(p)]||'text/plain')+';charset=utf-8');res.end(fs.readFileSync(p));});
@@ -40,7 +40,7 @@ for(const dir of ['','electric/','construction/']){
  await page.locator(`.option[data-key="${single.key}"]`).tap();assert.equal(await page.evaluate(()=>currentAnswer().revealed),false);await page.getByRole('button',{name:'提交答案',exact:true}).tap();
  await page.evaluate(()=>{data.settings.instantAnswer=true;save();});
 }
-await page.goto(base+'construction/');await page.click('#textbook-quiz');assert.equal(await page.evaluate(()=>data.session.ids.length),45);assert.equal(await page.evaluate(()=>data.session.mode),'answer');
-await page.click('#back');await page.click('#cases-only');assert.equal(await page.evaluate(()=>data.session.ids.length),13);
+await page.goto(base+'construction/');await page.click('#textbook-quiz');assert.equal(await page.evaluate(()=>data.session.ids.length),bank.meta.focusObjectiveCount);assert.equal(await page.evaluate(()=>data.session.mode),'answer');
+await page.click('#back');await page.locator('.reference-entry summary').click();await page.click('#cases-only');assert.equal(await page.evaluate(()=>data.session.ids.length),13);
 assert.deepEqual(errors,[]);console.log('PASS: instant single/multiple across 3 subjects; wrong-stop; cancellation; stale events; final summary; hints; persistent opt-out; stable original IDs; textbook provenance and synchronized banks.');
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -33,10 +33,10 @@ const ready=page=>page.waitForFunction(async()=>{
   // Time suggestions use this subject, prioritize due/weak cards, preserve an active round.
   await page.evaluate(()=>{
    start([0,1],'不要丢的旧进度','recall');currentAnswer().draft='旧草稿';save();
-   data.records[27]={seen:1,wrong:true,due:1};save();go('home');
+   data.records[23]={seen:1,wrong:true,due:1};save();go('home');
   });
   await page.locator('#time-pocket summary').click();await page.locator('[data-minutes="3"]').click();
-  assert.equal(await page.evaluate(()=>data.session.ids[0]),27);
+  assert.equal(await page.evaluate(()=>data.session.ids[0]),23);
   assert(await page.evaluate(()=>data.pausedSessions.some(s=>s.title==='不要丢的旧进度'&&s.answers[0].draft==='旧草稿')));
   for(const minutes of [3,10,30]){
    const ids=await page.evaluate(m=>StudyExtras.choose(qs,record,m),minutes);
@@ -77,7 +77,7 @@ const ready=page=>page.waitForFunction(async()=>{
   }
   // Real browser offline mode: reload, switch subjects, open sheets, keep typed work.
   await page.goto(base+'construction/');await ready(page);await context.setOffline(true);
-  await page.reload();await page.locator('#cases-only').click();await page.locator('[data-step="1"]').click();await page.locator('#draft').fill('离线写下的正确做法');
+  await page.reload();await page.locator('.reference-entry summary').click();await page.locator('#cases-only').click();await page.locator('[data-step="1"]').click();await page.locator('#draft').fill('离线写下的正确做法');
   await page.reload();await page.locator('#resume').click();assert.equal(await page.locator('#draft').inputValue(),'离线写下的正确做法');
   await page.locator('#back').click();await page.locator('.course-switch a').nth(1).click();assert.equal(await page.evaluate(()=>qs.length),180);
   await page.locator('#one').click();await page.locator('#peek').click();assert((await page.locator('#feedback').innerText()).includes('正确答案'));
@@ -105,10 +105,10 @@ const ready=page=>page.waitForFunction(async()=>{
    await bp.waitForFunction(()=>document.querySelector('#offline-dialog [data-offline-status]').textContent.includes('已备好'));
    await broken.close();
   }
-  if(process.env.ARTIFACT_DIR){await page.goto(base+'construction/');await page.setViewportSize({width:390,height:844});await page.locator('#time-pocket summary').click();await page.screenshot({path:path.join(process.env.ARTIFACT_DIR,'pocket-home.png'),fullPage:true});await page.locator('#cases-only').click();await page.locator('#step-reveal').click();await page.screenshot({path:path.join(process.env.ARTIFACT_DIR,'case-steps.png'),fullPage:true});}
+  if(process.env.ARTIFACT_DIR){await page.goto(base+'construction/');await page.setViewportSize({width:390,height:844});await page.locator('#time-pocket summary').click();await page.screenshot({path:path.join(process.env.ARTIFACT_DIR,'pocket-home.png'),fullPage:true});await page.locator('.reference-entry summary').click();await page.locator('#cases-only').click();await page.locator('#step-reveal').click();await page.screenshot({path:path.join(process.env.ARTIFACT_DIR,'case-steps.png'),fullPage:true});}
   const touchContext=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   const touchPage=await touchContext.newPage();await touchPage.goto(base+'construction/');
-  await touchPage.locator('#cases-only').tap();await touchPage.locator('#draft').fill('触屏写完后一次点开');
+  await touchPage.locator('.reference-entry summary').tap();await touchPage.locator('#cases-only').tap();await touchPage.locator('#draft').fill('触屏写完后一次点开');
   await touchPage.locator('#step-reveal').tap();assert((await touchPage.locator('#step-answer li').count())>0);
   await touchContext.close();
   assert.deepEqual(errors,[]);console.log('PASS: time budgets, parked sessions, all 13×3 case stages, imported drafts, 3 printable sheets, real offline cross-subject practice, update and cache-failure recovery.');
