@@ -66,6 +66,8 @@ function normalize(value) {
   result.settings.count=Number.isInteger(settings.count)&&settings.count>=1?Math.min(settings.count,focusQs.length):5;
   result.settings.unit=focusUnits.some(([u])=>u===settings.unit)?settings.unit:'';
   result.settings.type=qs.some(q=>q.t===settings.type)?settings.type:'';
+  result.settings.unitSelections=StudyControls.selection(settings.unitSelections,result.settings.unit,[...new Set(focusQs.map(q=>q.u))]);
+  result.settings.typeSelections=StudyControls.selection(settings.typeSelections,result.settings.type,[...new Set(focusQs.map(q=>q.t))]);
   result.settings.scope=['all','unseen','wrong','star','later','due'].includes(settings.scope)?settings.scope:'all';
   result.settings.order=['sequence','random','smart'].includes(settings.order)?settings.order:'sequence';
   result.settings.mode=['answer','read','recall'].includes(settings.mode)?settings.mode:'answer';
@@ -133,7 +135,7 @@ function renderHome() {
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
-    '<details class="free-settings"><summary>自己选范围、题量和方式</summary><div class="free-fields">'+
+    '<details class="free-settings"><summary>自己选范围、题量和方式</summary><p class="filter-help">章节和题型可多选；不勾选本组时不会出题。其他项目直接点选。</p><div class="free-fields">'+
     '<label>题目范围<select id="free-scope"><option value="all">全部考试重点</option><option value="unseen">还没练过</option><option value="wrong">错题与待巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option><option value="due">推荐复习</option></select></label>'+
     '<label>重点章节<select id="free-unit"><option value="">全部重点章节</option>'+focusUnits.map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select></label>'+
     '<label>题型<select id="free-type"><option value="">全部题型</option>'+[...new Set(focusQs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select></label>'+
@@ -141,10 +143,10 @@ function renderHome() {
     '<label>本轮题量<input id="free-count" type="number" min="1" max="'+focusQs.length+'" inputmode="numeric"></label>'+
     '<label>练习方式<select id="free-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="auto-next">自评“记住了”后自动下一题</label>'+
-    '<p id="available" class="muted"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
+    '<p id="available" class="muted" role="status" aria-live="polite"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
     '<div class="stats"><button id="all"><b>'+done+'<small> / '+focusQs.length+'</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
-    '<section class="panel progress-panel"><div class="topline"><div><h3>走过的每一道题</h3><small>'+Math.round(done/focusQs.length*100)+'% 已接触</small></div><button id="open-map" class="quiet">选一道 →</button></div><div class="stitches" role="img" aria-label="'+focusQs.length+'道考试重点中已接触'+done+'道">'+focusQs.map(q=>'<span aria-hidden="true" class="stitch '+(record(q.id).wrong?'weak':record(q.id).level>=3?'mastered':record(q.id).seen?'seen':record(q.id).viewed?'viewed':'')+'"></span>').join('')+'</div><div class="map-legend"><span>浅绿 · 看过</span><span>深绿 · 巩固</span><span>暖橙 · 再练</span></div><p class="today-note">'+(today?'今天，已经拾起 '+today+' 道题。':'从任意一道开始，都算数。')+'</p>'+
+    '<section class="panel progress-panel"><div class="topline"><div><h3>走过的每一道题</h3><small>'+Math.round(done/focusQs.length*100)+'% 已接触</small></div><button id="open-map" class="quiet">选一道 →</button></div><div class="stitches"></div><div class="map-legend"><span>灰 · 未接触</span><span>浅绿 · 看过</span><span class="mastered-key">深绿／亮绿 · 巩固</span><span class="weak-key">暖橙 · 再练</span><span>点题号直接跳转</span></div><p class="today-note">'+(today?'今天，已经拾起 '+today+' 道题。':'从任意一道开始，都算数。')+'</p>'+
     '<details><summary class="section-toggle">按重点章节看看</summary>'+focusUnits.map(([u,title])=>{
       const list=focusQs.filter(q=>q.u===u),count=list.filter(q=>record(q.id).seen||record(q.id).viewed).length;
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
@@ -155,6 +157,7 @@ function renderHome() {
   const quizEntry=document.getElementById('textbook-quiz');quizEntry.className='primary big-start';
   homeGrid.querySelector('.start-panel .quick-entry').before(quizEntry);
   bindFreeSettings();
+  StudyControls.progress(focusQs,record,start);
   window.StudyExtras?.home({qs:focusQs,read:record,begin:start,subject:'construction'});
   document.getElementById('textbook-quiz').onclick=()=>start(focusChoices.map(q=>q.id),'考试重点选择题','answer');
   document.getElementById('core-only').onclick=()=>start(focusCards.map(q=>q.id),'考试重点卡','recall');
@@ -255,11 +258,11 @@ function pickOne() {
 }
 function freePool() {
   const s=data.settings;
-  return focusQs.filter(q=>(!s.unit||q.u===s.unit)&&(!s.type||q.t===s.type)&&
+  return focusQs.filter(q=>StudyControls.matches(s.unitSelections,s.unit,q.u)&&StudyControls.matches(s.typeSelections,s.type,q.t)&&
     ({all:true,unseen:!record(q.id).seen,wrong:record(q.id).wrong,star:record(q.id).star||record(q.id).note||record(q.id).mnemonic,later:record(q.id).later,due:isDue(q)})[s.scope]);
 }
 function bindFreeSettings() {
-  const update=()=>{document.getElementById('available').textContent='当前范围 '+freePool().length+' 道 · 随时可以停，也可以跳过';};
+  const update=()=>{const count=freePool().length;document.getElementById('available').textContent='当前范围 '+count+' 道 · 本轮 '+Math.min(count,data.settings.count)+' 道；练全部会出 '+count+' 道。';document.getElementById('daily').disabled=!count;document.getElementById('choose-all').disabled=!count;};
   for(const key of ['scope','unit','type','order','count','mode']) {
     const node=document.getElementById('free-'+key);node.value=data.settings[key];
     node.onchange=()=>{
@@ -271,6 +274,7 @@ function bindFreeSettings() {
       save();update();
     };
   }
+  StudyControls.filters(data.settings,()=>{save();update();});
   const auto=document.getElementById('auto-next');auto.checked=data.settings.autoNext;
   auto.onchange=()=>{data.settings.autoNext=auto.checked;save();};
   const begin=all=>{
