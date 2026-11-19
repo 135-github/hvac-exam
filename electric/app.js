@@ -187,6 +187,7 @@ function renderHome() {
   document.getElementById('letter').oninput=e=>{data.letter=e.target.value;save();};
   document.getElementById('quick-five').onclick=()=>start(shuffled(qs).sort((a,b)=>priority(b)-priority(a)).slice(0,5).map(q=>q.id),'五题小练习');
   ReviewLab.bindHome();
+  MemoryDeck.home();
   document.getElementById('copy-link').onclick=copyLink;
   document.getElementById('bookmark').onclick=saveBookmark;
   document.querySelectorAll('[data-unit]').forEach(b=>b.onclick=()=>{filters.unit=b.dataset.unit;go('practice');});
@@ -492,6 +493,7 @@ function renderFeedback(q,a) {
     '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
     '</div>';
   offerCircuit(q);
+  MemoryDeck.forQuestion(q);
   const editor=document.createElement('details');editor.className='mnemonic-editor';
   editor.innerHTML='<summary>换成我的助记</summary><label for="my-mnemonic">写下你脑海里的画面或顺口溜</label><textarea id="my-mnemonic" class="note" maxlength="500" placeholder="例如：电阻像窄门，电流经过要排队。">'+escapeHTML(record(q.id).mnemonic||'')+'</textarea><small>自动保存；清空后恢复题库助记。</small>';
   document.querySelector('#feedback .memory').after(editor);
@@ -688,3 +690,5 @@ window.addEventListener('study-before-update',()=>{commitPendingAnswer();save();
 }
 
 if(new URLSearchParams(location.search).get('demo')==='self-hold')showCircuitLab();
+const requestedCard=new URLSearchParams(location.search).get('card');
+if(requestedCard!==null)MemoryDeck.open(requestedCard);

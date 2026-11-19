@@ -5,3 +5,9 @@
 .lab-buttons button{flex:1;touch-action:none;user-select:none}.lab-start{font-weight:bold}
 .related-action{justify-content:space-between;margin:0 0 1rem}.review-mix,.review-step{display:block;font-size:.9rem;margin:.65rem 0}
 .demo-link{margin:.5rem 0 1rem}.transfer-dialog .options{margin:.75rem 0}.transfer-dialog button,.circuit-lab button{min-height:44px}
+.memory-deck select{width:100%;min-height:44px}.memory-deck dl{margin:1rem 0}
+.memory-deck dt{font-size:.92rem;margin-top:.65rem;padding-top:.65rem;border-top:1px solid var(--line);color:var(--muted)}
+.memory-deck dd{margin:.25rem 0 .6rem;font-weight:650;line-height:1.55}
+.memory-deck summary{cursor:pointer;padding:.65rem 0}.memory-deck details p{font-size:.92rem;line-height:1.55}
+.deck-nav{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:1rem}
+button.deck-entry{display:block;min-height:44px;margin:.5rem 0 0;color:var(--muted);font-size:.9rem;text-align:left}
