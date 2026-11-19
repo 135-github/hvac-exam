@@ -1,0 +1,7 @@
+.circuit-lab,.transfer-dialog{width:min(33rem,calc(100% - 2rem));max-height:85dvh;overflow:auto;padding:1.25rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px}
+.circuit-lab::backdrop,.transfer-dialog::backdrop{background:#101810aa}
+.circuit-lab svg{width:100%;display:block;background:var(--pale);border-radius:8px}
+.circuit-state{min-height:3em;font-weight:650}.lab-buttons,.related-action{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.lab-buttons button{flex:1;touch-action:none;user-select:none}.lab-start{font-weight:bold}
+.related-action{justify-content:space-between;margin:0 0 1rem}.review-mix,.review-step{display:block;font-size:.9rem;margin:.65rem 0}
+.demo-link{margin:.5rem 0 1rem}.transfer-dialog .options{margin:.75rem 0}.transfer-dialog button,.circuit-lab button{min-height:44px}

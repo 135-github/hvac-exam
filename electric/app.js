@@ -54,7 +54,13 @@ function normalizeSession(old) {
       else answers[id].ratingBefore=Object.fromEntries(LEARNING_KEYS.filter(key=>a.ratingBefore[key]!==undefined).map(key=>[key,a.ratingBefore[key]]));
     }
   }
-  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',paper:typeof old.paper==='string'&&paperById[old.paper]?old.paper:'',finished:old.finished===true};
+  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',paper:typeof old.paper==='string'&&paperById[old.paper]?old.paper:'',finished:old.finished===true,reviewPlan:restoreReviewPlan(old.reviewPlan,ids)};
+}
+function restoreReviewPlan(plan,ids) {
+  if(!plan || !Array.isArray(plan.labels) || plan.labels.length!==ids.length || ids.length!==5)return undefined;
+  const allowed=['薄弱题','到期复习','同考点变式','回顾','新题'];
+  if(!plan.labels.every(label=>allowed.includes(label)))return undefined;
+  return {ids,labels:plan.labels,source:ids.includes(plan.source)?plan.source:undefined,variant:ids.includes(plan.variant)?plan.variant:undefined};
 }
 function sessionId() { return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9); }
 
@@ -180,7 +186,7 @@ function renderHome() {
   document.getElementById('wrong').onclick=()=>go('wrong');
   document.getElementById('letter').oninput=e=>{data.letter=e.target.value;save();};
   document.getElementById('quick-five').onclick=()=>start(shuffled(qs).sort((a,b)=>priority(b)-priority(a)).slice(0,5).map(q=>q.id),'五题小练习');
-  document.getElementById('review-now').onclick=()=>{filters={unit:'',type:'',search:''};go('wrong');};
+  ReviewLab.bindHome();
   document.getElementById('copy-link').onclick=copyLink;
   document.getElementById('bookmark').onclick=saveBookmark;
   document.querySelectorAll('[data-unit]').forEach(b=>b.onclick=()=>{filters.unit=b.dataset.unit;go('practice');});
@@ -217,6 +223,7 @@ function renderResults() {
   document.getElementById('cards').onclick=()=>start(list.map(q=>q.id),'回忆卡片','recall');
   document.getElementById('read').onclick=()=>start(list.map(q=>q.id),'背题浏览','read');
   document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>start([Number(b.dataset.q)],'单题练习'));
+  ReviewLab.bindReview();
 }
 function priority(q) {
   const r=record(q.id);
@@ -398,6 +405,7 @@ function renderQuestion() {
     '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
+  ReviewLab.decorateQuestion(q);
   main.querySelector('.card').dataset.result=a.correct===false?'wrong':a.correct===true?'correct':'pending';
   document.getElementById('back').onclick=()=>go('home');
   document.getElementById('star').onclick=e=>{data.records[id]={...record(id),star:!record(id).star};save();e.currentTarget.textContent=record(id).star?'★ 已收藏':'☆ 收藏';e.currentTarget.setAttribute('aria-pressed',String(!!record(id).star));};
@@ -446,6 +454,7 @@ function submitCurrentAnswer() {
   if(q.key&&s.mode==='answer'&&!a.selected.length){toast('先选择答案。');return;}
   a.revealed=true;markViewed(id);
   if(q.key&&s.mode==='answer')a.correct=[...a.selected].sort().join('')===[...q.key].sort().join('');
+  if(typeof a.correct==='boolean')ReviewLab.graded(q,a);
   commitPendingAnswer();save();
   if(a.correct===true&&(data.settings.instantAnswer||data.settings.correctAutoNext)){next();toast('答对了 ✓');return;}
   renderQuestion();document.getElementById('feedback')?.scrollIntoView({block:'start'});
@@ -482,6 +491,7 @@ function renderFeedback(q,a) {
     (q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+
     '<div class="memory"><small>联想助记</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p></div>'+
     '</div>';
+  offerCircuit(q);
   const editor=document.createElement('details');editor.className='mnemonic-editor';
   editor.innerHTML='<summary>换成我的助记</summary><label for="my-mnemonic">写下你脑海里的画面或顺口溜</label><textarea id="my-mnemonic" class="note" maxlength="500" placeholder="例如：电阻像窄门，电流经过要排队。">'+escapeHTML(record(q.id).mnemonic||'')+'</textarea><small>自动保存；清空后恢复题库助记。</small>';
   document.querySelector('#feedback .memory').after(editor);
@@ -561,6 +571,7 @@ function renderSummary() {
   const weak=s.ids.filter(id=>s.answers[id]?.rated&&s.answers[id].grade!=='good');
   main.innerHTML='<section class="panel empty"><div class="summary-mark" aria-hidden="true">✓</div><small>进度已经留好了。</small><h1>这次，就到这里。</h1><p>翻看 '+s.ids.filter(id=>s.answers[id]?.revealed).length+' 道 · 作答 / 自评 '+completed+' 道 · 记住 '+remembered+' 道</p><p class="muted">'+(weak.length?'还有 '+weak.length+' 道值得再回想一次。':'可以歇一会儿，再回来。')+'</p><div class="finish-actions"><button id="finish" class="primary">收好进度，回首页</button>'+
     (covered<s.ids.length?'<button id="remaining">继续还没看过的题</button>':'')+(weak.length?'<button id="retry">再看这 '+weak.length+' 道</button>':'')+'<button id="another">再来一小轮</button>'+(s.paper==='random'?'<button id="redraw">重抽一套随机卷</button>':'')+'</div><p class="footnote">电工独立题库 · 忙完手头的事，再接着来。</p></section>';
+  ReviewLab.summary();
   document.getElementById('finish').onclick=()=>{if(s.finished)data.session=null;save();go('home');};
   document.getElementById('another').onclick=()=>startSmart(s.ids);
   if(s.paper==='random')document.getElementById('redraw').onclick=()=>start(drawPaper(paperById.random.random),'随机综合卷','answer',0,'random');
@@ -675,3 +686,5 @@ window.addEventListener('study-before-update',()=>{commitPendingAnswer();save();
   start([Number(requested)-1],'从速记回看','answer');
  }
 }
+
+if(new URLSearchParams(location.search).get('demo')==='self-hold')showCircuitLab();
