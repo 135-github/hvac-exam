@@ -79,7 +79,7 @@ const ready=page=>page.waitForFunction(async()=>{
   await page.goto(base+'construction/');await ready(page);await context.setOffline(true);
   await page.reload();await page.locator('.reference-entry summary').click();await page.locator('#cases-only').click();await page.locator('[data-step="1"]').click();await page.locator('#draft').fill('离线写下的正确做法');
   await page.reload();await page.locator('#resume').click();assert.equal(await page.locator('#draft').inputValue(),'离线写下的正确做法');
-  await page.locator('#back').click();await page.locator('.course-switch a').nth(1).click();assert.equal(await page.evaluate(()=>qs.length),180);
+  await page.locator('#back').click();await page.locator('.course-switch a').nth(1).click();assert.equal(await page.evaluate(()=>qs.length),680);
   await page.locator('#one').click();await page.locator('#peek').click();assert((await page.locator('#feedback').innerText()).includes('正确答案'));
   await page.locator('#back').click();await page.locator('.course-switch a').first().click();assert.equal(await page.evaluate(()=>qs.length),161);
   await page.goto(base+'review/construction.html');assert.equal(await page.locator('.paper').count(),3);

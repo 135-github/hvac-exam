@@ -7,7 +7,7 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const cases = [
   ['', 161, '4a6328ad5b149ab4b56a81711d0eee80a766a91aaf6efcb315425c32313472e0'],
-  ['electric', 180, '84b4e2bb3b92da7f84dcd8d4d2ca056e3be96c72bb6bb633e020b7276d5d4f10']
+  ['electric', 680, '84b4e2bb3b92da7f84dcd8d4d2ca056e3be96c72bb6bb633e020b7276d5d4f10']
 ];
 for (const [dir, count, expectedHash] of cases) {
   const bank = JSON.parse(fs.readFileSync(path.join(root, dir, 'questions.json'), 'utf8'));
@@ -25,13 +25,26 @@ for (const [dir, count, expectedHash] of cases) {
     assert(q.cue.trim().length > 0, 'Missing mnemonic');
     if (q.key) assert([...q.key].every(k => q.o.some(o => o[0] === k)), 'Answer missing from choices');
     if (dir === 'electric') {
-      assert.equal(q.verified, true);
+      assert.equal(typeof q.verified, 'boolean');
       assert(!q.cue.startsWith('答案联想：'), 'Replace placeholder mnemonic');
     }
   });
+  if (dir === 'electric') {
+    // The first 180 are the user-confirmed paper; the rest are imported practice.
+    assert(bank.qs.slice(0,180).every(q => q.verified === true), 'Original answers must stay confirmed');
+    assert(bank.qs.slice(180).every(q => q.verified === false && q.source === '安辰题库' && q.confirmation === 'imported-2026-11-19'), 'Imported questions must keep their source');
+    assert.equal(bank.papers.length, 5, 'Five papers expected');
+    const random = bank.papers.find(p => p.id === 'random');
+    assert.deepEqual(random.random, {'单选题':140,'多选题':20,'判断题':20}, 'Random paper ratio changed');
+    for (const [type, need] of Object.entries(random.random)) {
+      assert(bank.qs.filter(q => q.t === type).length >= need, `Random pool too small: ${type}`);
+    }
+  }
   // Freeze the original questions and confirmed answers independently of the UI.
+  // Imported practice questions are appended after the frozen original block.
   // An intentional content correction must update this fingerprint after review.
-  const original = bank.qs.map(q => ({id:q.id,n:q.n,u:q.u,t:q.t,s:q.s,o:q.o,key:q.key}));
+  const originalCount = dir === 'electric' ? 180 : count;
+  const original = bank.qs.slice(0, originalCount).map(q => ({id:q.id,n:q.n,u:q.u,t:q.t,s:q.s,o:q.o,key:q.key}));
   const digest = crypto.createHash('sha256').update(JSON.stringify(original)).digest('hex');
   assert.equal(digest, expectedHash, 'Original question or answer changed: review before updating fingerprint');
   console.log(`${dir || 'hvac'}: ${count} questions, synchronized data, original content preserved`);

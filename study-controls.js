@@ -24,7 +24,7 @@
       sync();label.replaceWith(field);
     }
   }
-  function progress(list,read,begin){
+  function progress(list,read,begin,format){
     const grid=document.querySelector('.stitches');if(!grid)return;
     grid.replaceChildren();grid.setAttribute('role','group');grid.setAttribute('aria-label','题目进度，点击题号直接开始');
     const ids=list.map(q=>q.id);
@@ -32,7 +32,8 @@
       const r=read(q.id),state=r.wrong?'weak':r.level>=3?'mastered':r.seen?'seen':r.viewed?'viewed':'';
       const label={weak:'需要再练',mastered:'已巩固',seen:'已练过',viewed:'已翻看','':'未接触'}[state];
       const button=document.createElement('button');button.type='button';button.className='stitch '+state;button.dataset.question=q.id;
-      button.textContent=q.id+1;button.title=`第${q.id+1}题 · ${label}：${q.s}`;button.setAttribute('aria-label',button.title);
+      const view=format?format(q):{text:q.id+1,title:`第${q.id+1}题`};
+      button.textContent=view.text;button.title=`${view.title} · ${label}：${q.s}`;button.setAttribute('aria-label',button.title);
       button.onclick=()=>begin(ids,'进度方块选题','answer',ids.indexOf(q.id));grid.append(button);
     }
   }

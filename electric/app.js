@@ -1,11 +1,26 @@
 'use strict';
 const {qs, units} = window.BANK;
+const papers = window.BANK.papers || [];
 const STORAGE = 'electric-memory-v1';
 const DAY = 86400000;
 const intervals = [1,3,7,14,30];
 const LEARNING_KEYS=['seen','right','wrong','level','due','last','lastGoodDay','ratingToken'];
 const main = document.getElementById('main');
 const escapeHTML = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const paperById = Object.fromEntries(papers.map(p=>[p.id,p]));
+const PRACTICE_PREFIX = {'4':'单','5':'多','6':'判'};
+const PRACTICE_NAME = {'4':'单选练习','5':'多选练习','6':'判断练习'};
+function questionLabel(q) {
+  return (PRACTICE_NAME[q.u] ? PRACTICE_NAME[q.u]+' ' : '')+'第 '+q.n+' 题';
+}
+function mapLabel(q) {
+  return PRACTICE_PREFIX[q.u] ? PRACTICE_PREFIX[q.u]+q.n : q.n;
+}
+function drawPaper(ratio) {
+  const ids=[];
+  for(const [type,count] of Object.entries(ratio)) ids.push(...shuffled(qs.filter(q=>q.t===type)).slice(0,count).map(q=>q.id));
+  return ids;
+}
 let view = 'home';
 let filters = {unit:'', type:'', search:''};
 let toastTimer;
@@ -39,7 +54,7 @@ function normalizeSession(old) {
       else answers[id].ratingBefore=Object.fromEntries(LEARNING_KEYS.filter(key=>a.ratingBefore[key]!==undefined).map(key=>[key,a.ratingBefore[key]]));
     }
   }
-  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',finished:old.finished===true};
+  return {id:typeof old.id==='string'?old.id:sessionId(),ids,index:current===undefined?ids.length-1:ids.indexOf(current),answers,title:typeof old.title==='string'?old.title:'上次练习',mode:['answer','read','recall'].includes(old.mode)?old.mode:old.cards?'recall':'answer',paper:typeof old.paper==='string'&&paperById[old.paper]?old.paper:'',finished:old.finished===true};
 }
 function sessionId() { return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9); }
 
@@ -51,10 +66,13 @@ function normalize(value) {
     if(qs[id]) result.records[id]={...r,level:Math.min(r.level||0,5)};
   }
   const settings=value.settings||{};
-  result.settings.count=Number.isInteger(settings.count)&&settings.count>=1&&settings.count<=180?settings.count:5;
+  result.settings.count=Number.isInteger(settings.count)&&settings.count>=1&&settings.count<=qs.length?settings.count:5;
   result.settings.unit=units[settings.unit]?settings.unit:'';
   result.settings.type=qs.some(q=>q.t===settings.type)?settings.type:'';
   result.settings.unitSelections=StudyControls.selection(settings.unitSelections,result.settings.unit,[...new Set(qs.map(q=>q.u))]);
+  // If the learner previously had every original unit selected, include newly added units too.
+  const oldUnits=['1','2','3'];
+  if(oldUnits.every(u=>result.settings.unitSelections.includes(u))) result.settings.unitSelections=[...new Set(qs.map(q=>q.u))];
   result.settings.typeSelections=StudyControls.selection(settings.typeSelections,result.settings.type,[...new Set(qs.map(q=>q.t))]);
   result.settings.scope=['all','unseen','wrong','star','later','due'].includes(settings.scope)?settings.scope:'all';
   result.settings.order=['sequence','random','smart'].includes(settings.order)?settings.order:'sequence';
@@ -106,14 +124,20 @@ function go(next) {
   if(view==='home')renderHome();else renderSetup();
   window.scrollTo(0,0);
 }
+function startPaper(id) {
+  const paper=paperById[id];
+  if(!paper)return;
+  const ids=paper.random?drawPaper(paper.random):qs.filter(q=>paper.units.includes(q.u)).map(q=>q.id);
+  start(ids,paper.title,'answer',0,paper.id);
+}
 function renderHome() {
   const done=qs.filter(q=>(record(q.id).seen||record(q.id).viewed)).length;
   const wrong=qs.filter(q=>record(q.id).wrong).length;
   const due=qs.filter(isDue).length;
   const today=qs.filter(q=>[record(q.id).viewed,record(q.id).last].some(t=>t&&dayKey(t)===dayKey())).length;
-  main.innerHTML='<small>电工考证 · 独立题库 · 180 道</small><h1>有空，就练一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
+  main.innerHTML='<small>电工考证 · 独立题库 · '+qs.length+' 道</small><h1>有空，就练一点。</h1><p class="home-intro">写论文、等答辩、准备考证的间隙，随时回来接着学。</p>'+
     '<div class="home-grid"><section class="ticket electric-ticket" aria-label="电工题库概览"><div class="ticket-top"><div><small>电工高级工证书考试</small><div class="ticket-date">11.21<span> 考证</span></div></div><span class="exam-state">随时续练</span></div>'+
-    '<div class="ticket-body"><div class="exam-time">2026 年 11 月 21 日</div><p>考试具体时段以准考证为准</p><p>140 道单选 · 20 道多选 · 20 道判断</p><p class="muted">答案已由题库整理者确认。把零散的时间，留给真正需要再想一遍的题。</p><div class="ticket-actions"><button id="quick-five">来一轮 · 5 题</button><button id="review-now">复习薄弱题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
+    '<div class="ticket-body"><div class="exam-time">2026 年 11 月 21 日</div><p>考试具体时段以准考证为准</p><p>综合卷 180 道 · 练习卷 500 道</p><p class="muted">原卷答案已确认；新增题按原文件保留。把零散的时间，留给真正需要再想一遍的题。</p><div class="ticket-actions"><button id="quick-five">来一轮 · 5 题</button><button id="review-now">复习薄弱题</button></div><details class="phone-help"><summary>下次，一点就进来</summary><p>在手机浏览器菜单中选“添加到主屏幕”或“收藏”。进度保存在当前浏览器，换手机前请导出记录。</p><button id="copy-link">复制电工题库链接</button><button id="bookmark">保存我的学习书签</button></details></div></section>'+
     '<section class="start-panel"><h3>这一轮，由你决定。</h3><p>可以只练一道，也可以直接翻答案。</p>'+
     (activeSession()?'<button class="primary big-start" id="resume">接着上次<span>→</span><small>'+sessionCaption(data.session)+'</small><small class="resume-stem">'+escapeHTML(qs[data.session.ids[data.session.index]].s)+'</small></button>':'')+
     '<div class="quick-entry"><button id="one" '+(!activeSession()?'class="primary"':'')+'>先练一道</button><button id="browse">随手翻翻</button></div>'+
@@ -122,22 +146,29 @@ function renderHome() {
     '<label>题型分区<select id="free-unit"><option value="">全部题型分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select></label>'+
     '<label>题型<select id="free-type"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select></label>'+
     '<label>出题顺序<select id="free-order"><option value="sequence">按原文顺序</option><option value="random">随机抽题</option><option value="smart">智能推荐</option></select></label>'+
-    '<label>本轮题量<input id="free-count" type="number" min="1" max="180" inputmode="numeric"></label>'+
+    '<label>本轮题量<input id="free-count" type="number" min="1" max="'+qs.length+'" inputmode="numeric"></label>'+
     '<label>练习方式<select id="free-mode"><option value="answer">作答后看答案</option><option value="read">直接背题看答案</option><option value="recall">回忆卡片</option></select></label></div>'+
     '<label class="switch-line"><input type="checkbox" id="auto-next">自评“记住了”后自动下一题</label>'+
     '<p id="available" class="muted" role="status" aria-live="polite"></p><div class="quick-entry"><button id="choose-all">练当前范围全部题</button><button id="daily" class="primary">按我的选择开始</button></div></details>'+
     '<details id="paused-list"><summary>放在这里的进度 · '+data.pausedSessions.length+'</summary><div id="paused-items"></div></details></section></div>'+
-    '<div class="stats"><button id="all"><b>'+done+'<small> / 180</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
+    '<section class="panel paper-panel"><div class="topline"><div><h3>五张卷，按需要选</h3><small>独立练习只含新增 500 题；综合卷仍是你的原 180 题。</small></div></div><div class="paper-grid">'+
+    papers.map(p=>{
+      if(p.random)return '<button class="paper-card" data-paper="'+p.id+'"><b>'+escapeHTML(p.title)+'</b><span>180 道</span><small>'+escapeHTML(p.desc)+'</small></button>';
+      const list=qs.filter(q=>p.units.includes(q.u)),count=list.filter(q=>record(q.id).seen||record(q.id).viewed).length;
+      return '<button class="paper-card" data-paper="'+p.id+'"><b>'+escapeHTML(p.title)+'</b><span>'+list.length+' 道</span><small>'+escapeHTML(p.desc)+'</small><progress value="'+count+'" max="'+list.length+'"></progress><small>已接触 '+count+' / '+list.length+'</small></button>';
+    }).join('')+'</div></section>'+
+    '<div class="stats"><button id="all"><b>'+done+'<small> / '+qs.length+'</small></b><small>已接触</small></button><button id="due"><b>'+due+'</b><small>到期复习</small></button><button id="wrong"><b>'+wrong+'</b><small>待巩固</small></button></div>'+
     '<section class="panel progress-panel"><div class="topline"><div><h3>走过的每一道题</h3><small>'+Math.round(done/qs.length*100)+'% 已接触</small></div><button id="open-map" class="quiet">选一道 →</button></div><div class="stitches"></div><div class="map-legend"><span>灰 · 未接触</span><span>浅绿 · 看过</span><span class="mastered-key">深绿／亮绿 · 巩固</span><span class="weak-key">暖橙 · 再练</span><span>点题号直接跳转</span></div><p class="today-note">'+(today?'今天，已经拾起 '+today+' 道题。':'从任意一道开始，都算数。')+'</p>'+
     '<details><summary class="section-toggle">按题型分区看看</summary>'+Object.entries(units).map(([u,title])=>{
       const list=qs.filter(q=>q.u===u),count=list.filter(q=>record(q.id).seen||record(q.id).viewed).length;
       return '<button class="chapter" data-unit="'+u+'"><span>'+escapeHTML(title)+'</span><small>'+count+'/'+list.length+'</small><progress value="'+count+'" max="'+list.length+'"></progress></button>';
     }).join('')+'</details></section>'+
     '<section class="letter"><label for="letter"><h3>留一句话，给考前的自己</h3></label><textarea id="letter" class="note" maxlength="100" placeholder="比如：认真准备过，就从容一点。">'+escapeHTML(data.letter)+'</textarea><small>自动保存，也会写进你的学习书签。</small></section>'+
-    '<details class="footnote"><summary>题库与记录说明</summary><p>来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断。保留原题号和选项顺序，不加入拓展题。全部答案已由题库整理者确认。助记用画面、口诀或选项组合帮助回忆，也可以改成自己的版本。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工高级工考证日期为2026年11月21日，具体时段以准考证为准。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 180 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
+    '<details class="footnote"><summary>题库与记录说明</summary><p>原综合卷来自你提供的《整卷预览》，共 140 道单选、20 道多选、20 道判断，答案已由题库整理者确认。2026 年 11 月 19 日导入同学安辰的练习题 500 道：200 道单选、100 道多选、200 道判断，答案按原文件保留，未逐题复核；这些题的助记为自动生成，可能直接点出答案，可自行修改。原 180 题的题号、选项顺序和进度均未改变。</p><p>记住后的常规复习间隔为 1、3、7、14、30 天。同日重复答对只提升一次等级。电工高级工考证日期为2026年11月21日，具体时段以准考证为准。电工与暖通进度分开保存，互不覆盖。进度只存在当前浏览器，可在右上角导出备份。</p></details><details class="footnote"><summary>为什么有这一页</summary><p>开题报告、开题答辩、论文初稿、电工考证和期末考试，赶在了同一段日子里。于是我们把这 680 道题放到一起，给零散的时间留一个随手能打开的入口。</p><p>练到哪儿，就留在哪儿。忙完了，再接着来。</p></details>';
   const homeGrid=main.querySelector('.home-grid');homeGrid.prepend(homeGrid.querySelector('.start-panel'));
   bindFreeSettings();
-  StudyControls.progress(qs,record,start);
+  StudyControls.progress(qs,record,start,q=>({text:mapLabel(q),title:questionLabel(q)}));
+  document.querySelectorAll('[data-paper]').forEach(b=>b.onclick=()=>startPaper(b.dataset.paper));
   window.StudyExtras?.home({qs,read:record,begin:start,subject:'electric'});
   document.getElementById('open-map').onclick=()=>openQuestionPicker(true);
   document.getElementById('one').onclick=()=>start([pickOne().id],'先练一道');
@@ -157,8 +188,8 @@ function renderHome() {
 function matchesSearch(q,text) {
   const term=text.trim();
   if(!term)return true;
-  if(/^#?\d+$/.test(term))return q.id+1===Number(term.replace('#',''));
-  return [q.s,...q.o||[],q.cue,q.exp,record(q.id).note||'',record(q.id).mnemonic||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
+  if(/^#?\d+$/.test(term)){const n=Number(term.replace('#',''));return q.n===String(n)||q.id+1===n;}
+  return [q.s,...q.o||[],q.cue,q.exp,questionLabel(q),record(q.id).note||'',record(q.id).mnemonic||''].join(' ').toLocaleLowerCase().includes(term.toLocaleLowerCase());
 }
 function pool() {
   return qs.filter(q=>(!filters.unit||q.u===filters.unit) && (!filters.type||q.t===filters.type) &&
@@ -168,7 +199,7 @@ function pool() {
 }
 function renderSetup() {
   const title={practice:'按自己的节奏，复习。',wrong:'再遇见，就记住。',star:'留给自己的重点。',due:'今天，再回想一次。',later:'先放一放，等你回来。'}[view];
-  main.innerHTML='<small>'+({practice:'全部 180 道原文题',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
+  main.innerHTML='<small>'+({practice:'全部 '+qs.length+' 道题',wrong:'答错的题、没记牢的题，都收在这里',star:'收藏与个人注记',due:'已到复习时间的题目',later:'你标记为稍后再看的题目'}[view])+'</small><h1>'+title+'</h1>'+
     '<div class="toolbar"><select id="unit" aria-label="题型分区"><option value="">全部题型分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select><select id="type" aria-label="题型"><option value="">全部题型</option>'+[...new Set(qs.map(q=>q.t))].map(t=>'<option>'+t+'</option>').join('')+'</select><input id="search" type="search" placeholder="题号、题干、选项或注记" aria-label="搜索题号、题目或注记"></div><div id="results"></div>';
   for(const key of ['unit','type','search']) {
     const node=document.getElementById(key);
@@ -180,7 +211,7 @@ function renderSetup() {
 function renderResults() {
   const list=pool();
   document.getElementById('results').innerHTML='<div class="modes"><button class="primary" id="order">顺序练习</button><button id="random">随机练习</button><button id="cards">回忆卡片</button><button id="read">背题浏览</button></div><small>'+list.length+' 道题 · 回忆卡片会先隐藏选项</small>'+
-    (list.length?list.map(q=>'<button class="list-item" data-q="'+q.id+'"><small>第 '+(q.id+1)+' 题 · '+q.t+'</small><p>'+escapeHTML(q.s)+'</p></button>').join(''):'<section class="panel empty">这里暂时没有题目。<p class="muted">可以换个筛选条件，或去题库继续练习。</p></section>');
+    (list.length?list.map(q=>'<button class="list-item" data-q="'+q.id+'"><small>'+questionLabel(q)+' · '+q.t+'</small><p>'+escapeHTML(q.s)+'</p></button>').join(''):'<section class="panel empty">这里暂时没有题目。<p class="muted">可以换个筛选条件，或去题库继续练习。</p></section>');
   document.getElementById('order').onclick=()=>start(list.map(q=>q.id),'顺序练习');
   document.getElementById('random').onclick=()=>start(shuffled(list.map(q=>q.id)),'随机练习');
   document.getElementById('cards').onclick=()=>start(list.map(q=>q.id),'回忆卡片','recall');
@@ -205,10 +236,10 @@ function parkSession() {
     data.pausedSessions.unshift(data.session);
   }
 }
-function start(ids,title,mode='answer',index=0) {
+function start(ids,title,mode='answer',index=0,paper='') {
   if(!ids.length){toast('这个范围暂时没有题目，可以换个条件。');return;}
   parkSession();
-  data.session={id:sessionId(),ids,index,answers:{},title,mode};
+  data.session={id:sessionId(),ids,index,answers:{},title,mode,paper};
   save();renderQuestion();window.scrollTo(0,0);
 }
 
@@ -241,7 +272,7 @@ function bindFreeSettings() {
     node.onchange=()=>{
       if(key==='count') {
         const n=Number(node.value);
-        if(!Number.isInteger(n)||n<1||n>qs.length){toast('题量可以选 1 到 180 道');node.value=data.settings.count;return;}
+        if(!Number.isInteger(n)||n<1||n>qs.length){toast('题量可以选 1 到 '+qs.length+' 道');node.value=data.settings.count;return;}
         data.settings.count=n;
       } else data.settings[key]=node.value;
       save();update();
@@ -254,7 +285,7 @@ function bindFreeSettings() {
     let list=freePool();
     if(!list.length){toast('这个范围暂时没有题目，可以换个条件。');return;}
     const count=Number(document.getElementById('free-count').value);
-    if(!all&&(!Number.isInteger(count)||count<1||count>qs.length)){toast('题量可以选 1 到 180 道');return;}
+    if(!all&&(!Number.isInteger(count)||count<1||count>qs.length)){toast('题量可以选 1 到 '+qs.length+' 道');return;}
     data.settings.count=all?list.length:count;
     if(data.settings.order==='random')list=shuffled(list);
     if(data.settings.order==='smart')list=shuffled(list).sort((a,b)=>priority(b)-priority(a));
@@ -266,7 +297,7 @@ function bindFreeSettings() {
 }
 function sessionCaption(s) {
   const id=s.ids[s.index],mode={answer:'作答',read:'背题',recall:'回忆'}[s.mode]||'作答';
-  return mode+' · 原文第 '+(id+1)+' 题 · 本轮 '+(s.index+1)+' / '+s.ids.length;
+  return mode+' · '+questionLabel(qs[id])+' · 本轮 '+(s.index+1)+' / '+s.ids.length;
 }
 function renderPausedSessions() {
   const container=document.getElementById('paused-items');
@@ -323,8 +354,8 @@ function openQuestionPicker(all=false) {
   all=all===true;
   document.getElementById('question-picker')?.remove();
   const dialog=document.createElement('dialog');dialog.id='question-picker';dialog.setAttribute('aria-labelledby','picker-title');
-  dialog.innerHTML='<div class="topline"><h3 id="picker-title">'+(all?'题目地图':'本轮选题')+'</h3><button id="close-picker">关闭</button></div><p class="muted">数字是原文题号。随时跳到想看的那一道。</p>'+
-    (all?'<div class="map-filters"><label>题目范围<select id="map-filter"><option value="all">全部原文题</option><option value="unseen">还没看过</option><option value="wrong">需要再巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option></select></label><label>找题号<input id="map-number" type="search" inputmode="numeric" placeholder="例如 106"></label></div>':'')+
+  dialog.innerHTML='<div class="topline"><h3 id="picker-title">'+(all?'题目地图':'本轮选题')+'</h3><button id="close-picker">关闭</button></div><p class="muted">数字是所在试卷的题号；单、多、判分别是三张新增练习卷。随时跳到想看的那一道。</p>'+
+    (all?'<div class="map-filters"><label>题型分区<select id="map-unit"><option value="">全部分区</option>'+Object.entries(units).map(([id,n])=>'<option value="'+id+'">'+escapeHTML(n)+'</option>').join('')+'</select></label><label>题目范围<select id="map-filter"><option value="all">全部题目</option><option value="unseen">还没看过</option><option value="wrong">需要再巩固</option><option value="star">收藏与笔记</option><option value="later">留待稍后</option></select></label><label>找题号<input id="map-number" type="search" inputmode="numeric" placeholder="例如 106"></label></div>':'')+
     '<p class="muted" id="map-count"></p><div class="picker-grid"></div>';
   document.body.append(dialog);
   dialog.querySelector('#close-picker').onclick=()=>dialog.close();
@@ -332,23 +363,24 @@ function openQuestionPicker(all=false) {
   const render=()=>{
     const scope=all?dialog.querySelector('#map-filter').value:'all';
     const number=all?dialog.querySelector('#map-number').value.trim():'';
+    const unit=all?dialog.querySelector('#map-unit').value:'';
     const list=(all?qs.map(q=>q.id):s.ids).filter(id=>{
-      const r=record(id);
-      return (!number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note||r.mnemonic,later:r.later})[scope];
+      const q=qs[id],r=record(id);
+      return (!unit||q.u===unit)&&(!number||String(q.n)===number||String(id+1)===number)&&({all:true,unseen:!r.seen&&!r.viewed,wrong:r.wrong,star:r.star||r.note||r.mnemonic,later:r.later})[scope];
     });
     const grid=dialog.querySelector('.picker-grid');grid.replaceChildren();
     dialog.querySelector('#map-count').textContent=list.length?'共 '+list.length+' 道 · 点题号就能开始':'这里暂时没有题目，可以换个条件。';
     list.forEach(id=>{
       const a=s?.answers[id],r=record(id);
       const status=all?(r.wrong?'再巩固':r.level>=3?'已巩固':r.seen?'已练过':r.viewed?'已翻看':'未看过'):(a?.rated?(a.grade==='good'?'已记住':'再巩固'):a?.revealed?'已翻看':'未作答');
-      const button=document.createElement('button');button.innerHTML=(id+1)+'<small>'+status+'</small>';button.dataset.id=id;
+      const button=document.createElement('button');button.innerHTML=mapLabel(qs[id])+'<small>'+status+'</small>';button.dataset.id=id;
       button.className=status==='再巩固'?'weak':['已记住','已巩固','已练过'].includes(status)?'rated':status==='已翻看'?'viewed':'';
-      button.setAttribute('aria-label','第 '+(id+1)+' 题，'+status);
+      button.setAttribute('aria-label',questionLabel(qs[id])+'，'+status);
       if(!all&&id===s.ids[s.index])button.setAttribute('aria-current','true');
       button.onclick=()=>{dialog.close();if(all)start(list,'地图选题','answer',list.indexOf(id));else moveTo(s.ids.indexOf(id));};grid.append(button);
     });
   };
-  if(all){dialog.querySelector('#map-filter').onchange=render;dialog.querySelector('#map-number').oninput=render;}
+  if(all){dialog.querySelector('#map-filter').onchange=render;dialog.querySelector('#map-number').oninput=render;dialog.querySelector('#map-unit').onchange=render;}
   render();
   dialog.showModal();
 }
@@ -362,7 +394,7 @@ function renderQuestion() {
   const s=data.session,id=s.ids[s.index],q=qs[id],a=currentAnswer(),r=record(id);
   if(s.mode==='read'&&!a.revealed){a.revealed=true;a.peeked=true;markViewed(id);}
   main.innerHTML='<div class="question-wrap"><div class="topline"><button id="back" class="quiet">← 暂停，回首页</button><button class="quiet" id="jump">选题 · '+(s.index+1)+' / '+s.ids.length+'</button></div><div class="session-tools"><button id="hint">助记提示</button><button id="peek">看答案</button><button id="study-settings">练习设置</button></div><button id="exit-focus" class="quiet">专注中 · 退出专注</button>'+
-    '<section class="card"><div class="question-meta"><span>第 '+(id+1)+' 题 · '+q.t+'</span><button id="star" class="quiet" aria-pressed="'+!!r.star+'">'+(r.star?'★ 已收藏':'☆ 收藏')+'</button></div>'+
+    '<section class="card"><div class="question-meta"><span>'+questionLabel(q)+' · '+q.t+'</span><button id="star" class="quiet" aria-pressed="'+!!r.star+'">'+(r.star?'★ 已收藏':'☆ 收藏')+'</button></div>'+
     '<progress aria-label="本轮已接触进度" value="'+Object.values(s.answers).filter(x=>x.revealed||x.rated).length+'" max="'+s.ids.length+'"></progress><h2>'+escapeHTML(q.s)+'</h2>'+'<p class="choice-status" id="choice-status" aria-live="polite"></p><div class="options" id="options"></div><div id="hint-content" aria-live="polite">'+(a.hinted&&!a.revealed?'<div class="memory hint-memory"><small>助记提示 · 可能含答案线索</small><p>'+escapeHTML(record(q.id).mnemonic||q.cue)+'</p>'+(q.warning?'<p class="warn">'+escapeHTML(q.warning)+'</p>':'')+'<small>看过提示后，试着用自己的话回忆。</small></div>':'')+'</div>'+
     '<div id="feedback" aria-live="polite"></div><div id="rating" class="rating-buttons"></div><details class="recall-note" '+(r.note?'open':'')+'><summary>我的注记</summary><textarea id="note" class="note" placeholder="写下理解、易错点，或自己的口诀">'+escapeHTML(r.note||'')+'</textarea><small>自动保存</small></details>'+
     '<button id="restart-question" class="quiet">重新答这道题</button>'+'</section><div class="answer-dock" id="actions"></div></div>';
@@ -528,9 +560,10 @@ function renderSummary() {
   const remembered=s.ids.filter(id=>s.answers[id]?.grade==='good').length;
   const weak=s.ids.filter(id=>s.answers[id]?.rated&&s.answers[id].grade!=='good');
   main.innerHTML='<section class="panel empty"><div class="summary-mark" aria-hidden="true">✓</div><small>进度已经留好了。</small><h1>这次，就到这里。</h1><p>翻看 '+s.ids.filter(id=>s.answers[id]?.revealed).length+' 道 · 作答 / 自评 '+completed+' 道 · 记住 '+remembered+' 道</p><p class="muted">'+(weak.length?'还有 '+weak.length+' 道值得再回想一次。':'可以歇一会儿，再回来。')+'</p><div class="finish-actions"><button id="finish" class="primary">收好进度，回首页</button>'+
-    (covered<s.ids.length?'<button id="remaining">继续还没看过的题</button>':'')+(weak.length?'<button id="retry">再看这 '+weak.length+' 道</button>':'')+'<button id="another">再来一小轮</button></div><p class="footnote">电工独立题库 · 忙完手头的事，再接着来。</p></section>';
+    (covered<s.ids.length?'<button id="remaining">继续还没看过的题</button>':'')+(weak.length?'<button id="retry">再看这 '+weak.length+' 道</button>':'')+'<button id="another">再来一小轮</button>'+(s.paper==='random'?'<button id="redraw">重抽一套随机卷</button>':'')+'</div><p class="footnote">电工独立题库 · 忙完手头的事，再接着来。</p></section>';
   document.getElementById('finish').onclick=()=>{if(s.finished)data.session=null;save();go('home');};
   document.getElementById('another').onclick=()=>startSmart(s.ids);
+  if(s.paper==='random')document.getElementById('redraw').onclick=()=>start(drawPaper(paperById.random.random),'随机综合卷','answer',0,'random');
   if(weak.length)document.getElementById('retry').onclick=()=>start(weak,'再巩固一次');
   if(covered<s.ids.length)document.getElementById('remaining').onclick=()=>{s.index=s.ids.findIndex(id=>!s.answers[id]?.revealed&&!s.answers[id]?.rated);save();renderQuestion();};
   window.scrollTo(0,0);
@@ -561,20 +594,21 @@ function saveBookmark() {
   ctx.fillStyle='#fffefa';ctx.fillRect(65,65,950,1310);
   ctx.strokeStyle='#dedfd4';ctx.strokeRect(65,65,950,1310);
   ctx.fillStyle='#315f4c';ctx.font='30px "Microsoft YaHei", sans-serif';ctx.fillText('电工考证 · 有空就练一点',115,145);
-  ctx.font='130px Inter, sans-serif';ctx.fillText('180 题',110,330);
+  ctx.font='130px Inter, sans-serif';ctx.fillText(qs.length+' 题',110,330);
   ctx.fillStyle='#b76742';ctx.font='26px "Microsoft YaHei", sans-serif';ctx.fillText('电工 · 学习书签',120,390);
   ctx.setLineDash([8,10]);ctx.beginPath();ctx.moveTo(65,445);ctx.lineTo(1015,445);ctx.stroke();ctx.setLineDash([]);
   ctx.fillStyle='#273d36';ctx.font='58px Inter, sans-serif';ctx.fillText('一点一点，记得更牢',115,555);
   ctx.font='38px "Microsoft YaHei", sans-serif';ctx.fillText('11.21 · 电工高级工考证',115,635);
-  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('140 单选 · 20 多选 · 20 判断',115,690);
+  ctx.font='24px "Microsoft YaHei", sans-serif';ctx.fillStyle='#68776c';ctx.fillText('综合卷 180 · 练习卷 500',115,690);
   const done=qs.filter(q=>record(q.id).seen||record(q.id).viewed).length;
-  ctx.fillText('已接触 '+done+' / 180 道',115,790);
+  ctx.fillText('已接触 '+done+' / '+qs.length+' 道',115,790);
+  const cols=46,cellW=16,cellH=11,gapX=2,gapY=12;
   for(let i=0;i<qs.length;i++){
     ctx.fillStyle=record(i).seen?'#719079':record(i).viewed?'#bacbb1':'#e6e8df';
-    ctx.fillRect(115+(i%23)*37,825+Math.floor(i/23)*28,23,17);
+    ctx.fillRect(115+(i%cols)*(cellW+gapX),790+Math.floor(i/cols)*(cellH+gapY),cellW,cellH);
   }
   ctx.fillStyle='#273d36';ctx.font='32px "Microsoft YaHei", sans-serif';
-  wrapCanvas(ctx,data.letter||'认真准备过，就从容一点。',115,1100,830,52);
+  wrapCanvas(ctx,data.letter||'认真准备过，就从容一点。',115,1180,830,52);
   ctx.fillStyle='#68776c';ctx.font='22px "Microsoft YaHei", sans-serif';ctx.fillText('记录于 '+dayKey()+' · 把这一页留给自己',115,1320);
   canvas.toBlob(blob=>{if(blob){download(blob,'电工学习书签.png');toast('书签已生成，可保存到相册');}else toast('书签生成失败，请重试。');},'image/png');
 }
