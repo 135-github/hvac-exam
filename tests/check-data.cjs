@@ -49,3 +49,23 @@ for (const [dir, count, expectedHash] of cases) {
   assert.equal(digest, expectedHash, 'Original question or answer changed: review before updating fingerprint');
   console.log(`${dir || 'hvac'}: ${count} questions, synchronized data, original content preserved`);
 }
+
+const courseDirs = ['', 'electric', 'construction'];
+const expectedLabels = new Map(courseDirs.map(dir => {
+  const {qs} = JSON.parse(fs.readFileSync(path.join(root, dir, 'questions.json'), 'utf8'));
+  const cards = qs.filter(q => q.examFocus === 'marked');
+  const label = dir === 'construction'
+    ? cards.length + '卡 · ' + cards.filter(q => q.key).length + '自测'
+    : qs.length + ' 题';
+  return [new URL(dir ? dir + '/' : './', 'https://example.test/').pathname, label];
+}));
+for (const dir of courseDirs) {
+  const html = fs.readFileSync(path.join(root, dir, 'index.html'), 'utf8');
+  const nav = html.match(/<nav\b[^>]*class="course-switch"[^>]*>([\s\S]*?)<\/nav>/)[1];
+  const links = [...nav.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>[\s\S]*?<small>([^<]+)<\/small><\/a>/g)];
+  const base = new URL(dir ? dir + '/' : './', 'https://example.test/');
+  const labels = new Map(links.map(([, href, label]) => [new URL(href, base).pathname, label]));
+  assert.equal(links.length, courseDirs.length);
+  assert.deepEqual(labels, expectedLabels, 'Subject switcher differs from bank: ' + (dir || 'hvac'));
+}
+console.log('All three subject switchers match their source banks.');
