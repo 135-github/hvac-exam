@@ -2,7 +2,7 @@
 // This offline study checkpoint belongs to this browser, independent of learning-record imports.
 const StudyCheckpoint = (() => {
   const storageKey = 'electric-checkpoint-v1';
-  const limit = 200;
+  const limit = 1360;
   const passwordDigest = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
   let pending, dialog, admitted;
   function read() {
@@ -10,6 +10,8 @@ const StudyCheckpoint = (() => {
     if (raw === null) return {count:0, last:'', locked:false};
     const value = JSON.parse(raw);
     if (!Number.isInteger(value.count) || value.count<0 || value.count>limit || typeof value.last!=='string' || typeof value.locked!=='boolean') throw Error('invalid checkpoint');
+    // A lock from the previous 200-question policy no longer meets the threshold.
+    if (value.count < limit) value.locked = false;
     return value;
   }
   const write = state => localStorage.setItem(storageKey, JSON.stringify(state));
@@ -28,7 +30,7 @@ const StudyCheckpoint = (() => {
     admitted=null;
     if(dialog?.isConnected)return;
     dialog=document.createElement('dialog');dialog.className='transfer-dialog';dialog.setAttribute('aria-labelledby','checkpoint-title');
-    dialog.innerHTML='<h2 id="checkpoint-title">已练习或浏览 200 道题</h2><p>输入密码，继续下一组 200 题。</p><form><label>继续练习密码<input type="password" inputmode="numeric" autocomplete="off" required autofocus style="display:block;width:100%;box-sizing:border-box;margin:.5rem 0"></label><p role="status"></p><button class="primary">解锁并继续</button></form>';
+    dialog.innerHTML='<h2 id="checkpoint-title">已练习或浏览 '+limit+' 道题</h2><p>输入密码，继续下一组 '+limit+' 题。</p><form><label>继续练习密码<input type="password" inputmode="numeric" autocomplete="off" required autofocus style="display:block;width:100%;box-sizing:border-box;margin:.5rem 0"></label><p role="status"></p><button class="primary">解锁并继续</button></form>';
     dialog.oncancel=e=>e.preventDefault();
     dialog.querySelector('form').onsubmit=async e=>{
       e.preventDefault();const panel=dialog,input=panel.querySelector('input'),status=panel.querySelector('[role=status]');
