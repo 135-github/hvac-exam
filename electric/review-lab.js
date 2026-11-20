@@ -55,6 +55,9 @@ const ReviewLab = (() => {
     button.onclick=begin;
   }
   function attempt(source){
+    StudyCheckpoint.visit('transfer:'+sessionId(),()=>drawAttempt(source));
+  }
+  function drawAttempt(source){
     const original=qs[source], target=related(source);
     const item=additions[source];
     const q=item?{s:item[1],o:item[2].map((v,i)=>String.fromCharCode(65+i)+'. '+v),key:String.fromCharCode(65+item[3]),cue:item[4]}:qs[target];

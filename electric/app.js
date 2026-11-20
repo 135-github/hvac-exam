@@ -398,6 +398,10 @@ function currentAnswer() {
 }
 function renderQuestion() {
   if(!activeSession()){go('home');return;}
+  const session=data.session,index=session.index;
+  StudyCheckpoint.visit(session.id+':'+session.ids[index],drawQuestion,()=>activeSession()&&data.session===session&&session.index===index);
+}
+function drawQuestion() {
   applyAppearance(true);
   const s=data.session,id=s.ids[s.index],q=qs[id],a=currentAnswer(),r=record(id);
   if(s.mode==='read'&&!a.revealed){a.revealed=true;a.peeked=true;markViewed(id);}
